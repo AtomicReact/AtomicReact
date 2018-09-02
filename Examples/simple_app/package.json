@@ -15,7 +15,7 @@
   "author": "Guihgo",
   "license": "MIT",
   "dependencies": {
-    "Atomic": "^1.0.0",
+    "atomicreact": "^1.0.0",
     "express": "^4.16.3"
   }
 }
