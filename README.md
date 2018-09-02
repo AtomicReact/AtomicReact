@@ -12,34 +12,33 @@ Atomic is a framework to build web apps with atomicity concept
 * **Build from what you already know**: HTML, CSS and JAVASCRIPT
 
 ## Requirements
-  1. [NodeJs](#todoLinkNodejs)
-  2. [npm](#todoLinkNpm)
+  1. [NodeJs](https://nodejs.org)
 
 ## Setup
   1. Install Atomic CLI via npm (**globally -g**) (Optional, but recommended for beginner)
-    ```
-      npm install Atomic -g
-    ```
+  ```
+    npm install Atomic -g
+  ```
   2. Install Atomic module in your project via npm (**less global tag -g**)
-    ```
-      npm install Atomic
-    ```
-  3. Now we need to **create the AtomicConfig.js file**. *AtomicConfig.js* file config all Atomic with your project. To create a default AtomicConfig file, you may run Atomic CLI command:
-    ```
-      Atomic init
-    ```
-    Or you can create it yourself (File->New->*AtomicConfig.js*)
+  ```
+    npm install Atomic
+  ```
+  3. Now **create the AtomicConfig.js file**. *AtomicConfig.js* file sets up all Atomic with your project. To create a default AtomicConfig file, you may run Atomic CLI command:
+  ```
+    Atomic init
+  ```
+  Or you can create it yourself (*File->New->AtomicConfig.js*)
 
-  4. Read the *Section [AtomicConfig API](#LinkAtomicConfigAPI)* to know how to config Atomic
+  4. Read the *Section [AtomicConfig API](#atomicconfig-api)* to know how to config Atomic
 
   5. Run Atomic! Run Atomic CLI command:
-    ```
-      Atomic run
-    ```
-    Or you can run it yourself
-    ```
-      node AtomicConfig
-    ```
+  ```
+    Atomic run
+  ```
+  Or you can run it yourself
+  ```
+    node AtomicConfig
+  ```
 
 ## AtomicConfig API
   TODO...But for while read code comments on AtomicConfig.js created via **Atomic init** command.
@@ -47,7 +46,7 @@ Atomic is a framework to build web apps with atomicity concept
 ## Simple example
   1. Clone this repo.
   2. Go to *Examples/simple_app*
-  3. Install dependencies (npm):
+  3. Install dependencies with npm:
   ```
     npm install
   ```
