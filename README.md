@@ -50,7 +50,11 @@ Or you can run it yourself
 ```
   npm install
 ```
-4. And run (Atomic CLI must be installed):
+4. run Atomic (Atomic CLI must be installed):
 ```
   Atomic run
+```
+5. And run http server:
+```
+  node app
 ```
