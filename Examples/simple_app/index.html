@@ -1,0 +1,34 @@
+<HTML>
+<head>
+	<myHeadDefault></myHeadDefault>
+	<title>Simple Atomic App</title>
+
+	<style>
+		body{
+			margin: 50px;
+		}
+	</style>
+
+	<script type="text/javascript">
+
+		/* Important! Render Atomic on load event with Atomic.renderElement() */
+		window.addEventListener("load", function(event) {
+			Atomic.renderElement(document.getElementsByTagName('BODY')[0]);
+		});
+
+  </script>
+
+</head>
+
+<body>
+	<h1>Simple Atomic App</h1>
+	<simpleAtom props.title="In this simple atomic app you'll see how to: ">
+		<ul>
+			<li>Config Atomic</li>
+			<li>Create Atoms</li>
+			<li>Create JS for Atoms</li>
+			<li>And create CSS for Atoms</li>
+		</ul>
+	</simpleAtom>
+</body>
+</HTML>

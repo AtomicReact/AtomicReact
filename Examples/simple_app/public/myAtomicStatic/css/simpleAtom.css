@@ -1,0 +1,8 @@
+[data-atomic-key="simpleAtom"]>[data-atomic-child="myBox"] {
+  border: 2px solid #F00;
+  padding: 15px;
+}
+[data-atomic-key="simpleAtom"]>[data-atomic-child="myButton"] {
+  padding: 15px;
+  cursor: pointer;
+}

@@ -1,0 +1,26 @@
+{
+  "name": "Atomic",
+  "version": "1.0.0",
+  "description": "framework to build web apps atomicity concept",
+  "main": "Atomic.js",
+  "scripts": {
+    "run_test": "nodejs app && nodejs AtomicConfig"
+  },
+  "author": "Guihgo",
+  "license": "ISC",
+  "devDependencies": {
+    "express": "^4.16.3"
+  },
+  "dependencies": {
+    "chokidar": "^2.0.4",
+    "ws": "^6.0.0"
+  },
+  "bin": {
+      "Atomic": "./AtomicCLI.js"
+  },
+  "preferGlobal": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Guihgo/Atomic.git"
+  }
+}
