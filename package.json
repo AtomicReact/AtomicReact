@@ -1,7 +1,7 @@
 {
   "name": "Atomic",
   "version": "1.0.0",
-  "description": "framework to build web apps atomicity concept",
+  "description": "Atomic is a framework to build web apps with atomicity concept",
   "main": "Atomic.js",
   "scripts": {
     "run_test": "nodejs app && nodejs AtomicConfig"

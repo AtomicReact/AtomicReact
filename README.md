@@ -1,6 +1,6 @@
 # Atomic
 
-Atomic is a JavaScript library builded in NodeJs for building Web Apps
+Atomic is a framework to build web apps with atomicity concept
 
 ## Features
 
