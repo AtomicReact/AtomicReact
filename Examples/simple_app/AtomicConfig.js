@@ -1,6 +1,6 @@
 var path = require('path');
-var Atomic = require('Atomic').Atomic;
-var AtomicHotReload = require('Atomic').HotReload;
+var Atomic = require('atomicreact').Atomic;
+var AtomicHotReload = require('atomicreact').HotReload;
 
 var atomicConfig = {
 	publicDir: path.join(__dirname, 'public'), //publicDir: folder with static files (js, css, imgs...). See documentation for more info.

@@ -1,6 +1,6 @@
-# Atomic
+# AtomicReact
 
-Atomic is a framework to build web apps with atomicity concept
+AtomicReact is a framework to build web apps with atomicity concept
 
 ## Features
 
@@ -17,11 +17,11 @@ Atomic is a framework to build web apps with atomicity concept
 ## Setup
   1. Install Atomic CLI via npm (**globally -g**) (Optional, but recommended for beginner)
   ```
-    npm install Atomic -g
+    npm install atomicreact -g
   ```
   2. Install Atomic module in your project via npm (**less global tag -g**)
   ```
-    npm install Atomic
+    npm install atomicreact
   ```
   3. Now **create the AtomicConfig.js file**. *AtomicConfig.js* file sets up all Atomic with your project. To create a default AtomicConfig file, you may run Atomic CLI command:
   ```

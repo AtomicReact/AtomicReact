@@ -1,13 +1,13 @@
 {
-  "name": "Atomic",
+  "name": "atomicreact",
   "version": "1.0.0",
-  "description": "Atomic is a framework to build web apps with atomicity concept",
+  "description": "AtomicReact is a framework to build web apps with atomicity concept",
   "main": "Atomic.js",
   "scripts": {
     "run_test": "nodejs app && nodejs AtomicConfig"
   },
   "author": "Guihgo",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "express": "^4.16.3"
   },
