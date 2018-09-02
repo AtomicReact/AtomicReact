@@ -6,7 +6,7 @@ AtomicReact is a framework to build web apps with atomicity concept
 
 * **Simple to Get Started**: Install with npm, config and run
 * **Strong Ecosystem**: Build encapsulated components that manage their own state, then compose them to make complex UIs
-* **HotReload**: Code and view in development time
+* **HotReload**: Code and view in same time
 * **NodeJs Modules Compatibility**: Build with Express, Gulp, Grunt, UglifyJS2,... Or not
 * **Fast Front-End Development**: Create once, reuse afterwards
 * **Build from what you already know**: HTML, CSS and JAVASCRIPT
@@ -15,13 +15,13 @@ AtomicReact is a framework to build web apps with atomicity concept
   1. [NodeJs](https://nodejs.org)
 
 ## Setup
-  1. Install Atomic CLI via npm (**globally -g**) (Optional, but recommended for beginner)
+  1. Install Atomic CLI via npm (**globally -g**) (*Optional, but recommended for beginner*)
   ```
     npm install atomicreact -g
   ```
-  2. Install Atomic module in your project via npm (**less global tag -g**)
+  2. Install Atomic module in your project via npm
   ```
-    npm install atomicreact
+    npm install atomicreact --save
   ```
   3. Now **create the AtomicConfig.js file**. *AtomicConfig.js* file sets up all Atomic with your project. To create a default AtomicConfig file, you may run Atomic CLI command:
   ```
