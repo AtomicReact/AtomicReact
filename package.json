@@ -1,6 +1,6 @@
 {
   "name": "atomicreact",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "AtomicReact is a framework to build web apps with atomicity concept",
   "main": "Atomic.js",
   "scripts": {
@@ -16,7 +16,7 @@
     "ws": "^6.0.0"
   },
   "bin": {
-      "Atomic": "./AtomicCLI.js"
+    "Atomic": "./AtomicCLI.js"
   },
   "preferGlobal": true,
   "repository": {
