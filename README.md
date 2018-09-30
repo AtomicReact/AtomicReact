@@ -25,9 +25,8 @@ AtomicReact is a framework to build web apps with atomicity concept
 ```
 3. Now **create the AtomicConfig.js file**. *AtomicConfig.js* file sets up all Atomic with your project. To create a default AtomicConfig file, you may run Atomic CLI command:
 ```
-  Atomic init
+  Atomic
 ```
-Or you can create it yourself (*File->New->AtomicConfig.js*)
 
 4. Read the *Section [AtomicConfig API](#atomicconfig-api)* to know how to config Atomic
 
