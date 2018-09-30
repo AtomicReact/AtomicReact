@@ -1,56 +1,76 @@
 var fs = require('fs');
 var path = require('path');
-var consoleFlags = require('./ConsoleFlags');
+var consoleFlags = require('./ConsoleFlags.js');
+var FileTool = require('./tools/File.js');
 
 class Atomic {
   constructor(Config, HotReload) {
     this.Global = {
+      name: JSON.parse(fs.readFileSync(path.join(process.cwd(), "package.json"))).name,
       isOnClientSide: false,
       atomosRendered: {
         count: 0,
         id: []
       },
     };
+
     this.ClientVariables = {
-      Atomic: "Atomic",
+      Atomic: "Atomic",//("Atomic"+this.Global.name),
       Props: "props",
-      Id: "data-atomic-id",
-      Key: "data-atomic-key",
+      Id: "data-atomic-id", //id = id dado para um atomo
+      Key: "data-atomic-key", //key = nome do atomo
       Children: "data-atomic-children",
       Child: "data-atomic-child"
     };
 
-    this.Config = (Config!=null) ? Config:{
-      paths:{
-        html: __dirname,
-        js: __dirname,
-        css: __dirname
-      },
-      publicDir: "",
-      debug: true,
-      devMode: true
-    };
-    this.Config.publicDir = this.Config.publicDir || "";
-    this.Config.devMode = this.Config.devMode || true;
-
-    this.AtomicVariables = { //para uso interno do Atomic
+    this.AtomicVariables = {
       Children: "atomic.children",
       Child: "atomic.child"
     }
+
+    this.Config = (Config!=null) ? JSON.parse(JSON.stringify(Config)):{
+      atomicDir: "",
+      bundleDir: "",
+      debug: true
+    };
+
+    if(!this.Config.atomicDir) { return console.log(consoleFlags.erro, "You must set an atomicDir where all yours atoms will be"); }
+    this.Config.atomicDir = path.join(process.cwd(), this.Config.atomicDir);
+    this.Config.bundleDir = path.join(process.cwd(), this.Config.bundleDir||"");
+    this.Config.debug = (this.Config.debug==undefined) ? true:this.Config.debug;
+
+    this.Config.paths = {
+      html: path.join(this.Config.atomicDir, "html"),
+      js: path.join(this.Config.atomicDir, "js"),
+      css: path.join(this.Config.atomicDir, "css")
+    };
+    //Create folder if not exist
+    FileTool.createDirIfNotExist(process.cwd(), this.Config.bundleDir);
+    FileTool.createDirIfNotExist(process.cwd(), this.Config.paths.html);
+    FileTool.createDirIfNotExist(process.cwd(), this.Config.paths.js);
+    FileTool.createDirIfNotExist(process.cwd(), this.Config.paths.css);
 
     /* HotReload */
     this.HotReload = HotReload || null;
     if(this.HotReload!=null) {
       // console.log("this.HotReload.webSocketsClients.length: "+this.HotReload.webSocketsClients.length);
       this.HotReload.watchingFiles = []; //reseta arquivos que ja estavam sendo watcheds
-      //inicial watchs (js e css dir)
-      this.HotReload.addToWatch(this.Config.paths.html);
-      this.HotReload.addToWatch(path.join(this.Config.publicDir, this.Config.paths.js));
-      this.HotReload.addToWatch(path.join(this.Config.publicDir, this.Config.paths.css));
+      //inicial watchs (atomicDir)
+      this.HotReload.addToWatch(this.Config.atomicDir);
+      // this.HotReload.addToWatch(process.cwd());
+
+      this.HotReload.getEventEmiter().on('changes', (function(obj){
+        // console.log("HotReload -> changes event emitted", obj);
+        this.init();
+      }).bind(this));
     }
 
-    // /* Carrega Data dos Atomos */
+    this.init();
+  }
+  init() {
+    /* Carrega Data dos Atomos */
     this.Atomos = [];
+
     fs.readdirSync(this.Config.paths.html).forEach((function(file){
       var parsedFile = path.parse(path.join(this.Config.paths.html, file));
       if(parsedFile.ext.indexOf(".html")!=-1){
@@ -59,6 +79,8 @@ class Atomic {
       }
     }).bind(this));
 
+    this.bundle();
+    if(this.Config.debug) { this.printAtoms(); }
   }
   isRunning() {
     console.log(consoleFlags.info,'Atomic is running');
@@ -99,9 +121,11 @@ class Atomic {
     // console.log(this.Atomos[pos].data);
   }
   printAtoms() {
-    console.log(consoleFlags.info, 'Atomos loaded:');
+    if(this.Global.isOnClientSide) { console.log('Atoms Loaded:'); }
+    else { console.log(consoleFlags.info, 'Atoms loaded:'); }
     for(var i=0; i<this.Atomos.length; i++) {
-      console.log('   ->'+this.Atomos[i].key);
+      if(this.Global.isOnClientSide) { console.log('   ['+(i+1)+'] '+this.Atomos[i].key); }
+      else { console.log(consoleFlags.info, '   ['+(i+1)+'] '+this.Atomos[i].key); }
     }
   }
   getGeoCursorTag(source, TagKey, caseSensitivy) {
@@ -154,16 +178,19 @@ class Atomic {
     // console.log(geoCursor);
     return geoCursor;
   }
-  renderAtomo(source, Atomo, renderOnlyRenderOnCompile) {
+  renderAtomo(source, Atomo) {
     // console.log(Atomo.key);
     // console.log(source);
     var geoCursorAtomo = this.getGeoCursorTag(source, Atomo.key);
     if(geoCursorAtomo.open.start==-1) {return {Source: source, Acabou: true};}
 
     var AtomoData = Atomo.data;
-    //props
+
+    //atributos
     var atributos = source.slice(geoCursorAtomo.open.start,geoCursorAtomo.open.end);
     // console.log(atributos);
+
+    //props
     // var regexPropAttr = new RegExp(/props\.\w*\s*=\s*(\")\s*([^\"]*)/, 'g');
     var regexPropAttr = new RegExp(this.ClientVariables.Props+'(\\.\\w*\\s*=\\s*(\\")\\s*([^\\"]*))', 'g');
     var match;
@@ -171,9 +198,16 @@ class Atomic {
     while(match = regexPropAttr.exec(atributos)){
       campo = match[0].slice(0,match[0].indexOf('=')).trim();
       valor = match[0];
+      atributos = atributos.replace(valor+'"', ''); //Apaga esse props dos atributos para que eu possa ter um customAtributos limpo
+      // console.log(valor);
       valor = valor.slice(valor.indexOf('"')+1, valor.length);
       AtomoData = AtomoData.replace(new RegExp('{((\\s)*)'+campo+'((\\s)*)}', 'gi'), valor);
     }
+
+    //custom atributos:  (id, class, ....) devem ser add na tag do AtomoData
+    // console.log(atributos);
+    var customAtributos = atributos.slice(atributos.indexOf(" "), atributos.length-1);
+    // console.log(customAtributos);
 
     //children
     var children = source.slice(geoCursorAtomo.open.end, geoCursorAtomo.close.start);
@@ -209,36 +243,29 @@ class Atomic {
     // console.log(atomicChild);
 
     var openEndFirstTagOnAtomoData = this.getGeoCursorTag(AtomoData, '').open.end - 1;
-    AtomoData = AtomoData.slice(0, openEndFirstTagOnAtomoData)+atomicKey+atomicId+atomicChild+AtomoData.slice(openEndFirstTagOnAtomoData, AtomoData.length);
+    AtomoData = AtomoData.slice(0, openEndFirstTagOnAtomoData)+customAtributos+atomicKey+atomicId+atomicChild+AtomoData.slice(openEndFirstTagOnAtomoData, AtomoData.length);
 
     this.Global.atomosRendered.count = this.Global.atomosRendered.count+1;
     // console.log(AtomoData);
 
-    AtomoData = this.render(AtomoData, renderOnlyRenderOnCompile);
+    AtomoData = this.render(AtomoData);
     // console.log('geoCursorChildren: '+geoCursorChildren);
     // console.log('AtomoDataComChildren: '+AtomoDataComChildren);
     source = source.slice(0,geoCursorAtomo.open.start)+AtomoData+source.slice(geoCursorAtomo.close.end,source.length);
 
     return {Source: source, Acabou: false};
   }
-  loopRender(source, Atomo, renderOnlyRenderOnCompile) {
-    var RetornoRenderAtomo = this.renderAtomo(source, Atomo, renderOnlyRenderOnCompile);
+  loopRender(source, Atomo) {
+    var RetornoRenderAtomo = this.renderAtomo(source, Atomo);
     if(RetornoRenderAtomo.Acabou) {
       return RetornoRenderAtomo.Source;
     } else {
-      return this.loopRender(RetornoRenderAtomo.Source, Atomo, renderOnlyRenderOnCompile);
+      return this.loopRender(RetornoRenderAtomo.Source, Atomo);
     }
   }
-  render(source, renderOnlyRenderOnCompile) {
-    // renderOnlyRenderOnCompile: renderiza apenas atomos marcados pra renderiza durante o compile (Atomo.renderOnCompile = true)
-    if(renderOnlyRenderOnCompile==null || renderOnlyRenderOnCompile==undefined) { renderOnlyRenderOnCompile = false; }
+  render(source) {
     this.Atomos.forEach((function(Atomo){
-      if((renderOnlyRenderOnCompile==true) && (Atomo.renderOnCompile==false || Atomo.renderOnCompile==undefined)) {
-        // console.log('nao vai renderiza');
-        return;
-      } else {
-        source = this.loopRender(source, Atomo, renderOnlyRenderOnCompile);
-      }
+      source = this.loopRender(source, Atomo);
     }).bind(this));
     // console.log(source);
     return source;
@@ -273,67 +300,17 @@ class Atomic {
     });
 
   }
-  renderFile(fileRoot) {
-    var rootData = fs.readFileSync(fileRoot).toString();
-    return this.render(rootData);
-  }
   exportFunction(funcao) {
     return encodeURI(funcao.toString().replace(funcao.name, 'function').replace(/this/g, this.ClientVariables.Atomic)).replace(/'/g, '%27');
   }
-  createScriptToImportAtomosCss(fileRoot) {
-    var inject = '';
-    var src;
-    var cssFile;
-    // console.log(this.Config.paths.js);
-    this.Atomos.forEach((function(Atomo){
-      cssFile = path.join(this.Config.paths.css, Atomo.key + '.css');
-      src = path.relative(fileRoot, cssFile).replace(/\\/g, '/');
-      // <link rel="stylesheet" href="./diretorio1/arquivo.css">
-      if (!fs.existsSync(path.join(this.Config.publicDir, cssFile))) {
-        return console.log(consoleFlags.warn, "File "+path.join(this.Config.publicDir, cssFile)+" not exist");
-      }
-      inject += '<link rel="stylesheet" href="'+src+'">';
-    }).bind(this));
-    // console.log(inject);
-    return inject;
-  }
-  createScriptToImportAtomosJavascript(fileRoot) {
-    var inject = '';
-    var src;
-    var jsFile;
-    // console.log(this.Config.paths.js);
-    this.Atomos.forEach((function(Atomo){
-      jsFile = path.join(this.Config.paths.js, Atomo.key + '.js');
-      src = path.relative(fileRoot, jsFile).replace(/\\/g, '/');
-      // '<script src="./diretorio1/arquivo.js"></script>'
-      // console.log(path.join(this.Config.publicDir, jsFile));
-      // console.log(src);
-      if (!fs.existsSync(path.join(this.Config.publicDir, jsFile))) {
-        return console.log(consoleFlags.warn, "File "+path.join(this.Config.publicDir, jsFile)+" not exist");
-      }
-      inject += '<script src="'+src+'"></script>';
-    }).bind(this));
-    // console.log(inject);
-    return inject;
-  }
-  setPreRender(AtomosToPreRender) {
-    AtomosToPreRender.forEach((function(AtomoKey){
-      this.Atomos.forEach((function(Atomo, pos){
-        if(AtomoKey==Atomo.key) {
-          this.Atomos[pos].renderOnCompile = true;
-        }
-      }).bind(this));
-    }).bind(this));
-  }
-  loadFile(fileRoot) {
-    //carrega Atomic na pagina
-    var rootData = fs.readFileSync(fileRoot).toString();
-    rootData = this.render(rootData, true);
-    var geoCursorHead = this.getGeoCursorTag(rootData, 'head', false);
-    // console.log(geoCursorHead);
+  bundle() {
+    if(this.Config.debug) { console.log(consoleFlags.info, "===Bundling==="); }
+    /* Core JS */
+    var jsCore = "";
+
     var objToExportToClient = {
-      Global: JSON.parse(JSON.stringify(this.Global)), //gambi para clonar objetp
-      Atomos: this.Atomos,
+      Global: JSON.parse(JSON.stringify(this.Global)), //gambi para clonar objeto
+      Atomos: [],
       ClientVariables: this.ClientVariables,
       HotReload: {
         port: this.HotReload.port,
@@ -341,87 +318,136 @@ class Atomic {
       }
     };
     objToExportToClient.Global.isOnClientSide = true;
-
-    //fix problemas das aspas com encodeURI
-    var objToExportToClientStringfied = encodeURI(JSON.stringify(objToExportToClient)).replace(/'/g, '%27'); //encodeURI do nodejs não encode o ', por isso fazemos isso manualmente
-
-    var inject = "<script type='text/javascript'>const "+this.ClientVariables.Atomic+ " = JSON.parse(decodeURI('"+ objToExportToClientStringfied + "'));</script>";
+    var objToExportToClientStringfied = encodeURI(JSON.stringify(objToExportToClient)).replace(/'/g, '%27'); //fix problemas das aspas com encodeURI - encodeURI do nodejs não encode o ', por isso fazemos isso manualmente
+    jsCore = "const "+this.ClientVariables.Atomic+ " = JSON.parse(decodeURI('"+ objToExportToClientStringfied + "'));";
 
     //exporta aqui e importa funcoes no lado do client
-    var functionsToExport = [this.printAtoms, this.renderAtomo, this.loopRender, this.render, this.renderElement, this.getGeoCursorTag, this.setOnRender, this.setOnNewChildrenAdded, this.getChild, this.getChildren, this.addChildren, this.ligaHotReloadNoClient];
-    var importFunctions = '';
+    var functionsToExport = [this.printAtoms, this.getGeoCursorTag, this.renderAtomo, this.loopRender, this.render, this.renderElement, this.getAtom, this.getChild, this.getChildren, this.addChildren, this.ligaHotReloadNoClient, this.renderPageNoClient];
     functionsToExport.forEach((function(functionToExport){
-      importFunctions += 'eval(decodeURI(\''+this.ClientVariables.Atomic+'.'+functionToExport.name+'='+this.exportFunction(functionToExport)+'\'));';
+      jsCore += 'eval(decodeURI(\''+this.ClientVariables.Atomic+'.'+functionToExport.name+'='+this.exportFunction(functionToExport)+'\'));';
     }).bind(this));
-    inject += "<script type='text/javascript'>"+importFunctions+"</script>";
 
     //Liga HotReload
-    if(this.HotReload!=null && this.Config.devMode==true) { inject += "<script type='text/javascript'>Atomic.ligaHotReloadNoClient()</script>"; }
-
-    //css dos atomos
-    inject += this.createScriptToImportAtomosCss(fileRoot);
-    //javascript dos atomos
-    inject += this.createScriptToImportAtomosJavascript(fileRoot);
-
-    rootData = rootData.slice(0, geoCursorHead.close.start)+inject+rootData.slice(geoCursorHead.close.start, rootData.length);
-
-    //Add um preStyle
-    var stylePreAdd = " style=\"display: none;\"";
-    this.Atomos.forEach(function(Atomo){
-      var regexOpen = new RegExp('<'+Atomo.key+'[^>]*>', "g");
-      while(regexOpen.exec(rootData)){
-        rootData = rootData.slice(0, regexOpen.lastIndex-1)+stylePreAdd+rootData.slice(regexOpen.lastIndex-1, rootData.length);
-      }
-    });
-
-    return rootData;
-  }
-  compileFile(file, outputPathFile, callback) {
-    var parsedFile = path.parse(file);
-    // console.log(parsedFile.dir);
-    outputPathFile = outputPathFile || path.join(parsedFile.dir, parsedFile.name+"_compiled"+parsedFile.ext);
-    var parsedOutputPathFile = path.parse(outputPathFile);
-    // console.log(parsedOutputPathFile.dir);
-    if (!fs.existsSync(parsedOutputPathFile.dir)) {
-      return console.log(consoleFlags.erro, "Directory(s) to compile "+outputPathFile+" not exist");
-    }
-    if (!fs.existsSync(file)) {
-      return console.log(consoleFlags.erro, "File to compile "+file+" not exist");
-    }
-
-    //HotReload
     if(this.HotReload!=null) {
-      this.HotReload.addToWatch(file);
+      jsCore += this.ClientVariables.Atomic+"."+this.ligaHotReloadNoClient.name+"();";
     }
+    jsCore += "Atomic.renderPageNoClient();";
 
-    // console.log(callback);
-    if(callback==undefined) {
-      fs.writeFileSync(outputPathFile,this.loadFile(file), {flag:'w+'});
-      if(this.Config.debug) {console.log(consoleFlags.info, "File compiled with sucess: "+file)}
-      return;
-    } else {
-      fs.writeFile(outputPathFile,this.loadFile(file), {flag:'w+'}, (function(err){
-        if(err) { console.log(consoleFlags.erro, err);  }
-        else { if(this.Config.debug) {console.log(consoleFlags.info, "File compiled with sucess: "+file);} }
-        return callback(file, outputPathFile, err);
+    var jsCorePath = path.join(this.Config.bundleDir, 'atomicreact.core.js');
+    fs.writeFileSync(jsCorePath, jsCore);
+
+    /* Bundle JS */
+    var jsBundle = "";
+
+    //export Atomos
+    var objToExportToClient = {
+      Atomos: this.Atomos
+    };
+    var objToExportToClientStringfied = encodeURI(JSON.stringify(objToExportToClient)).replace(/'/g, '%27'); //fix problemas das aspas com encodeURI - encodeURI do nodejs não encode o ', por isso fazemos isso manualmente
+    jsBundle = "JSON.parse(decodeURI('"+ objToExportToClientStringfied + "')).Atomos.forEach(function(Atomo){"+this.ClientVariables.Atomic+".Atomos.push(Atomo);});";
+
+    var jsAtomoFile;
+    // console.log(this.Config.paths.js);
+    this.Atomos.forEach((function(Atomo, index){
+      jsAtomoFile = path.join(this.Config.paths.js, Atomo.key + '.js');
+      if (!fs.existsSync(jsAtomoFile)) {
+        if(this.Config.debug) {console.log(consoleFlags.warn, "File "+jsAtomoFile+" not exist");}
+        return;
+      }
+
+      let AtomoImported;
+      try {
+        delete require.cache[path.resolve(jsAtomoFile)];
+        AtomoImported = require(jsAtomoFile);
+      } catch(e) {
+        console.log(consoleFlags.erro, e.message);
+        console.log(consoleFlags.erro, e.stack);
+        // console.log( Object.getOwnPropertyNames(e));
+        // console.log(e.stack);
+        return;
+      }
+
+      // //onRender
+      // if(AtomoImported.onRender!=undefined) {
+      //   jsBundle += 'eval(decodeURI(\''+this.ClientVariables.Atomic+'.Atomos['+index+'].onRender = '+encodeURI(AtomoImported.onRender.toString().replace(/this/g, this.ClientVariables.Atomic)).replace(/'/g, '%27')+'\'));';
+      // } else {console.log(consoleFlags.warn, "function onRender undefined for "+Atomo.key);}
+      // //onNewChildrenAdded
+      // if(AtomoImported.onNewChildrenAdded!=undefined) {
+      //   jsBundle += 'eval(decodeURI(\''+this.ClientVariables.Atomic+'.Atomos['+index+'].onNewChildrenAdded = '+encodeURI(AtomoImported.onNewChildrenAdded.toString().replace(/this/g, this.ClientVariables.Atomic)).replace(/'/g, '%27')+'\'));';
+      // } else {console.log(consoleFlags.warn, "function onNewChildrenAdded undefined for "+Atomo.key);}
+
+      // console.log(Object.getOwnPropertyNames(AtomoImported));
+      var AtomoImportedObjName = Object.getOwnPropertyNames(AtomoImported);
+      Object.values(AtomoImported).forEach((function(value, indexValues){
+        // console.log(typeof value);
+        if(typeof value === 'function') {
+          // console.log("eh uma funcao", value.toString());
+          jsBundle += 'eval(decodeURI(\''+this.ClientVariables.Atomic+'.getAtom(\"'+Atomo.key+'\").'+AtomoImportedObjName[indexValues]+' = '+encodeURI(value.toString()).replace(/'/g, '%27')+'\'));';
+        }
+        if(typeof value === 'object') {
+          jsBundle += 'eval(decodeURI(\''+this.ClientVariables.Atomic+'.getAtom(\"'+Atomo.key+'\").'+AtomoImportedObjName[indexValues]+' = '+encodeURI(JSON.stringify(value)).replace(/'/g, '%27')+'\'));';
+        }
+        else {
+          // console.log("nao eh uma funcao");
+        }
       }).bind(this));
+      // console.log(Object.values(AtomoImported)[2].toString());
+      // console.log(Object.values(AtomoImported));
+      if(AtomoImported.onRender==undefined && this.Config.debug==true) {
+        console.log(consoleFlags.warn, "function onRender undefined for "+Atomo.key);
+      }
+      if(AtomoImported.onNewChildrenAdded==undefined && this.Config.debug==true) {
+        console.log(consoleFlags.warn, "function onNewChildrenAdded undefined for "+Atomo.key);
+      }
+
+    }).bind(this));
+
+    /* Bundle CSS */
+    var cssBundle = "";
+    var cssAtomoFile;
+    this.Atomos.forEach((function(Atomo, index){
+      cssAtomoFile = path.join(this.Config.paths.css, Atomo.key + '.css');
+      if (!fs.existsSync(cssAtomoFile) && this.Config.debug) {
+        return console.log(consoleFlags.warn, "File "+cssAtomoFile+" not exist");
+      }
+      cssBundle += fs.readFileSync(cssAtomoFile).toString();
+    }).bind(this));
+
+    //Bundle dependencies
+    var packageJson = JSON.parse(fs.readFileSync(path.join(process.cwd(), "package.json")));
+    var nodeModulesPath = path.join(process.cwd(), "node_modules");
+    try {
+      if(this.Config.debug && packageJson.atomicReact.dependencies.length>0) { console.log(consoleFlags.info, "Dependencies Loaded"); }
+      packageJson.atomicReact.dependencies.forEach((function(dp){ //dp = dependencie name
+        var dpPath = path.join(nodeModulesPath, dp);
+
+        var dpConfig = require(path.join(dpPath, "AtomicReact_config.js"));
+
+        var dpBundleJsPath = path.join(dpPath, dpConfig.bundleDir);
+        var dpBundleCssPath = path.join(dpBundleJsPath, "atomicreact.bundle.css");
+        dpBundleJsPath = path.join(dpBundleJsPath, "atomicreact.bundle.js");
+
+        if(fs.existsSync(dpBundleJsPath)) { jsBundle += fs.readFileSync(dpBundleJsPath).toString(); }
+        if(fs.existsSync(dpBundleCssPath)) { cssBundle += fs.readFileSync(dpBundleCssPath).toString(); }
+        if(this.Config.debug) { console.log(consoleFlags.info, "\t[+] "+dp); }
+      }).bind(this));
+    } catch(e){/*console.log(e);*/};
+
+    //Save de bundle
+    var jsBundlePath = path.join(this.Config.bundleDir, 'atomicreact.bundle.js');
+    fs.writeFileSync(jsBundlePath, jsBundle);
+
+    var cssBundlePath = path.join(this.Config.bundleDir, 'atomicreact.bundle.css');
+    fs.writeFileSync(cssBundlePath, cssBundle);
+  }
+  getAtom(AtomoKey) {
+    var index = -1;
+    for(var i=0; i<this.Atomos.length; i++){
+      if(AtomoKey==this.Atomos[i].key) {
+        index = i;
+      }
     }
-  }
-  setOnRender(AtomoKey, onRender) {
-    this.Atomos.forEach(function(Atomo, index){
-      if(AtomoKey==Atomo.key) {
-        this.Atomos[index].onRender = onRender;
-        // console.log('onRender setado com sucesso');
-      }
-    });
-  }
-  setOnNewChildrenAdded(AtomoKey, onNewChildrenAdded) {
-    this.Atomos.forEach(function(Atomo, index){
-      if(AtomoKey==Atomo.key) {
-        this.Atomos[index].onNewChildrenAdded = onNewChildrenAdded;
-        // console.log('onNewChildrenAdded setado com sucesso');
-      }
-    });
+    return this.Atomos[index];
   }
   getChild(element, child) {
     return element.querySelector('['+this.ClientVariables.Child+'="'+child+'"]');
@@ -442,9 +468,16 @@ class Atomic {
     if(this.WebSocketClient!=null && this.WebSocketClient!=undefined) { return; }
     this.WebSocketClient = new WebSocket("ws://"+this.HotReload.addrs+":"+this.HotReload.port);
     this.WebSocketClient.onmessage = function(e){
-      // console.log(e);
-      location.reload();
+      console.log(e.data);
+      if(e.data=="<atomicreact.hotreload.REFRESH>"){
+        location.reload();
+      }
     }
+  }
+  renderPageNoClient() {
+    window.addEventListener("load", function(event) {
+    	Atomic.renderElement(document.getElementsByTagName('html')[0]);
+    });
   }
 }
 module.exports.Atomic = Atomic;

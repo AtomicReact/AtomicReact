@@ -5,12 +5,13 @@ class ConsoleIO {
     this.eventEmiter = new EventEmitter();
     this.buff = "";
     process.stdin.setEncoding('utf8');
+    this.readLine();
   }
   readLine() {
     var onData = (data)=> {
       this.buff += data;
       if(this.buff.indexOf('\r\n')>-1) {
-        process.stdin.destroy();
+        // process.stdin.destroy();
         this.eventEmiter.emit('lineReaded', this.buff);
       }
     }
@@ -22,6 +23,15 @@ class ConsoleIO {
       .on('end', onEnd);
     return this.eventEmiter;
   }
+  destroy() {
+    process.stdin.destroy();
+  }
+  pause() {
+    process.stdin.pause();
+  }
+  getEventEmiter() {
+    return this.eventEmiter;
+  }
 }
 
-module.exports = new ConsoleIO();
+module.exports = ConsoleIO;

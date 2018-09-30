@@ -1,13 +1,12 @@
+const EventEmitter = require('events');
 var WebSocketServer = require('ws').Server;
 var chokidar = require('chokidar');
 
 var consoleFlags = require('../ConsoleFlags');
 
 class HotReload {
-  constructor(runAtomic, port, addrs) {
-    // console.log((runAtomic instanceof Function));
-    if(!(runAtomic instanceof Function)) { console.log(consoleFlags.erro, 'runAtomic is not a function'); return null; }
-    this.runAtomic = runAtomic;
+  constructor(port, addrs) {
+    this.eventEmiter = new EventEmitter();
     this.port = port || 1337;
     this.addrs = addrs || "127.0.0.1";
 
@@ -38,14 +37,10 @@ class HotReload {
     /* Watcher */
     this.watcher = chokidar.watch();
     this.watcher.on('change', (function(file, stats) {
-      // if (stats) console.log(stats);
       this.sendAtualizar();
     }).bind(this));
 
     this.watchingFiles = [];
-  }
-  start() {
-    this.runAtomic();
   }
   addToWatch(path) {
     if(this.watchingFiles.indexOf(path)==-1) {
@@ -54,12 +49,15 @@ class HotReload {
     }
   }
   sendAtualizar() {
-    this.runAtomic();
+    this.eventEmiter.emit('changes', {tipo:"normal"});
     try {
       this.webSocketsClients.forEach(function(objWebSocketClient){
-        objWebSocketClient.webSocketClient.send("atomic.hotreload.reload");
+        objWebSocketClient.webSocketClient.send("<atomicreact.hotreload.REFRESH>");
       });
     } catch(e) {}
+  }
+  getEventEmiter(){
+    return this.eventEmiter;
   }
 }
 
