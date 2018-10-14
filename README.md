@@ -1,59 +1,64 @@
-# AtomicReact
+# AtomicReact  &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/facebook/react/blob/master/LICENSE) [![npm version](https://img.shields.io/npm/v/atomicreact.svg?style=flat)](https://www.npmjs.com/package/atomicreact)
 
 AtomicReact is a framework to build web apps with atomicity concept
 
 ## Features
 
-* **Simple to Get Started**: Install with npm, config and run
-* **Strong Ecosystem**: Build encapsulated components that manage their own state, then compose them to make complex UIs
+* **Fast to Get Started**: Install and run
+* **Strong Ecosystem**:
+    *  Build encapsulated atoms that manage their own state, then compose them to make complex UIs.
+    *  Easy to use atoms from other developers
+    *  Atom is made by structure, logic and style! In our words: Atom = { html, js, css }
 * **HotReload**: Code and view in same time
-* **NodeJs Modules Compatibility**: Build with Express, Gulp, Grunt, UglifyJS2,... Or not
+* **Build with NodeJs Modules**: Easy to build with Express, Gulp, Grunt, UglifyJS2
 * **Fast Front-End Development**: Create once, reuse afterwards
 * **Build from what you already know**: HTML, CSS and JAVASCRIPT
 
 ## Requirements
-1. [NodeJs](https://nodejs.org)
+1. [NodeJs](https://nodejs.org) (with NPM of course)
 
-## Setup
-1. Install Atomic CLI via npm (**globally -g**) (*Optional, but recommended for beginner*)
+
+## Installation
+1. Install Atomic package globally via *npm* (to use CLI commands)
 ```
   npm install atomicreact -g
 ```
-2. Install Atomic module in your project via npm
+2. Install Atomic package in your project via *npm*
 ```
   npm install atomicreact --save
 ```
-3. Now **create the AtomicConfig.js file**. *AtomicConfig.js* file sets up all Atomic with your project. To create a default AtomicConfig file, you may run Atomic CLI command:
+3. **Initialize Atomic** inside your project folder:
+```
+  Atomic init
+```
+4. **Run Atomic**:
+```
+  Atomic run
+```
+
+*init* command will create the default files. And *run* will start Atomic using these files.
+Or you can do 3. and 4. steps in one with:
 ```
   Atomic
 ```
+that's all folks !
 
-4. Read the *Section [AtomicConfig API](#atomicconfig-api)* to know how to config Atomic
+## Let's get a little teoria before get started?!
+AtomicRact was designed in atoms concept. Whats are the things made ?
+Let's get an essencial thing to our lives: The Water. The water is made with a lot of molecules whose each one is composed by one oxigen and two hidrogen atoms.
+Basically Atom Conecept is create things from the minimal part of them.
 
-5. Run Atomic! Run Atomic CLI command:
+## Get Started
+One atom is formed by 3 parts: Structure (html) & Logic Interface (Js) & Style (Css). Necessarily, an atom need to have a structure but doesn't a logic and style.
+The *Atomic dir* there three dirs: html, js, css.
 ```
-  Atomic run
+    AtomicDir
+    ├──  html
+    ├──  js
+    ├──  css
 ```
-Or you can run it yourself
-```
-  node AtomicConfig
-```
+**To create an atom**, just create one file with anyone name in *AtomicDir->html* folder.
 
-## AtomicConfig API
-  TODO...But for while read code comments on AtomicConfig.js created via **Atomic init** command.
 
-## Simple example
-1. Clone this repo.
-2. Go to *Examples/simple_app*
-3. Install dependencies with npm:
-```
-  npm install
-```
-4. run Atomic (Atomic CLI must be installed):
-```
-  Atomic run
-```
-5. And run http server:
-```
-  node app
-```
+## Documentation
+I'm lazy for documentation, but as soon will be create.

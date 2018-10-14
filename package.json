@@ -1,6 +1,6 @@
 {
   "name": "atomicreact",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "AtomicReact is a framework to build web apps with atomicity concept",
   "main": "Atomic.js",
   "scripts": {

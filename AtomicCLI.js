@@ -68,7 +68,7 @@ class AtomicCLI {
   };
   run() {
     // console.log('Atomic run commanded');
-    var childProcess = exec('node AtomicReact_run.js', (err, stdout, stderr) => {
+    var childProcess = exec('node AtomicReact_run.js',{maxBuffer: 1000*1024}, (err, stdout, stderr) => {
       if (err) {
         console.error(err);
         return;

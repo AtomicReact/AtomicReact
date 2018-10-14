@@ -188,7 +188,8 @@ class Atomic {
 
     //atributos
     var atributos = source.slice(geoCursorAtomo.open.start,geoCursorAtomo.open.end);
-    // console.log(atributos);
+    var customAtributos = atributos.slice(0, atributos.length);
+    // console.log(customAtributos);
 
     //props
     // var regexPropAttr = new RegExp(/props\.\w*\s*=\s*(\")\s*([^\"]*)/, 'g');
@@ -196,18 +197,16 @@ class Atomic {
     var match;
     var campo,valor;
     while(match = regexPropAttr.exec(atributos)){
+      // console.log(match);
       campo = match[0].slice(0,match[0].indexOf('=')).trim();
       valor = match[0];
-      atributos = atributos.replace(valor+'"', ''); //Apaga esse props dos atributos para que eu possa ter um customAtributos limpo
-      // console.log(valor);
+      customAtributos = customAtributos.replace(valor+'"', ''); //Apaga esse props dos atributos para que eu possa ter um customAtributos limpo
       valor = valor.slice(valor.indexOf('"')+1, valor.length);
       AtomoData = AtomoData.replace(new RegExp('{((\\s)*)'+campo+'((\\s)*)}', 'gi'), valor);
     }
 
     //custom atributos:  (id, class, ....) devem ser add na tag do AtomoData
-    // console.log(atributos);
-    var customAtributos = atributos.slice(atributos.indexOf(" "), atributos.length-1);
-    // console.log(customAtributos);
+    customAtributos = customAtributos.slice(customAtributos.indexOf(" "), customAtributos.length-1);
 
     //children
     var children = source.slice(geoCursorAtomo.open.end, geoCursorAtomo.close.start);
