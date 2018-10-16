@@ -58,7 +58,3 @@ The *Atomic dir* there three dirs: html, js, css.
     ├──  css
 ```
 **To create an atom**, just create one file with anyone name in *AtomicDir->html* folder.
-
-
-## Documentation
-I'm lazy for documentation, but as soon will be create.
