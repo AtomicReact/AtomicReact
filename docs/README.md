@@ -47,15 +47,15 @@ Basically Atom Concept is create things from the minimal particle of them.
 ## How AtomicReact works
 In AtomicReact the minimal particle is called by Atom. One Atom is formed by 3 parts: Structure (HTML) & Logic Interface (JS) & Style (CSS). Necessarily, an Atom need to have a structure but doesn't need a logic and style.
 
-After runs *Atomic init* command,  is created your *AtomicDir* where your Atoms will be are
-The *Atomic dir* there three dirs: html, js, css.
+After runs *Atomic init* command,  is created your *AtomicDir* where your Atoms will be are.
+In *Atomic dir* there three dirs: html, js, css.
 ```
     AtomicDir
     ├──  html
     ├──  js
     ├──  css
 ```
-**To create an atom**, just create one file with anyone name in *AtomicDir->html* folder.
+**To create an Atom**, just create one file with anyone name in *AtomicDir->html* folder.
 
 
 ## Full Documentation
