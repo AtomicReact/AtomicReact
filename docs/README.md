@@ -56,8 +56,3 @@ In *Atomic dir* there three dirs: html, js, css.
     ├──  css
 ```
 **To create an Atom**, just create one file with anyone name in *AtomicDir->html* folder.
-
-
-## Full Documentation
-
-The full documentation for AtomoicReact can be found on <https://guihgo.github.io/AtomicReact/>

@@ -60,4 +60,4 @@ In *Atomic dir* there three dirs: html, js, css.
 
 ## Full Documentation
 
-The full documentation for AtomoicReact can be found on <https://guihgo.github.io/AtomicReact/>
+The full documentation for AtomicReact can be found on <https://guihgo.github.io/AtomicReact/>
