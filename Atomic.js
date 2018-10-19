@@ -59,8 +59,8 @@ class Atomic {
       this.HotReload.addToWatch(this.Config.atomicDir);
       // this.HotReload.addToWatch(process.cwd());
 
-      this.HotReload.getEventEmiter().on('changes', (function(obj){
-        // console.log("HotReload -> changes event emitted", obj);
+      this.HotReload.getEventEmitter().on('changes', (function(msg){
+        // console.log("HotReload -> changes event emitted", msg);
         this.init();
       }).bind(this));
     }
@@ -468,7 +468,7 @@ class Atomic {
     this.WebSocketClient = new WebSocket("ws://"+this.HotReload.addrs+":"+this.HotReload.port);
     this.WebSocketClient.onmessage = function(e){
       console.log(e.data);
-      if(e.data=="<atomicreact.hotreload.REFRESH>"){
+      if(e.data=="<atomicreact.hotreload.RELOAD>"){
         location.reload();
       }
     }

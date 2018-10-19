@@ -6,7 +6,7 @@ var consoleFlags = require('../ConsoleFlags');
 
 class HotReload {
   constructor(port, addrs) {
-    this.eventEmiter = new EventEmitter();
+    this.eventEmitter = new EventEmitter();
     this.port = port || 1337;
     this.addrs = addrs || "127.0.0.1";
 
@@ -37,7 +37,7 @@ class HotReload {
     /* Watcher */
     this.watcher = chokidar.watch();
     this.watcher.on('change', (function(file, stats) {
-      this.sendAtualizar();
+      this.reload();
     }).bind(this));
 
     this.watchingFiles = [];
@@ -48,16 +48,16 @@ class HotReload {
       this.watcher.add(path);
     }
   }
-  sendAtualizar() {
-    this.eventEmiter.emit('changes', {tipo:"normal"});
+  reload() {
+    this.eventEmitter.emit('changes', "<atomicreact.hotreload.RELOAD>");
     try {
       this.webSocketsClients.forEach(function(objWebSocketClient){
-        objWebSocketClient.webSocketClient.send("<atomicreact.hotreload.REFRESH>");
+        objWebSocketClient.webSocketClient.send("<atomicreact.hotreload.RELOAD>");
       });
     } catch(e) {}
   }
-  getEventEmiter(){
-    return this.eventEmiter;
+  getEventEmitter(){
+    return this.eventEmitter;
   }
 }
 
