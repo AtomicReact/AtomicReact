@@ -1,5 +1,5 @@
 * [Introducing](/)
 * [Get Started](getStarted.md)
+* [Atom](Atom.md)
 * [Atomic Class](AtomicClass.md)
 * [HotReload Class](HotReloadClass.md)
-* [Atom](Atom.md)
