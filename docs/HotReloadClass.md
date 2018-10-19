@@ -20,9 +20,9 @@ address | address to communicate with web client via web socket | `string` | *12
 
 ## Testing in diferent devices
 
-Let's supose you want to test your web app in a smartphone connected in same network that device runing Atomic is. To do this, just set `address` param on [constructor](HotReloadClass?id=constructor) to the device runing Atomic *address ip*
+Let's supose you want to test your web app in a smartphone connected in same network that device running Atomic is. To do this, just set `address` param on [constructor](HotReloadClass?id=constructor) to the  *address ip* of device running Atomic
 
-*E.g:* If the device runing Atomic *address ip* is *192.168.0.101*, the `AtomicReact_run.js` file will be:
+*E.g:* If the *address ip* of device running Atomic  is *192.168.0.101*, the `AtomicReact_run.js` file will be:
 
 ``` js
 [...]
@@ -35,11 +35,7 @@ var myHotReload = new AtomicHotReload(1337, '192.168.0.101'); //initialize HotRe
 
 ## Watching custom files and dirs
 
-By default *HotReload* watch changes on `AtomicDir`. To watch custom files or dirs use [`addToWatch(path)`](HotReloadClass?id=addtowatch) function:
-
-Param | Description | Type
------------- | ------------- | -------------
-path | dir or file path will be watched  | `string`
+By default *HotReload* watch changes on `AtomicDir`. To watch custom files or dirs use [`addToWatch()`](HotReloadClass?id=addtowatch) function.
 
 *E.g:* To watch a *foobar.html* file and *foo/bar/* dir , the `AtomicReact_run.js` file will be:
 
@@ -74,7 +70,7 @@ Param | Description | Type
 ------------ | ------------- | -------------
 path | dir or file path will be watched  | `string`
 * Notes:
-  * Checkout [Watching custom files and dirs](HotReloadClass?id=watching-custom-files-and-dirs) section for leran more about
+  * Checkout [Watching custom files and dirs](HotReloadClass?id=watching-custom-files-and-dirs) section for learn more about
 
 ---
 
