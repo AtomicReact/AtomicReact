@@ -98,9 +98,9 @@ For while just put the follow html code inside your Atom.
 
 ## Using an Atom
 
-Let's supose you already has a *http server* serving an *html* file. Maybe with *Http Server from NodeJS* , *Wamp Server*, *Apache Server*, whatever.
+Let's supose you already have a *http server* serving an *html* file. Maybe with *Http Server from NodeJS* , *Wamp Server*, *Apache Server*, whatever.
 
-**To use an Atom** you just import the bundles files in *html* file. Like this:
+**To use an Atom** you need just import the bundles files in *html* file. Like this:
 
 ``` html
 <script src="./AtomicReactBundle/atomicreact.core.js"></script>
