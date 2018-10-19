@@ -4,7 +4,7 @@ AtomicReact is a framework to build Web Apps with atomicity concept
 
 ## Features
 
-* **Fast to Get Started**: Install and run
+* **Fast to Get Started**: Install and run!
 * **Strong Ecosystem**:
     *  Build encapsulated Atoms that manage their own state, then compose them to make complex UIs.
     *  Easy to use Atoms from other developers
