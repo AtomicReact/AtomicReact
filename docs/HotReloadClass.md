@@ -89,7 +89,7 @@ path | dir or file path will be watched  | `string`
 HotReload.reload()
 ```
 * **Description:**
-Send Atomic recompile and refresh all web clients
+Send all [Atomic Class](AtomicClass) using the HotReload recompile and refresh all web clients
 * **Params:** void
 
 ---
