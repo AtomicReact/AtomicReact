@@ -2,6 +2,8 @@
 
 ![GitHub Logo](https://svgshare.com/i/8wf.svg)
 
+![GitHub Logo Image](./assets/logo_s.png)
+
 AtomicReact is a framework to build Web Apps with atomicity concept
 ## Features
 
