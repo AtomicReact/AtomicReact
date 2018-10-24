@@ -1,6 +1,6 @@
 # AtomicReact  &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/facebook/react/blob/master/LICENSE) [![npm version](https://img.shields.io/npm/v/atomicreact.svg?style=flat)](https://www.npmjs.com/package/atomicreact)
 
-![GitHub Logo](/docs/assets/icon.png)
+![GitHub Logo](/docs/assets/icon_medium.png)
 
 AtomicReact is a framework to build Web Apps with atomicity concept
 
