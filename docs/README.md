@@ -1,6 +1,6 @@
-# AtomicReact  &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/facebook/react/blob/master/LICENSE) [![npm version](https://img.shields.io/npm/v/atomicreact.svg?style=flat)](https://www.npmjs.com/package/atomicreact)
+# AtomicReact  &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/Guihgo/AtomicReact/blob/master/LICENSE) [![npm version](https://img.shields.io/npm/v/atomicreact.svg?style=flat)](https://www.npmjs.com/package/atomicreact)
 
-![GitHub Logo Image](/assets/logo.svg?)
+![Logo](/assets/logo.svg?)
 
 AtomicReact is a framework to build Web Apps with atomicity concept
 ## Features
@@ -13,6 +13,7 @@ AtomicReact is a framework to build Web Apps with atomicity concept
 * **Don't waste time recompiling**: Code and view in same time with HotReload feature
 * **NodeJs Modules Compatibility**: Easy to build with Express, Gulp, Grunt, UglifyJS2, ...
 * **Fast Front-End Development**: Create once, reuse afterwards
+* **Organized**: Each part in its own directory
 * **Build from what you already know**: HTML, CSS and JAVASCRIPT
 * **Share**: Share your Atoms with others developers.
 

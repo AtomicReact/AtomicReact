@@ -14,6 +14,7 @@ AtomicReact is a framework to build Web Apps with atomicity concept
 * **Don't waste time recompiling**: Code and view in same time with HotReload feature
 * **NodeJs Modules Compatibility**: Easy to build with Express, Gulp, Grunt, UglifyJS2, ...
 * **Fast Front-End Development**: Create once, reuse afterwards
+* **Organized**: Each part in its own directory
 * **Build from what you already know**: HTML, CSS and JAVASCRIPT
 * **Share**: Share your Atoms with others developers.
 

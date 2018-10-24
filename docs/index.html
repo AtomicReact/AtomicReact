@@ -9,16 +9,26 @@
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <!-- Theme: Simple Dark -->
 <link rel="stylesheet" href="https://unpkg.com/docsify-themeable/dist/css/theme-simple-dark.css">
+<!-- Place this tag in your head or just before your close body tag. -->
 
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
 </head>
 <body>
+  <div style="position: absolute; z-index: 100; top: 10px; right: 75px;">
+    <!-- Place this tag where you want the button to render. -->
+    <a class="github-button" href="https://github.com/Guihgo/AtomicReact" data-size="large" data-show-count="true" aria-label="Star Guihgo/AtomicReact on GitHub">Star</a>
+    <!-- Place this tag where you want the button to render. -->
+    <a class="github-button" href="https://github.com/Guihgo/AtomicReact/fork" data-size="large" data-show-count="true" aria-label="Fork Guihgo/AtomicReact on GitHub">Fork</a>
+  </div>
   <div id="app"></div>
   <script>
     window.$docsify = {
       name: 'AtomicReact',
       repo: 'https://github.com/Guihgo/AtomicReact',
       loadSidebar: true,
-      subMaxLevel: 3
+      subMaxLevel: 3,
+      coverpage: true,
+      auto2top: true
     }
   </script>
   <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
