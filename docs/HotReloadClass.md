@@ -2,7 +2,7 @@
 
 HotReload helps on development time. It recompile Atomic all times when anyone change happens on `AtomicDir`. So the developer can see the changes on web without need refresh the page all times.
 
-*Note:*
+*Notes:*
   * HotReload uses [*chokidar module*](https://github.com/paulmillr/chokidar) to watch changes.
   * HotReload uses [*ws module*](https://github.com/websockets/ws) to communicate with web client via websocket.
 
@@ -55,6 +55,8 @@ myHotReload.addToWatch(require('path').join(__dirname, 'foo/bar')); //watch foo/
 * [`addToWatch()`](HotReloadClass?id=addtowatch)
 * [`getEventEmitter()`](HotReloadClass?id=geteventemitter)
 * [`reload()`](HotReloadClass?id=reload)
+* [`Events`](HotReloadClass?id=events)
+  * [`reload`](HotReloadClass?id=event-name-reload)
 
 ### Reference
 
@@ -63,12 +65,13 @@ myHotReload.addToWatch(require('path').join(__dirname, 'foo/bar')); //watch foo/
 HotReload.addToWatch(path)
 ```
 * **Description:**
-Add some path to be watched
+Add a path to be watched
 * **Params:**
 
 Param | Description | Type
 ------------ | ------------- | -------------
 path | dir or file path will be watched  | `string`
+
 * Notes:
   * Checkout [Watching custom files and dirs](HotReloadClass?id=watching-custom-files-and-dirs) section for learn more about
 
@@ -82,14 +85,44 @@ path | dir or file path will be watched  | `string`
   Get [EventEmitter Class](https://nodejs.org/api/events.html#events_class_eventemitter). This class is used to communicate with all [Atomic Class](AtomicClass) using the HotReload
   * **Params:** void
 
+  * Notes:
+    * Checkout [Events](HotReloadClass?id=events) section for know more about events emitted.
+
 ---
 
 #### reload()
 ``` js
-HotReload.reload()
+HotReload.reload(message)
 ```
 * **Description:**
 Send recompile all [Atomic Class](AtomicClass) using the HotReload and refresh all web clients
-* **Params:** void
+* **Params:**
+
+Param | Description | Type
+------------ | ------------- | -------------
+message | message command to be send to web socket client  | `string`
+
+---
+
+### Events
+
+Events fired by event emitter
+
+``` js
+HotReload.getEventEmitter().on('<eventName>', callback);
+```
+
+* #### Event name: `reload`
+``` js
+HotReload.getEventEmitter().on('reload', function(message){/*...*/});
+```
+  * **Description:**
+  fired when [`reload()`](HotReloadClass?id=reload) function is called
+  * **Callback function param:**
+
+Param | Description | Type | Note
+------------ | ------------- | ------------- | -------------
+message | message command sent to web socket client  | `string` | When HotReload detect anyone changes on watching path it send `<atomicreact.hotreload.RELOAD>` message command.
+
 
 ---

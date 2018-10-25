@@ -37,7 +37,7 @@ class HotReload {
     /* Watcher */
     this.watcher = chokidar.watch();
     this.watcher.on('change', (function(file, stats) {
-      this.reload();
+      this.reload("<atomicreact.hotreload.RELOAD>");
     }).bind(this));
 
     this.watchingFiles = [];
@@ -48,11 +48,11 @@ class HotReload {
       this.watcher.add(path);
     }
   }
-  reload() {
-    this.eventEmitter.emit('changes', "<atomicreact.hotreload.RELOAD>");
+  reload(message) {
+    this.eventEmitter.emit('reload', message);
     try {
       this.webSocketsClients.forEach(function(objWebSocketClient){
-        objWebSocketClient.webSocketClient.send("<atomicreact.hotreload.RELOAD>");
+        objWebSocketClient.webSocketClient.send(message);
       });
     } catch(e) {}
   }

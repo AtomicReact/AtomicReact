@@ -59,7 +59,7 @@ class Atomic {
       this.HotReload.addToWatch(this.Config.atomicDir);
       // this.HotReload.addToWatch(process.cwd());
 
-      this.HotReload.getEventEmitter().on('changes', (function(msg){
+      this.HotReload.getEventEmitter().on('reload', (function(msg){
         // console.log("HotReload -> changes event emitted", msg);
         this.init();
       }).bind(this));
