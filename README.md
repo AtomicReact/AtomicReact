@@ -1,4 +1,4 @@
-# AtomicReact  &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/facebook/react/blob/master/LICENSE) [![npm version](https://img.shields.io/npm/v/atomicreact.svg?style=flat)](https://www.npmjs.com/package/atomicreact)
+# AtomicReact  &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/facebook/react/blob/master/LICENSE) [![npm version](https://img.shields.io/npm/v/atomicreact.svg?style=flat)](https://www.npmjs.com/package/atomicreact) ![NPM Downloads](https://img.shields.io/npm/dt/atomicreact.svg)
 
 ![GitHub Logo](/docs/assets/icon_medium.png)
 
@@ -22,7 +22,7 @@ AtomicReact is a framework to build Web Apps with atomicity concept
 1. [NodeJs](https://nodejs.org) (with NPM of course)
 
 ## Get a little teoria before ?!
-AtomicRact was designed in atoms concept. What things in the universe are made of?
+AtomicReact was designed in atoms concept. What things in the universe are made of?
 Let's get an essencial thing to our lives: The Water. The water is made with a lot of molecules whose each one is composed by one oxigen and two hidrogen atoms.
 Basically Atom Concept is create things from the minimal particle of them.
 

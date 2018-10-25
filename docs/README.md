@@ -21,7 +21,7 @@ AtomicReact is a framework to build Web Apps with atomicity concept
 1. [NodeJs](https://nodejs.org) (with NPM of course)
 
 ## Get a little teoria before ?!
-AtomicRact was designed in atoms concept. What things in the universe are made of?
+AtomicReact was designed in atoms concept. What things in the universe are made of?
 Let's get an essencial thing to our lives: The Water. The water is made with a lot of molecules whose each one is composed by one oxigen and two hidrogen atoms.
 Basically Atom Concept is create things from the minimal particle of them.
 
