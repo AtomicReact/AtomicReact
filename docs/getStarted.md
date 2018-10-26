@@ -59,8 +59,8 @@ var myAtomic = new Atomic(require('./AtomicReact_config.js'), myHotReload); //in
 myHotReload.addToWatch(require('path').join(__dirname, 'index.html'));
 ```
 
-By default, HotReload watch all changes on `AtomicDir` and refresh all pages using the AtomicReact if anyone change happens to help in development time.
-You can watch other files even folders using `HotReload.addToWatch(somePath)`.
+By default, HotReload watch all changes on `AtomicDir` and so refresh all pages using the AtomicReact.
+You can watch other files even folders using [`HotReload.addToWatch() function`](HotReloadClass?id=watching-custom-files-and-dirs).
 
 *Notes:*
   * Checkout the [`HotReload class`](HotReloadClass)

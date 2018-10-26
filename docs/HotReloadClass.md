@@ -66,27 +66,28 @@ HotReload.addToWatch(path)
 ```
 * **Description:**
 Add a path to be watched
-* **Params:**
+* **Param:**
 
 Param | Description | Type
 ------------ | ------------- | -------------
 path | dir or file path will be watched  | `string`
 
-* Notes:
+* **Return:** void
+* **Note:**
   * Checkout [Watching custom files and dirs](HotReloadClass?id=watching-custom-files-and-dirs) section for learn more about
 
 ---
 
 #### getEventEmitter()
-  ``` js
-  HotReload.getEventEmitter()
-  ```
-  * **Description:**
-  Get [EventEmitter Class](https://nodejs.org/api/events.html#events_class_eventemitter). This class is used to communicate with all [Atomic Class](AtomicClass) using the HotReload
-  * **Params:** void
-
-  * Notes:
-    * Checkout [Events](HotReloadClass?id=events) section for know more about events emitted.
+``` js
+HotReload.getEventEmitter()
+```
+* **Description:**
+Get [EventEmitter Class](https://nodejs.org/api/events.html#events_class_eventemitter). The EventEmitter is used to communicate with all [Atomic Class](AtomicClass) using the HotReload
+* **Param:** void
+* **Return:** [EventEmitter Class](https://nodejs.org/api/events.html#events_class_eventemitter)
+* **Note:**
+  * Checkout [Events](HotReloadClass?id=events) section for know more about events emitted.
 
 ---
 
@@ -96,11 +97,13 @@ HotReload.reload(message)
 ```
 * **Description:**
 Send recompile all [Atomic Class](AtomicClass) using the HotReload and refresh all web clients
-* **Params:**
+* **Param:**
 
 Param | Description | Type
 ------------ | ------------- | -------------
 message | message command to be send to web socket client  | `string`
+
+* **Return:** void
 
 ---
 
@@ -123,6 +126,5 @@ HotReload.getEventEmitter().on('reload', function(message){/*...*/});
 Param | Description | Type | Note
 ------------ | ------------- | ------------- | -------------
 message | message command sent to web socket client  | `string` | When HotReload detect anyone changes on watching path it send `<atomicreact.hotreload.RELOAD>` message command.
-
 
 ---
