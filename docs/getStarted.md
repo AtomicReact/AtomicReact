@@ -36,7 +36,7 @@ Where:
 
 `atomicDir` : the path where Atoms will be. **Note:** in this documentation, we call `AtomicDir` to refer this path
 
-`bundleDir` : the path where all Atoms will be bundled, normally a public dir
+`bundleDir` : the path where all Atoms will be bundled, normally a public dir. **Note:** in this documentation, we call `BundleDir` to refer this path
 
 `debug` : whether mensages in console like infos and warns will be showed
 
@@ -100,7 +100,7 @@ For while just put the follow html code inside your Atom.
 
 Let's supose you already have a *http server* serving an *html* file. Maybe with *Http Server from NodeJS* , *Wamp Server*, *Apache Server*, whatever.
 
-**To use an Atom** you need just import the bundles files in *html* file. Like this:
+**To use an Atom** you need just import the bundles files from `BundleDir` in your *html* file. Like this:
 
 ``` html
 <script src="./AtomicReactBundle/atomicreact.core.js"></script>

@@ -269,35 +269,21 @@ class Atomic {
     // console.log(source);
     return source;
   }
-  renderElement(domElement, elementOnNewChildrenAdded) {
+  renderElement(domElement) {
     this.Global.atomosRendered.list = []; //limpa a lista de atomos renderizados
 
-    if(elementOnNewChildrenAdded!=null && elementOnNewChildrenAdded!=undefined) {
-      // console.log(domElement.outerHTML);
-      var elementRenderizado = this.render(domElement.outerHTML);
-      var childrenElement = this.getChildren(elementOnNewChildrenAdded);
-      childrenElement.insertAdjacentHTML("beforeend", elementRenderizado);
+    domElement.innerHTML = this.render(domElement.innerHTML);
 
-      var key = elementOnNewChildrenAdded.getAttributeNode(this.ClientVariables.Key).value;
-      var id = elementOnNewChildrenAdded.getAttributeNode(this.ClientVariables.Id).value;
-      this.Atomos.forEach(function(Atomo, index){
-        if((key == Atomo.key) && (this.Atomos[index].onNewChildrenAdded!=null)) {
-          this.Atomos[index].onNewChildrenAdded(id, elementOnNewChildrenAdded, childrenElement.lastElementChild);
-        }
-      });
-    } else {
-      domElement.innerHTML = this.render(domElement.innerHTML);
-    }
-
+    this.notifyAtomOnRender();
+  }
+  notifyAtomOnRender(){
     this.Global.atomosRendered.list.forEach(function(AtomoRendered){
-      // console.log(AtomoRendered.id + "como key: "+AtomoRendered.key);
       this.Atomos.forEach(function(Atomo, index){
         if((AtomoRendered.key == Atomo.key) && (this.Atomos[index].onRender!=null)) {
-          this.Atomos[index].onRender(AtomoRendered.id, document.querySelector('['+this.ClientVariables.Id+'="'+AtomoRendered.id+'"]'));
+          this.Atomos[index].onRender(document.querySelector('['+this.ClientVariables.Id+'="'+AtomoRendered.id+'"]'));
         }
       });
     });
-
   }
   exportFunction(funcao) {
     return encodeURI(funcao.toString().replace(funcao.name, 'function').replace(/this/g, this.ClientVariables.Atomic)).replace(/'/g, '%27');
@@ -321,7 +307,7 @@ class Atomic {
     jsCore = "const "+this.ClientVariables.Atomic+ " = JSON.parse(decodeURI('"+ objToExportToClientStringfied + "'));";
 
     //exporta aqui e importa funcoes no lado do client
-    var functionsToExport = [this.printAtoms, this.getGeoCursorTag, this.renderAtomo, this.loopRender, this.render, this.renderElement, this.getAtom, this.getChild, this.getChildren, this.addChildren, this.ligaHotReloadNoClient, this.renderPageNoClient];
+    var functionsToExport = [this.printAtoms, this.getGeoCursorTag, this.renderAtomo, this.loopRender, this.render, this.renderElement, this.notifyAtomOnRender, this.getAtom, this.getChild, this.getChildren, this.addChildren, this.ligaHotReloadNoClient, this.renderPageNoClient];
     functionsToExport.forEach((function(functionToExport){
       jsCore += 'eval(decodeURI(\''+this.ClientVariables.Atomic+'.'+functionToExport.name+'='+this.exportFunction(functionToExport)+'\'));';
     }).bind(this));
@@ -454,13 +440,32 @@ class Atomic {
   getChildren(element) {
     return element.querySelector('['+this.ClientVariables.Children+']');
   }
-  addChildren(element, AtomoKey, props) {
+  addChildren(element, AtomoKey, props, where) {
     props = props || [];
+    where = where || "beforeend";
+
     var elementoToBeCreate = document.createElement(AtomoKey);
+
+    //add props
     props.forEach(function(prop){
       elementoToBeCreate.setAttribute(this.ClientVariables.Props+"."+prop.key, prop.value);
     });
-    this.renderElement(elementoToBeCreate, element);
+
+    this.Global.atomosRendered.list = []; //limpa a lista de atomos renderizados
+    var elementRenderizado = this.render(elementoToBeCreate.outerHTML);
+
+    var childrenElement = this.getChildren(element);
+    childrenElement.insertAdjacentHTML(where, elementRenderizado);
+
+    this.notifyAtomOnRender();
+
+    var key = element.getAttributeNode(this.ClientVariables.Key).value;
+    //notifyAtomOnNewChildrenAdded
+    this.Atomos.forEach(function(Atomo, index){
+      if((key == Atomo.key) && (this.Atomos[index].onNewChildrenAdded!=null)) {
+        this.Atomos[index].onNewChildrenAdded(document.querySelector('['+this.ClientVariables.Id+'="'+this.Global.atomosRendered.list[0].id+'"]'), element);
+      }
+    });
   }
   ligaHotReloadNoClient(){
     // console.log('ligaHotReloadNoClient disparado');

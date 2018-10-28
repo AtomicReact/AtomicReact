@@ -16,12 +16,12 @@ HotReload | Used for enable HotReload feature  | [`HotReload class`](HotReloadCl
 ## API Reference
 
 ### Overview
-* [`addChildren() - TODO`]()
+* [`addChildren()`]()
 * [`getAtom()`]()
 * [`getChild()`]()
 * [`getChildren()`]()
 * [`printAtoms()`](AtomicClass?id=printatoms)
-* [`renderElement()  - TODO`]()
+* [`renderElement()`]()
 
 ### Reference
 
