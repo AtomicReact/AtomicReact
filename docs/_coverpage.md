@@ -1,6 +1,6 @@
 
 </br>
-![Logo](/assets/logo.svg? =50x50)
+![Logo](./assets/logo.svg? 50x50)
 
 # AtomicReact
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/Guihgo/AtomicReact/blob/master/LICENSE)
