@@ -296,12 +296,15 @@ class Atomic {
     var objToExportToClient = {
       Global: JSON.parse(JSON.stringify(this.Global)), //gambi para clonar objeto
       Atomos: [],
-      ClientVariables: this.ClientVariables,
-      HotReload: {
+      ClientVariables: this.ClientVariables
+    };
+    if(this.HotReload!=null) {
+      objToExportToClient.HotReload = {
         port: this.HotReload.port,
         addrs: this.HotReload.addrs
-      }
-    };
+      };
+    }
+
     objToExportToClient.Global.isOnClientSide = true;
     var objToExportToClientStringfied = encodeURI(JSON.stringify(objToExportToClient)).replace(/'/g, '%27'); //fix problemas das aspas com encodeURI - encodeURI do nodejs não encode o ', por isso fazemos isso manualmente
     jsCore = "const "+this.ClientVariables.Atomic+ " = JSON.parse(decodeURI('"+ objToExportToClientStringfied + "'));";
