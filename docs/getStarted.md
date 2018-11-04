@@ -83,7 +83,7 @@ The `js` sub folder is the Atom logic.
 
 The `css` sub folder is the Atom style.
 
-**To create an Atom** just create a file on `html` sub folder. **The file name is the Atom name or the Atom key**. Note if you let's the `debug` as *true* in `AtomicReact_config.js` file you should see the Atom name on console.
+**To create an Atom** just create a *.html* file on `html` sub folder. **The file name is the Atom name or the Atom key**. Note if you let's the `debug` as *true* in `AtomicReact_config.js` file you should see the Atom name on console.
 
 For while just put the follow html code inside your Atom.
 ``` html
