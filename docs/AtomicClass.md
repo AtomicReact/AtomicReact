@@ -21,6 +21,7 @@ HotReload | Used for enable HotReload feature  | [`HotReload class`](HotReloadCl
 * [`getChild()`]()
 * [`getChildren()`]()
 * [`printAtoms()`](AtomicClass?id=printatoms)
+* [`renderElement()`]()
 
 ### Reference
 
