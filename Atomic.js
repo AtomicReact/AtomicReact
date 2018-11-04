@@ -428,10 +428,10 @@ class Atomic {
     var cssBundlePath = path.join(this.Config.bundleDir, 'atomicreact.bundle.css');
     fs.writeFileSync(cssBundlePath, cssBundle);
   }
-  getAtom(AtomoKey) {
+  getAtom(AtomKey) {
     var index = -1;
     for(var i=0; i<this.Atomos.length; i++){
-      if(AtomoKey==this.Atomos[i].key) {
+      if(AtomKey==this.Atomos[i].key) {
         index = i;
       }
     }
@@ -443,11 +443,11 @@ class Atomic {
   getChildren(element) {
     return element.querySelector('['+this.ClientVariables.Children+']');
   }
-  addChildren(element, AtomoKey, props, where) {
+  addChildren(element, AtomKey, props, where) {
     props = props || [];
     where = where || "beforeend";
 
-    var elementoToBeCreate = document.createElement(AtomoKey);
+    var elementoToBeCreate = document.createElement(AtomKey);
 
     //add props
     props.forEach(function(prop){
