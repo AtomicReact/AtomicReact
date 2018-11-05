@@ -77,13 +77,13 @@ There are 3 subs folders in `AtomicDir`:
     └── css
 ```
 
-The `html`sub folder  is the Atom structure.
+The `html`sub folder  is the Atom's structure.
 
-The `js` sub folder is the Atom logic.
+The `js` sub folder is the Atom's logic.
 
-The `css` sub folder is the Atom style.
+The `css` sub folder is the Atom's style.
 
-**To create an Atom** just create a *.html* file on `html` sub folder. **The file name is the Atom name or the Atom key**. Note if you let's the `debug` as *true* in `AtomicReact_config.js` file you should see the Atom name on console.
+**To create an Atom** just create any *.html* file in `html` sub folder. **The file name is the Atom name or the Atom key**. Note if you let's the `debug` as *true* in `AtomicReact_config.js` file you should see the Atom name on console.
 
 For while just put the follow html code inside your Atom.
 ``` html
