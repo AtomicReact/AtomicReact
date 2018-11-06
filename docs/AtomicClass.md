@@ -18,8 +18,8 @@ HotReload | Used for enable HotReload feature  | [`HotReload class`](HotReloadCl
 ### Overview
 * [`addChildren()`](AtomicClass?id=addchildren)
 * [`getAtom()`](AtomicClass?id=getatom)
-* [`getChild()`](AtomicClass?id=getchild)
 * [`getChildren()`](AtomicClass?id=getchildren)
+* [`getSub()`](AtomicClass?id=getsub)
 * [`printAtoms()`](AtomicClass?id=printatoms)
 * [`renderElement()`](AtomicClass?id=renderelement)
 
@@ -27,7 +27,7 @@ HotReload | Used for enable HotReload feature  | [`HotReload class`](HotReloadCl
 
 #### addChildren()
 ``` js
-Atomic.addChildren(element, AtomKey, props, where)
+Atomic.addChildren(atomElement, AtomKey, props, where)
 ```
 * **Description:**
 Add an Atom inside an Atom's [**children tag**](Atom?id=structure-html).
@@ -35,19 +35,25 @@ Add an Atom inside an Atom's [**children tag**](Atom?id=structure-html).
 
 Param | Description | Type | Default value
 ------------ | ------------- | ------------- | -------------
-element | Atom which will be added an Atom | `DOM Element` |
-AtomKey | *Atom* key will be added | `string` |
+atomElement | Atom which will be added an Atom | `DOM Element` |
+AtomKey | key of Atom will be added | `string` |
 props | Atom's [`Prop`](AtomicClass?id=prop) array | `Prop Array` | [ ]
 where | Representing the position relative to the element's children tag. Must be: `beforebegin`, `afterbegin`, `beforeend` or `afterend`. [Checkout this](https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentHTML#Parameters) to know more. | `string` | *beforeend*
 
 ##### Prop:
-A key pair object containing the prop's key declarated in [Atom Structure](Atom?id=structure-html) and value. Example:
+A key pair object containing the prop's key declarated in Atom's [Atom Structure](Atom?id=props) and its value. Example:
 ``` js
 {
   key: "myTitle",
   value: "This is my title"
 }
 ```
+
+Where:
+
+`key`'s value is a `string`
+
+`value`'s value is a `string`
 
 * **Return:** void
 
@@ -58,7 +64,7 @@ A key pair object containing the prop's key declarated in [Atom Structure](Atom?
 Atomic.getAtom(AtomKey)
 ```
 * **Description:**
-Get an [`Atom`](Atom) by key
+Get an [`Atom`](Atom) by its key
 * **Param:**
 
 Param | Description | Type
@@ -69,26 +75,26 @@ AtomKey | Atom key | `string` |
 
 ---
 
-#### getChild()
+#### getSub()
 ``` js
-Atomic.getChild(element, child)
+Atomic.getSub(atomElement, subName)
 ```
 * **Description:**
-Get an Atom's [*child element*](Atom?id=structure-html)
+Get an Atom's [*sub element*](Atom?id=sub) by its name.
 * **Param:**
 
 Param | Description | Type
 ------------ | ------------- | -------------
-element | Atom which child is in | `DOM Element`
-child | Child name declarated in [Atom Structure](Atom?id=structure-html) | `string`
+atomElement | Atom which sub element is in | `DOM Element`
+subName | Sub's name declarated in [Atom Structure - Sub](Atom?id=sub) | `string`
 
-* **Return:** the child element as `DOM Element`
+* **Return:** the sub element as `DOM Element`
 
 ---
 
 #### getChildren()
 ``` js
-Atomic.getChildren(element)
+Atomic.getChildren(atomElement)
 ```
 * **Description:**
 Get the Atom's [*children element*](Atom?id=structure-html)
@@ -96,7 +102,7 @@ Get the Atom's [*children element*](Atom?id=structure-html)
 
 Param | Description | Type
 ------------ | ------------- | -------------
-element | Atom which children is in | `DOM Element`
+atomElement | Atom which children is in | `DOM Element`
 
 * **Return:** the children element as `DOM Element`
 

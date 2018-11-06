@@ -20,12 +20,12 @@ class Atomic {
       Id: "data-atomic-id", //id = id dado para um atomo
       Key: "data-atomic-key", //key = nome do atomo
       Children: "data-atomic-children",
-      Child: "data-atomic-child"
+      Sub: "data-atomic-sub"
     };
 
     this.AtomicVariables = {
       Children: "atomic.children",
-      Child: "atomic.child"
+      Sub: "atomic.sub"
     }
 
     this.Config = (Config!=null) ? JSON.parse(JSON.stringify(Config)):{
@@ -115,8 +115,8 @@ class Atomic {
     }
     this.Atomos[pos].data = fs.readFileSync(fileAtomoHtml).toString();
 
-    //substui regular expressoes (atomic.child para data-atomic-child, ...)
-    this.Atomos[pos].data = this.replaceExpressao(this.AtomicVariables.Child, this.ClientVariables.Child, this.Atomos[pos].data);
+    //substui regular expressoes (atomic.sub para data-atomic-sub, ...)
+    this.Atomos[pos].data = this.replaceExpressao(this.AtomicVariables.Sub, this.ClientVariables.Sub, this.Atomos[pos].data);
     this.Atomos[pos].data = this.replaceExpressao(this.AtomicVariables.Children, this.ClientVariables.Children, this.Atomos[pos].data, true);
     // console.log(this.Atomos[pos].data);
   }
@@ -231,18 +231,18 @@ class Atomic {
     if(this.Global.isOnClientSide==true) { this.Global.atomosRendered.list.push({key:Atomo.key, id:atomicId}); }
     atomicId = " "+this.ClientVariables.Id+"='"+atomicId+"'";
 
-    //Add Atomic.Child
-    var atomicChild = '';
-    var regexChildAttr = new RegExp(this.ClientVariables.Child+'(\\s*=\\s*(\\")\\s*([^\\"]*))', 'g');
-    while(match = regexChildAttr.exec(atributos)){
+    //Add Atomic.Sub
+    var atomicSub = '';
+    var regexSubAttr = new RegExp(this.ClientVariables.Sub+'(\\s*=\\s*(\\")\\s*([^\\"]*))', 'g');
+    while(match = regexSubAttr.exec(atributos)){
       campo = match[0].slice(0,match[0].indexOf('=')).trim();
       valor = match[0];
-      atomicChild = " "+atomicChild + match[0] + '"';
+      atomicSub = " "+atomicSub + match[0] + '"';
     }
-    // console.log(atomicChild);
+    // console.log(atomicSub);
 
     var openEndFirstTagOnAtomoData = this.getGeoCursorTag(AtomoData, '').open.end - 1;
-    AtomoData = AtomoData.slice(0, openEndFirstTagOnAtomoData)+customAtributos+atomicKey+atomicId+atomicChild+AtomoData.slice(openEndFirstTagOnAtomoData, AtomoData.length);
+    AtomoData = AtomoData.slice(0, openEndFirstTagOnAtomoData)+customAtributos+atomicKey+atomicId+atomicSub+AtomoData.slice(openEndFirstTagOnAtomoData, AtomoData.length);
 
     this.Global.atomosRendered.count = this.Global.atomosRendered.count+1;
     // console.log(AtomoData);
@@ -310,7 +310,7 @@ class Atomic {
     jsCore = "const "+this.ClientVariables.Atomic+ " = JSON.parse(decodeURI('"+ objToExportToClientStringfied + "'));";
 
     //exporta aqui e importa funcoes no lado do client
-    var functionsToExport = [this.printAtoms, this.getGeoCursorTag, this.renderAtomo, this.loopRender, this.render, this.renderElement, this.notifyAtomOnRender, this.getAtom, this.getChild, this.getChildren, this.addChildren, this.ligaHotReloadNoClient, this.renderPageNoClient];
+    var functionsToExport = [this.printAtoms, this.getGeoCursorTag, this.renderAtomo, this.loopRender, this.render, this.renderElement, this.notifyAtomOnRender, this.getAtom, this.getSub, this.getChildren, this.addChildren, this.ligaHotReloadNoClient, this.renderPageNoClient];
     functionsToExport.forEach((function(functionToExport){
       jsCore += 'eval(decodeURI(\''+this.ClientVariables.Atomic+'.'+functionToExport.name+'='+this.exportFunction(functionToExport)+'\'));';
     }).bind(this));
@@ -437,13 +437,13 @@ class Atomic {
     }
     return this.Atomos[index];
   }
-  getChild(element, child) {
-    return element.querySelector('['+this.ClientVariables.Child+'="'+child+'"]');
+  getSub(atomElement, subName) {
+    return atomElement.querySelector('['+this.ClientVariables.Sub+'="'+subName+'"]');
   }
-  getChildren(element) {
-    return element.querySelector('['+this.ClientVariables.Children+']');
+  getChildren(atomElement) {
+    return atomElement.querySelector('['+this.ClientVariables.Children+']');
   }
-  addChildren(element, AtomKey, props, where) {
+  addChildren(atomElement, AtomKey, props, where) {
     props = props || [];
     where = where || "beforeend";
 
@@ -457,16 +457,16 @@ class Atomic {
     this.Global.atomosRendered.list = []; //limpa a lista de atomos renderizados
     var elementRenderizado = this.render(elementoToBeCreate.outerHTML);
 
-    var childrenElement = this.getChildren(element);
+    var childrenElement = this.getChildren(atomElement);
     childrenElement.insertAdjacentHTML(where, elementRenderizado);
 
     this.notifyAtomOnRender();
 
-    var key = element.getAttributeNode(this.ClientVariables.Key).value;
+    var key = atomElement.getAttributeNode(this.ClientVariables.Key).value;
     //notifyAtomOnNewChildrenAdded
     this.Atomos.forEach(function(Atomo, index){
       if((key == Atomo.key) && (this.Atomos[index].onNewChildrenAdded!=null)) {
-        this.Atomos[index].onNewChildrenAdded(document.querySelector('['+this.ClientVariables.Id+'="'+this.Global.atomosRendered.list[0].id+'"]'), element);
+        this.Atomos[index].onNewChildrenAdded(document.querySelector('['+this.ClientVariables.Id+'="'+this.Global.atomosRendered.list[0].id+'"]'), atomElement);
       }
     });
   }

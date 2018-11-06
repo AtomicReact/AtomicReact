@@ -1,9 +1,9 @@
 # Atom
 
 The minimal particle is called by **Atom**. One Atom is formed by 3 parts:
-* **Structure (HTML)**
-* **Logic (JS)**
-* **Style (CSS)**
+* [**Structure (HTML)**](Atom?id=structure-html)
+* [**Logic (JS)**](Atom?id=logic-js)
+* [**Style (CSS)**](Atom?id=style-css)
 
 Necessarily, an Atom **need to have a structure but doesn't need a logic and style**.
 After runs [`Atomic` command](AtomicCLI),  is created your `AtomicDir` where your Atoms will be.
@@ -27,17 +27,24 @@ Let's suppose you created a file called by `MyFirstAtom.html` in `html` sub fold
 
 ## Structure (HTML)
 
+``` text
+└── AtomicDir
+    ├── html   <<<---
+    ├── js
+    └── css
+```
+
 ### Props
 
-The `Props` is the Atom's proprieties. Is used to set Atom's initial state.
+The `props` are the Atom's proprieties. Are used to set Atom's initial state.
 
-**To use** a `prop`, just type `props.anyPropKey` **between pairs of braces** any where in *Atom's Structure*, like this:
+**To use** a `props`, just type `props.anyPropKey` **between pairs of braces** any where in *Atom's Structure*, like this:
 
 ```html
 {props.<anyPropKey>}
 ```
 
-**To set** a `prop`, just type `props.anyPropKey="someValue"` inside Atom's tagging.
+**To set** a `props` value, just type `props.anyPropKey="someValue"` inside Atom's tagging. See below:
 
 ```html
 <MyFirstAtom props.anyPropKey="someValue"></MyFirstAtom>
@@ -57,10 +64,52 @@ In `index.html`:
 <MyFirstAtom props.theTitle="This is my Title" props.borderColor="#FF0000"></MyFirstAtom>
 ```
 
+### Sub
+
+An Atom can have *important elements* which we could like handle them, they are **`sub`  parts**. The `atomic.sub` is used for set any element inside an Atom as its *sub part* and easily to get it with [`Atomic.getSub()`](AtomicClass?id=getsub) function. An Atom can have none, one or more `sub`.
+
+**To set** any element as `sub`, just type `atomic.sub="anySubName"` inside element's tagging.
+```html
+<AnyTag atomic.sub="anySubName"></AnyTag>
+<!-- Note: AnyTag maybe a Html Tag or a Atom Key also -->
+```
+
+#### Exemple:
+
+In `MyFirstAtom.html`:
+```html
+<div>
+  <button atomic.sub="btnShowAlert">Show Message!</button>
+</div>
+```
+
+In `MyFirstAtom.js`:
+```js
+module.exports.onRender = function(thisAtom){
+
+  var btnShowAlert = Atomic.getSub(thisAtom, 'btnShowAlert'); //get button element DOM
+
+  btnShowAlert.onclick = function(e){ //button's onclick event
+    alert("the button was clicked"); // alert a message
+  }
+
+}
+```
+
 ## Logic (JS)
 
-TODO
+``` text
+└── AtomicDir
+    ├── html
+    ├── js     <<<---
+    └── css
+```
 
 ## Style (CSS)
 
-TODO
+``` text
+└── AtomicDir
+    ├── html
+    ├── js
+    └── css    <<<---
+```
