@@ -19,12 +19,12 @@ class Atomic {
       Props: "props",
       Id: "data-atomic-id", //id = id dado para um atomo
       Key: "data-atomic-key", //key = nome do atomo
-      Children: "data-atomic-children",
+      Nucleus: "data-atomic-nucleus",
       Sub: "data-atomic-sub"
     };
 
     this.AtomicVariables = {
-      Children: "atomic.children",
+      Nucleus: "atomic.nucleus",
       Sub: "atomic.sub"
     }
 
@@ -117,7 +117,7 @@ class Atomic {
 
     //substui regular expressoes (atomic.sub para data-atomic-sub, ...)
     this.Atomos[pos].data = this.replaceExpressao(this.AtomicVariables.Sub, this.ClientVariables.Sub, this.Atomos[pos].data);
-    this.Atomos[pos].data = this.replaceExpressao(this.AtomicVariables.Children, this.ClientVariables.Children, this.Atomos[pos].data, true);
+    this.Atomos[pos].data = this.replaceExpressao(this.AtomicVariables.Nucleus, this.ClientVariables.Nucleus, this.Atomos[pos].data, true);
     // console.log(this.Atomos[pos].data);
   }
   printAtoms() {
@@ -135,7 +135,7 @@ class Atomic {
       TagKey = TagKey.toLowerCase();
     }
     /*
-      |startOpenAtomo|<Tag>|startCloseAtomo|...children...|endOpenAtomo|</Tag>|endCloseAtomo|
+      |startOpenAtomo|<Tag>|startCloseAtomo|...nucleus...|endOpenAtomo|</Tag>|endCloseAtomo|
     */
     var geoCursor = {
       open: {
@@ -208,19 +208,19 @@ class Atomic {
     //custom atributos:  (id, class, ....) devem ser add na tag do AtomoData
     customAtributos = customAtributos.slice(customAtributos.indexOf(" "), customAtributos.length-1);
 
-    //children
-    var children = source.slice(geoCursorAtomo.open.end, geoCursorAtomo.close.start);
-    // var geoCursorChildren = this.getGeoCursorTag(AtomoData, this.ClientVariables.Tags.children);
-    // AtomoData = AtomoData.slice(0,geoCursorChildren.open.start)+children+AtomoData.slice(geoCursorChildren.close.end,AtomoData.length);
-    var regExpChildrenTag = new RegExp('<(.)*'+this.ClientVariables.Children+'[^>]*', 'gi');
+    //nucleus
+    var nucleus = source.slice(geoCursorAtomo.open.end, geoCursorAtomo.close.start);
+    // var geoCursorNucleus = this.getGeoCursorTag(AtomoData, this.ClientVariables.Tags.nucleus);
+    // AtomoData = AtomoData.slice(0,geoCursorNucleus.open.start)+nucleus+AtomoData.slice(geoCursorNucleus.close.end,AtomoData.length);
+    var regExpNucleusTag = new RegExp('<(.)*'+this.ClientVariables.Nucleus+'[^>]*', 'gi');
     // console.log(AtomoData);
-    var openEndChildrenTag = -1;
-    while(match = regExpChildrenTag.exec(AtomoData)) {
-      openEndChildrenTag = regExpChildrenTag.lastIndex+1;
+    var openEndNucleusTag = -1;
+    while(match = regExpNucleusTag.exec(AtomoData)) {
+      openEndNucleusTag = regExpNucleusTag.lastIndex+1;
     }
-    // console.log(openEndChildrenTag);
-    // console.log(AtomoData.slice(openEndChildrenTag-10, openEndChildrenTag+1));
-    AtomoData = AtomoData.slice(0,openEndChildrenTag)+children+AtomoData.slice(openEndChildrenTag,AtomoData.length);
+    // console.log(openEndNucleusTag);
+    // console.log(AtomoData.slice(openEndNucleusTag-10, openEndNucleusTag+1));
+    AtomoData = AtomoData.slice(0,openEndNucleusTag)+nucleus+AtomoData.slice(openEndNucleusTag,AtomoData.length);
 
     //Add Atomic.Key
     var atomicKey = " "+this.ClientVariables.Key+"='"+Atomo.key+"'";
@@ -248,8 +248,8 @@ class Atomic {
     // console.log(AtomoData);
 
     AtomoData = this.render(AtomoData);
-    // console.log('geoCursorChildren: '+geoCursorChildren);
-    // console.log('AtomoDataComChildren: '+AtomoDataComChildren);
+    // console.log('geoCursorNucleus: '+geoCursorNucleus);
+    // console.log('AtomoDataComNucleus: '+AtomoDataComNucleus);
     source = source.slice(0,geoCursorAtomo.open.start)+AtomoData+source.slice(geoCursorAtomo.close.end,source.length);
 
     return {Source: source, Acabou: false};
@@ -310,7 +310,7 @@ class Atomic {
     jsCore = "const "+this.ClientVariables.Atomic+ " = JSON.parse(decodeURI('"+ objToExportToClientStringfied + "'));";
 
     //exporta aqui e importa funcoes no lado do client
-    var functionsToExport = [this.printAtoms, this.getGeoCursorTag, this.renderAtomo, this.loopRender, this.render, this.renderElement, this.notifyAtomOnRender, this.getAtom, this.getSub, this.getChildren, this.addChildren, this.ligaHotReloadNoClient, this.renderPageNoClient];
+    var functionsToExport = [this.printAtoms, this.getGeoCursorTag, this.renderAtomo, this.loopRender, this.render, this.renderElement, this.notifyAtomOnRender, this.getAtom, this.getSub, this.getNucleus, this.add, this.ligaHotReloadNoClient, this.renderPageNoClient];
     functionsToExport.forEach((function(functionToExport){
       jsCore += 'eval(decodeURI(\''+this.ClientVariables.Atomic+'.'+functionToExport.name+'='+this.exportFunction(functionToExport)+'\'));';
     }).bind(this));
@@ -359,10 +359,10 @@ class Atomic {
       // if(AtomoImported.onRender!=undefined) {
       //   jsBundle += 'eval(decodeURI(\''+this.ClientVariables.Atomic+'.Atomos['+index+'].onRender = '+encodeURI(AtomoImported.onRender.toString().replace(/this/g, this.ClientVariables.Atomic)).replace(/'/g, '%27')+'\'));';
       // } else {console.log(consoleFlags.warn, "function onRender undefined for "+Atomo.key);}
-      // //onNewChildrenAdded
-      // if(AtomoImported.onNewChildrenAdded!=undefined) {
-      //   jsBundle += 'eval(decodeURI(\''+this.ClientVariables.Atomic+'.Atomos['+index+'].onNewChildrenAdded = '+encodeURI(AtomoImported.onNewChildrenAdded.toString().replace(/this/g, this.ClientVariables.Atomic)).replace(/'/g, '%27')+'\'));';
-      // } else {console.log(consoleFlags.warn, "function onNewChildrenAdded undefined for "+Atomo.key);}
+      // //onAdded
+      // if(AtomoImported.onAdded!=undefined) {
+      //   jsBundle += 'eval(decodeURI(\''+this.ClientVariables.Atomic+'.Atomos['+index+'].onAdded = '+encodeURI(AtomoImported.onAdded.toString().replace(/this/g, this.ClientVariables.Atomic)).replace(/'/g, '%27')+'\'));';
+      // } else {console.log(consoleFlags.warn, "function onAdded undefined for "+Atomo.key);}
 
       // console.log(Object.getOwnPropertyNames(AtomoImported));
       var AtomoImportedObjName = Object.getOwnPropertyNames(AtomoImported);
@@ -384,8 +384,8 @@ class Atomic {
       if(AtomoImported.onRender==undefined && this.Config.debug==true) {
         console.log(consoleFlags.warn, "function onRender undefined for "+Atomo.key);
       }
-      if(AtomoImported.onNewChildrenAdded==undefined && this.Config.debug==true) {
-        console.log(consoleFlags.warn, "function onNewChildrenAdded undefined for "+Atomo.key);
+      if(AtomoImported.onAdded==undefined && this.Config.debug==true) {
+        console.log(consoleFlags.warn, "function onAdded undefined for "+Atomo.key);
       }
 
     }).bind(this));
@@ -440,10 +440,10 @@ class Atomic {
   getSub(atomElement, subName) {
     return atomElement.querySelector('['+this.ClientVariables.Sub+'="'+subName+'"]');
   }
-  getChildren(atomElement) {
-    return atomElement.querySelector('['+this.ClientVariables.Children+']');
+  getNucleus(atomElement) {
+    return atomElement.querySelector('['+this.ClientVariables.Nucleus+']');
   }
-  addChildren(atomElement, AtomKey, props, where) {
+  add(atomElement, AtomKey, props, where) {
     props = props || [];
     where = where || "beforeend";
 
@@ -457,16 +457,16 @@ class Atomic {
     this.Global.atomosRendered.list = []; //limpa a lista de atomos renderizados
     var elementRenderizado = this.render(elementoToBeCreate.outerHTML);
 
-    var childrenElement = this.getChildren(atomElement);
-    childrenElement.insertAdjacentHTML(where, elementRenderizado);
+    var nucleusElement = this.getNucleus(atomElement);
+    nucleusElement.insertAdjacentHTML(where, elementRenderizado);
 
     this.notifyAtomOnRender();
 
     var key = atomElement.getAttributeNode(this.ClientVariables.Key).value;
-    //notifyAtomOnNewChildrenAdded
+    //notifyAtom onAdded
     this.Atomos.forEach(function(Atomo, index){
-      if((key == Atomo.key) && (this.Atomos[index].onNewChildrenAdded!=null)) {
-        this.Atomos[index].onNewChildrenAdded(document.querySelector('['+this.ClientVariables.Id+'="'+this.Global.atomosRendered.list[0].id+'"]'), atomElement);
+      if((key == Atomo.key) && (this.Atomos[index].onAdded!=null)) {
+        this.Atomos[index].onAdded(document.querySelector('['+this.ClientVariables.Id+'="'+this.Global.atomosRendered.list[0].id+'"]'), atomElement);
       }
     });
   }

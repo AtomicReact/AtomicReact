@@ -34,9 +34,76 @@ Let's suppose you created a file called by `MyFirstAtom.html` in `html` sub fold
     └── css
 ```
 
+Inside `AtomicDir/html` will be Atom's structure. Each Atom has your own file structure with `.html` extension. **The file name is the Atom name or the Atom key**, so if you create a file called by `MyFirstAtom.html` inside `AtomicDir/html` your **Atom key** is `MyFirstAtom`.
+
+Atom's struture is any *html* struture, but is recommended each structure be on a **single tag**. For exemple:
+
+In `MyFirstAtom.html` file:
+
+**Recommended:**
+```html
+<div>
+  <!-- All Atom's structure will be here -->
+</div>
+```
+
+**Not recommended (but you can):**
+```html
+<div>Foo</div>
+<div>Bar</div>
+```
+
+### Overview
+* [`nucleus`](Atom?id=nucleus)
+* [`props`](Atom?id=props)
+* [`sub`](Atom?id=sub)
+
+### Nucleus
+
+**`nucleus`** is the place where all Atom's children will be.
+
+**To set** the Atom's `nucleus`, just type `atomic.nucleus` inside any Atom's element.
+
+```html
+<AnyTag atomic.nucleus></AnyTag>
+<!-- Note: AnyTag maybe a Html Tag or a Atom Key also -->
+```
+
+**To add** something in *nucleus*, just insert inside Atom's tagging. See below:
+```html
+  <MyFirstAtom>
+    <!-- All here will be on Nucleus even this comment  -->
+    <h2>Hey! I'll be inside Atom's Nucleus !</h2>
+  </MyFirstAtom>
+```
+
+You can also add an Atom programatically with [`Atomic.add()`](AtomicClass?id=add) function.
+
+#### Exemple:
+
+In `MyFirstAtom.html`:
+```html
+<div>
+  <h1>I'm on atom's nucleus</h1>
+  <div atomic.nucleus></div> <!-- Set this div as nucleus -->
+  <h1>I'm under atom's nucleus</h1>
+</div>
+```
+
+In `index.html`:
+```html
+<MyFirstAtom>
+  <ul>
+    <li>Foo</li>
+    <li>Bar</li>
+    <li>The life is good</li>
+  </ul>
+</MyFirstAtom>
+```
+
 ### Props
 
-The `props` are the Atom's proprieties. Are used to set Atom's initial state.
+`props` are the Atom's proprieties. Are used to set Atom's initial state.
 
 **To use** a `props`, just type `props.anyPropKey` **between pairs of braces** any where in *Atom's Structure*, like this:
 
@@ -66,7 +133,7 @@ In `index.html`:
 
 ### Sub
 
-An Atom can have *important elements* which we could like handle them, they are **`sub`  parts**. The `atomic.sub` is used for set any element inside an Atom as its *sub part* and easily to get it with [`Atomic.getSub()`](AtomicClass?id=getsub) function. An Atom can have none, one or more `sub`.
+An Atom can have *important elements* which we could like handle them, they are **`sub`  particles**. The `atomic.sub` is used for set any element inside an Atom as its *sub part* and easily to get it with [`Atomic.getSub()`](AtomicClass?id=getsub) function. An Atom can have none, one or more `sub`.
 
 **To set** any element as `sub`, just type `atomic.sub="anySubName"` inside element's tagging.
 ```html
@@ -104,6 +171,21 @@ module.exports.onRender = function(thisAtom){
     ├── js     <<<---
     └── css
 ```
+
+Inside `AtomicDir/js` will be all Atom's logic. Each Atom has your own logic, so if you create a Atom called by `MyFirstAtom.html` on `AtomicDir/html`, its logic will be `AtomicDir/js/MyFirstAtom.js`.
+
+### Overview
+* [`OnRender`](Atom?id=onrender)
+* [`OnAdded`](Atom?id=onadded)
+* [`Atom's functions`](Atom?id=atoms-functions)
+* [`Atom's objects`](Atom?id=atoms-objects)
+
+### OnRender
+### OnAdded
+### Atom's functions
+### Atom's objects
+
+
 
 ## Style (CSS)
 

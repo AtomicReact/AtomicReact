@@ -90,7 +90,7 @@ For while just put the follow html code inside your Atom.
 <div>
   <h1>{props.myTitle}</h1>
   <h2>Hi! I'm a Atom</h2>
-  <div atomic.children></div>
+  <div atomic.nucleus></div>
 </div>
 ```
 *Notes:*
@@ -113,7 +113,7 @@ And **use it tagging Atom key**:
 ``` html
 <body>
   <MyAtom props.myTitle="This's my title">
-    <h4>i'm in children</h4>
+    <h4>i'm in nucleus</h4>
   </MyAtom>
 </body>
 ```
@@ -133,8 +133,33 @@ The *html* file will look like this:
 
 <body>
   <MyAtom props.myTitle="This's my title">
-    <h4>i'm in children</h4>
+    <h4>i'm in nucleus</h4>
   </MyAtom>
+</body>
+</HTML>
+```
+
+After AtomicReact render the page, your view will be:
+
+``` html
+<HTML>
+<head>
+	<title>Hello AtomicReact App</title>
+
+	<script src="./AtomicReactBundle/atomicreact.core.js"></script>
+	<script src="./AtomicReactBundle/atomicreact.bundle.js"></script>
+	<link rel="stylesheet" href="./AtomicReactBundle/atomicreact.bundle.css">
+
+</head>
+
+<body>
+  <div data-atomic-key="MyAtom" data-atomic-id="MyAtom_0">
+    <h1>This's my title</h1>
+    <h2>Hi! I'm a Atom</h2>
+    <div data-atomic-nucleus>
+      <h4>i'm in nucleus</h4>
+    </div>
+  </div>
 </body>
 </HTML>
 ```

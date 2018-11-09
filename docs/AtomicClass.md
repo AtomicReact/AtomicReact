@@ -16,21 +16,21 @@ HotReload | Used for enable HotReload feature  | [`HotReload class`](HotReloadCl
 ## API Reference
 
 ### Overview
-* [`addChildren()`](AtomicClass?id=addchildren)
+* [`add()`](AtomicClass?id=add)
 * [`getAtom()`](AtomicClass?id=getatom)
-* [`getChildren()`](AtomicClass?id=getchildren)
+* [`getNucleus()`](AtomicClass?id=getnucleus)
 * [`getSub()`](AtomicClass?id=getsub)
 * [`printAtoms()`](AtomicClass?id=printatoms)
 * [`renderElement()`](AtomicClass?id=renderelement)
 
 ### Reference
 
-#### addChildren()
+#### add()
 ``` js
-Atomic.addChildren(atomElement, AtomKey, props, where)
+Atomic.add(atomElement, AtomKey, props, where)
 ```
 * **Description:**
-Add an Atom inside an Atom's [**children tag**](Atom?id=structure-html).
+Add an Atom inside an Atom's [**Nucleus**](Atom?id=nucleus).
 * **Param:**
 
 Param | Description | Type | Default value
@@ -38,10 +38,10 @@ Param | Description | Type | Default value
 atomElement | Atom which will be added an Atom | `DOM Element` |
 AtomKey | key of Atom will be added | `string` |
 props | Atom's [`Prop`](AtomicClass?id=prop) array | `Prop Array` | [ ]
-where | Representing the position relative to the element's children tag. Must be: `beforebegin`, `afterbegin`, `beforeend` or `afterend`. [Checkout this](https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentHTML#Parameters) to know more. | `string` | *beforeend*
+where | Representing the position relative to the element's nucleus tag. Must be: `beforebegin`, `afterbegin`, `beforeend` or `afterend`. [Checkout this](https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentHTML#Parameters) to know more. | `string` | *beforeend*
 
 ##### Prop:
-A key pair object containing the prop's key declarated in Atom's [Atom Structure](Atom?id=props) and its value. Example:
+A key pair object containing the prop's key declarated in [Atom's Structure](Atom?id=props) and its value. Example:
 ``` js
 {
   key: "myTitle",
@@ -92,19 +92,19 @@ subName | Sub's name declarated in [Atom Structure - Sub](Atom?id=sub) | `string
 
 ---
 
-#### getChildren()
+#### getNucleus()
 ``` js
-Atomic.getChildren(atomElement)
+Atomic.getNucleus(atomElement)
 ```
 * **Description:**
-Get the Atom's [*children element*](Atom?id=structure-html)
+Get the Atom's [*Nucleus element*](Atom?id=nucleus)
 * **Param:**
 
 Param | Description | Type
 ------------ | ------------- | -------------
-atomElement | Atom which children is in | `DOM Element`
+atomElement | Atom which will be get the nucleus | `DOM Element`
 
-* **Return:** the children element as `DOM Element`
+* **Return:** the nucleus element as `DOM Element`
 
 ---
 
