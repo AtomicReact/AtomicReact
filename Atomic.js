@@ -122,7 +122,7 @@ class Atomic {
     //substui regular expressoes (atomic.sub para data-atomic-sub, ...)
     this.Atomos[pos].data = this.replaceExpressao(this.AtomicVariables.Sub, this.ClientVariables.Sub, this.Atomos[pos].data);
     this.Atomos[pos].data = this.replaceExpressao(this.AtomicVariables.Nucleus, this.ClientVariables.Nucleus, this.Atomos[pos].data, true);
-    console.log(this.Atomos[pos].data);
+    // console.log(this.Atomos[pos].data);
   }
   printAtoms() {
     if(this.Global.isOnClientSide) { console.log('Atoms Loaded:'); }
