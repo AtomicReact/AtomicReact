@@ -445,7 +445,7 @@ class Atomic {
     return atomElement.querySelector('['+this.ClientVariables.Sub+'="'+subName+'"]');
   }
   getNucleus(atomElement) {
-    return atomElement.querySelector('['+this.ClientVariables.Nucleus+']');
+    return document.querySelector('[data-atomic-id='+atomElement.getAttribute('data-atomic-id')+'] > ['+this.ClientVariables.Nucleus+']');
   }
   add(atomElement, AtomKey, props, where) {
     props = props || [];
