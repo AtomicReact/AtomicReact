@@ -151,8 +151,8 @@ class Atomic {
         end: -1
       }
     };
-    var regexOpenOuClose = new RegExp('</?'+TagKey+'[^>]*>', "g");
-    var regexOpen = new RegExp('<'+TagKey+'[^>]*>', "g");
+    var regexOpenOuClose = new RegExp('</?(('+TagKey+')|('+TagKey+'\\s[^>]*))>', "g");
+    var regexOpen = new RegExp('<(('+TagKey+')|('+TagKey+'\\s[^>]*))>', "g");
     var match;
     var contadorTagsAbertas = 0;
     var encontrou = false;
@@ -245,7 +245,7 @@ class Atomic {
     }
     // console.log(atomicSub);
 
-    var openEndFirstTagOnAtomoData = this.getGeoCursorTag(AtomoData, '').open.end - 1;
+    var openEndFirstTagOnAtomoData = this.getGeoCursorTag(AtomoData, '[^>]*').open.end - 1;
     AtomoData = AtomoData.slice(0, openEndFirstTagOnAtomoData)+customAtributos+atomicKey+atomicId+atomicSub+AtomoData.slice(openEndFirstTagOnAtomoData, AtomoData.length);
 
     this.Global.atomosRendered.count = this.Global.atomosRendered.count+1;
