@@ -152,15 +152,16 @@ In `MyFirstAtom.html`:
 
 In `MyFirstAtom.js`:
 ```js
-module.exports.onRender = function(thisAtom){
+class MyMain {
+  onRender(atom) {
+    var btnShowAlert = Atomic.getSub(atom, 'btnShowAlert'); //get button element DOM
 
-  var btnShowAlert = Atomic.getSub(thisAtom, 'btnShowAlert'); //get button element DOM
-
-  btnShowAlert.onclick = function(e){ //button's onclick event
-    alert("the button was clicked"); // alert a message
+    btnShowAlert.onclick = function(e){ //button's onclick event
+      alert("the button was clicked"); // alert a message
+    }
   }
-
 }
+module.exports.main = MyMain;
 ```
 
 ## Logic (JS)
@@ -172,26 +173,33 @@ module.exports.onRender = function(thisAtom){
     └── css
 ```
 
-Inside `AtomicDir/js` will be all Atom's logic. Each Atom has your own logic, so if you create a Atom called by `MyFirstAtom.html` on `AtomicDir/html`, its logic will be in `AtomicDir/js/MyFirstAtom.js`.
+Inside `AtomicDir/js` will be all Atom's logic. Each Atom has your own logic, so if you create an Atom called by `MyFirstAtom.html` on `AtomicDir/html`, its logic will be in `AtomicDir/js/MyFirstAtom.js`.
 
 Your code will be **inside a class** and exports it with `module.exports.main` like:
 
 ```js
 class MyMain {
   onRender(atom) {
-    /* DO something when this atom is rendered */
+    /* Does something when this atom is rendered */
+    console.log('atom: ', atom);
+    console.log("atom's nucleus", Atomic.getNucleus(atom));
+    this.myFunction();
   }
   onAdded(atomAdded, atom) {
-    /* DO something when other atom is added inside this atom  */
+    /* Does something when other atom is added inside this atom  */
+    console.log('atomAdded: ', atomAdded);
+    console.log('atom: ', atom);
   }
   myFunction() {
     alert('Hey! this is myFunction !');
   }
 }
-module.exports.main = MyMain;
+module.exports.main = MyMain; //export MyMain Class as main
 ```
 
-**Note**: two reserved functions was declared in example above: [`onRender`](Atom?id=onrender) and [`onAdded`](Atom?id=onadded).
+**Note**:
+* use `module.exports.main = <someClass>` to export your main class (see last line in example above)
+* two reserved functions was used in example above: [`onRender`](Atom?id=onrender) and [`onAdded`](Atom?id=onadded).
 
 ### Overview
 * [`onRender`](Atom?id=onrender)
@@ -199,7 +207,34 @@ module.exports.main = MyMain;
 
 ### onRender
 
+``` js
+onRender(atom)
+```
+
+* **Description:**
+this function is fired when an Atom was rendered.
+
+* **Param:**
+
+Param | Description | Type
+------------ | ------------- | -------------
+atom | Atom which was rendered  | `DOM Element`
+
 ### onAdded
+
+``` js
+onAdded(atomAdded, atom)
+```
+
+* **Description:**
+this function is fired when other Atom was added inside the Atom.
+
+* **Param:**
+
+Param | Description | Type
+------------ | ------------- | -------------
+atomAdded | Atom which was added | `DOM Element`
+atom | Atom where was added inside your [`nucleus`](Atom?id=nucleus)  | `DOM Element`
 
 ## Style (CSS)
 
