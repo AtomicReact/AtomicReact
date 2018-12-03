@@ -172,20 +172,34 @@ module.exports.onRender = function(thisAtom){
     └── css
 ```
 
-Inside `AtomicDir/js` will be all Atom's logic. Each Atom has your own logic, so if you create a Atom called by `MyFirstAtom.html` on `AtomicDir/html`, its logic will be `AtomicDir/js/MyFirstAtom.js`.
+Inside `AtomicDir/js` will be all Atom's logic. Each Atom has your own logic, so if you create a Atom called by `MyFirstAtom.html` on `AtomicDir/html`, its logic will be in `AtomicDir/js/MyFirstAtom.js`.
+
+Your code will be **inside a class** and exports it with `module.exports.main` like:
+
+```js
+class MyMain {
+  onRender(atom) {
+    /* DO something when this atom is rendered */
+  }
+  onAdded(atomAdded, atom) {
+    /* DO something when other atom is added inside this atom  */
+  }
+  myFunction() {
+    alert('Hey! this is myFunction !');
+  }
+}
+module.exports.main = MyMain;
+```
+
+**Note**: two reserved functions was declared in example above: [`onRender`](Atom?id=onrender) and [`onAdded`](Atom?id=onadded).
 
 ### Overview
-* [`OnRender`](Atom?id=onrender)
-* [`OnAdded`](Atom?id=onadded)
-* [`Atom's functions`](Atom?id=atoms-functions)
-* [`Atom's objects`](Atom?id=atoms-objects)
+* [`onRender`](Atom?id=onrender)
+* [`onAdded`](Atom?id=onadded)
 
-### OnRender
-### OnAdded
-### Atom's functions
-### Atom's objects
+### onRender
 
-
+### onAdded
 
 ## Style (CSS)
 

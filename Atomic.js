@@ -283,8 +283,8 @@ class Atomic {
   notifyAtomOnRender(){
     this.Global.atomosRendered.list.forEach(function(AtomoRendered){
       this.Atomos.forEach(function(Atomo, index){
-        if((AtomoRendered.key == Atomo.key) && (this.Atomos[index].onRender!=null)) {
-          this.Atomos[index].onRender(document.querySelector('['+this.ClientVariables.Id+'="'+AtomoRendered.id+'"]'));
+        if((AtomoRendered.key == Atomo.key) && (this.Atomos[index].main!=null) && (this.Atomos[index].main.onRender!=null)) {
+          this.Atomos[index].main.onRender(document.querySelector('['+this.ClientVariables.Id+'="'+AtomoRendered.id+'"]'));
         }
       });
     });
@@ -372,24 +372,17 @@ class Atomic {
       var AtomoImportedObjName = Object.getOwnPropertyNames(AtomoImported);
       Object.values(AtomoImported).forEach((function(value, indexValues){
         // console.log(typeof value);
-        if(typeof value === 'function') {
-          // console.log("eh uma funcao", value.toString());
-          jsBundle += 'eval(decodeURI(\''+this.ClientVariables.Atomic+'.getAtom(\"'+Atomo.key+'\").'+AtomoImportedObjName[indexValues]+' = '+encodeURI(value.toString()).replace(/'/g, '%27')+'\'));';
-        }
-        if(typeof value === 'object') {
-          jsBundle += 'eval(decodeURI(\''+this.ClientVariables.Atomic+'.getAtom(\"'+Atomo.key+'\").'+AtomoImportedObjName[indexValues]+' = '+encodeURI(JSON.stringify(value)).replace(/'/g, '%27')+'\'));';
-        }
-        else {
-          // console.log("nao eh uma funcao");
+        // console.log(AtomoImportedObjName[indexValues]);
+        if(AtomoImportedObjName[indexValues]=="main") {
+            jsBundle += 'eval(decodeURI(\''+this.ClientVariables.Atomic+'.getAtom(\"'+Atomo.key+'\").'+AtomoImportedObjName[indexValues]+' = '+encodeURI(value.toString()).replace(/'/g, '%27')+'\'));';
+            jsBundle += 'eval(decodeURI(\''+this.ClientVariables.Atomic+'.getAtom(\"'+Atomo.key+'\").'+AtomoImportedObjName[indexValues]+' = new ('+this.ClientVariables.Atomic+'.getAtom(\"'+Atomo.key+'\")).'+AtomoImportedObjName[indexValues]+'();\'));';
         }
       }).bind(this));
       // console.log(Object.values(AtomoImported)[2].toString());
       // console.log(Object.values(AtomoImported));
-      if(AtomoImported.onRender==undefined && this.Config.debug==true) {
-        console.log(consoleFlags.warn, "function onRender undefined for "+Atomo.key);
-      }
-      if(AtomoImported.onAdded==undefined && this.Config.debug==true) {
-        console.log(consoleFlags.warn, "function onAdded undefined for "+Atomo.key);
+      // console.log(AtomoImportedObjName);
+      if(AtomoImported.main==undefined && this.Config.debug==true) {
+        console.log(consoleFlags.warn, "["+Atomo.key+"] don't have main class");
       }
 
     }).bind(this));
@@ -469,8 +462,8 @@ class Atomic {
     var key = atomElement.getAttributeNode(this.ClientVariables.Key).value;
     //notifyAtom onAdded
     this.Atomos.forEach(function(Atomo, index){
-      if((key == Atomo.key) && (this.Atomos[index].onAdded!=null)) {
-        this.Atomos[index].onAdded(document.querySelector('['+this.ClientVariables.Id+'="'+this.Global.atomosRendered.list[0].id+'"]'), atomElement);
+      if((key == Atomo.key) && (this.Atomos[index].main!=null) && (this.Atomos[index].main.onAdded!=null)) {
+        this.Atomos[index].main.onAdded(document.querySelector('['+this.ClientVariables.Id+'="'+this.Global.atomosRendered.list[0].id+'"]'), atomElement);
       }
     });
   }
