@@ -18,6 +18,8 @@ AtomicReact is a framework to build Web Apps with atomicity concept
 * **Build from what you already know**: HTML, CSS and JAVASCRIPT
 * **Share**: Share your Atoms with others developers.
 
+## [Let's Get Started](https://guihgo.github.io/AtomicReact/#/getStarted)
+
 ## Requirements
 1. [NodeJs](https://nodejs.org) (with NPM of course)
 

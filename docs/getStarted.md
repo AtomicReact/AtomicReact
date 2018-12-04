@@ -9,13 +9,9 @@
 ```
   npm install atomicreact --save
 ```
-3. **Initialize Atomic** inside your project folder:
+3. **Initialize & Run Atomic** inside your project folder:
 ```
-  Atomic init
-```
-4. **Run Atomic**:
-```
-  Atomic run
+  Atomic
 ```
 
 So, some files and dirs will be created and now you are already can to [**create your first Atom**](getStarted?id=creating-an-atom)
