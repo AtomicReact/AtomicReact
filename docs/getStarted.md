@@ -18,58 +18,11 @@
   Atomic run
 ```
 
-So, some files and dir will be created. Let's see more about them below:
-
-## Configuration (**`AtomicReact_config.js`**)
-
-All AtomicReact configuration is made on **`AtomicReact_config.js`**.
-
-From initial `AtomicReact_config.js`:
-``` js
-module.exports = {
-  atomicDir: 'myAtomicReactFolder',
-  bundleDir: 'myPublicDir/AtomicReactBundle',
-  debug: true
-}
-```
-Where:
-
-`atomicDir` : the path where Atoms will be. **Note:** in this documentation, we call `AtomicDir` to refer this path
-
-`bundleDir` : the path where all Atoms will be bundled, normally a public dir. **Note:** in this documentation, we call `BundleDir` to refer this path
-
-`debug` : whether mensages in console like infos and warns will be showed
-
-## Running (**`AtomicReact_run.js`**)
-
-To runs AtomicReact we call the command `Atomic run` that uses **`AtomicReact_run.js`** file to run.
-
-From initial `AtomicReact_run.js`:
-``` js
-var Atomic = require('atomicreact').Atomic; //import Atomic from module
-var AtomicHotReload = require('atomicreact').HotReload; //import HotReload from module
-
-/* initialize HotReload */
-var myHotReload = new AtomicHotReload(1337, 'localhost'); //initialize HotReload on localhost:1337
-
-/* initialize Atomic */
-var myAtomic = new Atomic(require('./AtomicReact_config.js'), myHotReload); //initialize Atomic using HotReload
-
-/* Listen all changes in custom files */
-myHotReload.addToWatch(require('path').join(__dirname, 'index.html'));
-```
-
-By default, HotReload watch all changes on `AtomicDir` and so refresh all pages using the AtomicReact.
-You can watch other files even folders using [`HotReload.addToWatch() function`](HotReloadClass?id=watching-custom-files-and-dirs).
-
-*Notes:*
-  * Checkout the [`HotReload class`](HotReloadClass)
-  * Checkout the [`Atomic class`](AtomicClass)
-
+So, some files and dirs will be created and now you are already to [**create your first Atom**](getStarted?id=creating-an-atom)
 
 ## Creating an Atom
 
-There are 3 subs folders in `AtomicDir`:
+There are 3 subs folders in `AtomicDir` (*myAtomicReactFolder* by default):
 ``` text
 └── AtomicDir
     ├── html
