@@ -11,5 +11,5 @@
 :warning:
 > A framework to build Web Apps with atomicity concept
 
-[GitHub](https://github.com/Guihgo/AtomicReact/)
 [Get Started](getStarted.md)
+[GitHub](https://github.com/Guihgo/AtomicReact/)

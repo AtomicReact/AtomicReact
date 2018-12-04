@@ -18,7 +18,7 @@
   Atomic run
 ```
 
-So, some files and dirs will be created and now you are already to [**create your first Atom**](getStarted?id=creating-an-atom)
+So, some files and dirs will be created and now you are already can to [**create your first Atom**](getStarted?id=creating-an-atom)
 
 ## Creating an Atom
 
