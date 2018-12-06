@@ -2,15 +2,15 @@
 
 ## Installation
 1. Install Atomic package globally via *npm* (to use CLI commands)
-```
+```bash
   npm install atomicreact -g
 ```
 2. Install Atomic package in your project via *npm*
-```
+```bash
   npm install atomicreact --save
 ```
 3. **Initialize & Run Atomic** inside your project folder:
-```
+```bash
   Atomic
 ```
 
