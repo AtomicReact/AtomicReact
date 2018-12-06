@@ -198,7 +198,7 @@ module.exports.main = MyMain; //export MyMain Class as main
 ```
 
 **Note**:
-* use `module.exports.main = <someClass>` to export your main class (see last line in example above)
+* use `module.exports.main = <anyClass>` to export your main class (see last line in example above)
 * two reserved functions was used in example above: [`onRender`](Atom?id=onrender) and [`onAdded`](Atom?id=onadded).
 
 ### Overview
@@ -243,4 +243,44 @@ atom | Atom where was added inside your [`nucleus`](Atom?id=nucleus)  | `DOM Ele
     ├── html
     ├── js
     └── css    <<<---
+```
+
+Inside `AtomicDir/css` will be all Atom's style. Is recommended each Atom's style stay be in a file. When AtomicReact bundle the styles, it just joins all css files into one.
+
+To style an Atom we just **code a normal CSS with selectors** using `data-atomic-key`, `data-atomic-nucleus` and `data-atomic-sub` attributes. See the example below:
+
+**To consider the examples below, suppose the following `MyFirstAtom` Atom's Structure:**
+
+```html
+<div>
+  <h2 atomic.sub="myTitle">The Order List</h2>
+  <div atomic.nucleus></div>
+</div>
+```
+
+### Styling the Atom
+Let's suppose we want to style `MyFirstAtom` Atom with `border: 1px solid #F00`:
+
+```css
+[data-atomic-key="MyFirstAtom"] {
+  border: 1px solid #F00;
+}
+```
+
+### Styling the Atom's Nucleus
+Let's suppose we want to style the Atom's nucleus with `background-color: #00F`:
+
+```css
+[data-atomic-key="MyFirstAtom"] > [data-atomic-nucleus]{
+  background-color: #00F;
+}
+```
+
+### Styling the Atom's Sub
+Let's suppose we want to style the `myTitle` Atom's sub with `color: #0F0`:
+
+```css
+[data-atomic-key="MyFirstAtom"] > [data-atomic-sub="myTitle"]{
+  color: #0F0;
+}
 ```
