@@ -33,4 +33,4 @@ In AtomicReact the minimal particle is called by Atom. One Atom is formed by 3 p
 
 ## Full Documentation
 
-The full documentation for AtomicReact can be found on <https://guihgo.github.io/AtomicReact/>
+The full documentation for AtomicReact can be found on <https://atomicreact.github.io/AtomicReact/>
