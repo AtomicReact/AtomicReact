@@ -1,6 +1,6 @@
 {
   "name": "atomicreact",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "description": "AtomicReact is a framework to build web apps with atomicity concept",
   "main": "Atomic.js",
   "scripts": {
@@ -19,6 +19,6 @@
   "preferGlobal": true,
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Guihgo/Atomic.git"
+    "url": "git+https://github.com/AtomicReact/AtomicReact.git"
   }
 }

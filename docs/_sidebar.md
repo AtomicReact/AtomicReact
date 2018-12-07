@@ -7,3 +7,6 @@
 * [Atomic CLI](AtomicCLI.md)
 * [Atomic Class](AtomicClass.md)
 * [HotReload Class](HotReloadClass.md)
+---
+* [Third Parts](ThirdPart.md)
+* [Thanks](Thanks.md)
