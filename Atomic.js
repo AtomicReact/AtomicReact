@@ -7,6 +7,7 @@ class Atomic {
   constructor(Config, HotReload) {
     this.Global = {
       name: JSON.parse(fs.readFileSync(path.join(process.cwd(), "package.json"))).name,
+      version: JSON.parse(fs.readFileSync(path.join(__dirname, "package.json"))).version,
       isOnClientSide: false,
       atomosRendered: {
         count: 0,
@@ -83,7 +84,12 @@ class Atomic {
     if(this.Config.debug) { this.printAtoms(); }
   }
   isRunning() {
-    console.log(consoleFlags.info,'Atomic is running');
+    if(this.Global.isOnClientSide) {
+      console.log('AtomicReact is running on version: '+this.Global.version);
+    }
+    else {
+      console.log(consoleFlags.info,'AtomicReact is running on version: '+this.Global.version);
+    }
   }
   addAtomo(Atomo) {
     this.Atomos.push(Atomo);
@@ -282,11 +288,41 @@ class Atomic {
   }
   notifyAtomOnRender(){
     this.Global.atomosRendered.list.forEach(function(AtomoRendered){
-      this.Atomos.forEach(function(Atomo, index){
-        if((AtomoRendered.key == Atomo.key) && (this.Atomos[index].main!=null) && (this.Atomos[index].main.onRender!=null)) {
-          this.Atomos[index].main.onRender(document.querySelector('['+this.ClientVariables.Id+'="'+AtomoRendered.id+'"]'));
+      var bAtomFound = false;
+      for(var index=0; index<this.Atomos.length && bAtomFound==false; index++) {
+        if((AtomoRendered.key == this.Atomos[index].key) && (this.Atomos[index].main!=null) && (this.Atomos[index].main.onRender!=null)) {
+          bAtomFound = true;
+          var atom = document.querySelector('['+this.ClientVariables.Id+'="'+AtomoRendered.id+'"]');
+
+          atom.Atomic = {
+            main: new this.Atomos[index].mainClass()
+          };
+
+          /* insert newFunc in object if func is undefined */
+          var insertNewFunc= function(func, name, newFunc){
+            if(func==undefined) {
+              Object.defineProperty(Object.getPrototypeOf(atom.Atomic.main), name, {
+                value: newFunc
+              });
+            }
+          };
+
+          insertNewFunc(atom.Atomic.main.getElement, 'getElement', function(){
+            return atom;
+          });
+          insertNewFunc(atom.Atomic.main.add, 'add', function(AtomKey, props, where){
+            return this.add(atom, AtomKey, props, where);
+          });
+          insertNewFunc(atom.Atomic.main.getNucleus, 'getNucleus', function(){
+            return this.getNucleus(atom);
+          });
+          insertNewFunc(atom.Atomic.main.getSub, 'getSub', function(subName){
+            return this.getSub(atom, subName);
+          });
+
+          atom.Atomic.main.onRender();
         }
-      });
+      }
     });
   }
   exportFunction(funcao) {
@@ -314,7 +350,7 @@ class Atomic {
     jsCore = "const "+this.ClientVariables.Atomic+ " = JSON.parse(decodeURI('"+ objToExportToClientStringfied + "'));";
 
     //exporta aqui e importa funcoes no lado do client
-    var functionsToExport = [this.printAtoms, this.getGeoCursorTag, this.renderAtomo, this.loopRender, this.render, this.renderElement, this.notifyAtomOnRender, this.getAtom, this.getSub, this.getNucleus, this.add, this.ligaHotReloadNoClient, this.renderPageNoClient];
+    var functionsToExport = [this.printAtoms, this.isRunning, this.getGeoCursorTag, this.renderAtomo, this.loopRender, this.render, this.renderElement, this.notifyAtomOnRender, this.getAtom, this.getSub, this.getNucleus, this.add, this.ligaHotReloadNoClient, this.renderPageNoClient];
     functionsToExport.forEach((function(functionToExport){
       jsCore += 'eval(decodeURI(\''+this.ClientVariables.Atomic+'.'+functionToExport.name+'='+this.exportFunction(functionToExport)+'\'));';
     }).bind(this));
@@ -325,6 +361,7 @@ class Atomic {
     }
     jsCore += "Atomic.renderPageNoClient();";
 
+    /* Save core */
     var jsCorePath = path.join(this.Config.bundleDir, 'atomicreact.core.js');
     fs.writeFileSync(jsCorePath, jsCore);
 
@@ -359,23 +396,14 @@ class Atomic {
         return;
       }
 
-      // //onRender
-      // if(AtomoImported.onRender!=undefined) {
-      //   jsBundle += 'eval(decodeURI(\''+this.ClientVariables.Atomic+'.Atomos['+index+'].onRender = '+encodeURI(AtomoImported.onRender.toString().replace(/this/g, this.ClientVariables.Atomic)).replace(/'/g, '%27')+'\'));';
-      // } else {console.log(consoleFlags.warn, "function onRender undefined for "+Atomo.key);}
-      // //onAdded
-      // if(AtomoImported.onAdded!=undefined) {
-      //   jsBundle += 'eval(decodeURI(\''+this.ClientVariables.Atomic+'.Atomos['+index+'].onAdded = '+encodeURI(AtomoImported.onAdded.toString().replace(/this/g, this.ClientVariables.Atomic)).replace(/'/g, '%27')+'\'));';
-      // } else {console.log(consoleFlags.warn, "function onAdded undefined for "+Atomo.key);}
-
       // console.log(Object.getOwnPropertyNames(AtomoImported));
       var AtomoImportedObjName = Object.getOwnPropertyNames(AtomoImported);
       Object.values(AtomoImported).forEach((function(value, indexValues){
         // console.log(typeof value);
         // console.log(AtomoImportedObjName[indexValues]);
         if(AtomoImportedObjName[indexValues]=="main") {
-            jsBundle += 'eval(decodeURI(\''+this.ClientVariables.Atomic+'.getAtom(\"'+Atomo.key+'\").'+AtomoImportedObjName[indexValues]+' = '+encodeURI(value.toString()).replace(/'/g, '%27')+'\'));';
-            jsBundle += 'eval(decodeURI(\''+this.ClientVariables.Atomic+'.getAtom(\"'+Atomo.key+'\").'+AtomoImportedObjName[indexValues]+' = new ('+this.ClientVariables.Atomic+'.getAtom(\"'+Atomo.key+'\")).'+AtomoImportedObjName[indexValues]+'();\'));';
+          jsBundle += 'eval(decodeURI(\''+this.ClientVariables.Atomic+'.getAtom(\"'+Atomo.key+'\").mainClass = '+encodeURI(value.toString()).replace(/'/g, '%27')+'\'));';
+          jsBundle += 'eval(decodeURI(\''+this.ClientVariables.Atomic+'.getAtom(\"'+Atomo.key+'\").'+AtomoImportedObjName[indexValues]+' = new ('+this.ClientVariables.Atomic+'.getAtom(\"'+Atomo.key+'\")).mainClass();\'));';
         }
       }).bind(this));
       // console.log(Object.values(AtomoImported)[2].toString());
@@ -463,7 +491,7 @@ class Atomic {
     //notifyAtom onAdded
     this.Atomos.forEach(function(Atomo, index){
       if((key == Atomo.key) && (this.Atomos[index].main!=null) && (this.Atomos[index].main.onAdded!=null)) {
-        this.Atomos[index].main.onAdded(document.querySelector('['+this.ClientVariables.Id+'="'+this.Global.atomosRendered.list[0].id+'"]'), atomElement);
+        atomElement.Atomic.main.onAdded(document.querySelector('['+this.ClientVariables.Id+'="'+this.Global.atomosRendered.list[0].id+'"]'));
       }
     });
   }

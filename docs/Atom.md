@@ -179,16 +179,16 @@ Your code will be **inside a class** and exports it with `module.exports.main` l
 
 ```js
 class MyMain {
-  onRender(atom) {
+  onRender() {
     /* Does something when this atom is rendered */
-    console.log('atom: ', atom);
-    console.log("atom's nucleus", Atomic.getNucleus(atom));
+    console.log('atom: ', this.getElement());
+    console.log("atom's nucleus", this.getNucleus(atom));
     this.myFunction();
   }
-  onAdded(atomAdded, atom) {
+  onAdded(atomAdded) {
     /* Does something when other atom is added inside this atom  */
     console.log('atomAdded: ', atomAdded);
-    console.log('atom: ', atom);
+    console.log('atom: ', this.getElement());
   }
   myFunction() {
     alert('Hey! this is myFunction !');
@@ -199,31 +199,93 @@ module.exports.main = MyMain; //export MyMain Class as main
 
 **Note**:
 * use `module.exports.main = <anyClass>` to export your main class (see last line in example above)
-* two reserved functions was used in example above: [`onRender`](Atom?id=onrender) and [`onAdded`](Atom?id=onadded).
+* four reserved functions were used in example above:[`getElement()`](Atom?id=getelement), [`getNucleus()`](Atom?id=getnucleus), [`onAdded`](Atom?id=onadded), [`onRender`](Atom?id=onrender).
 
 ### Overview
-* [`onRender`](Atom?id=onrender)
+* [`add()`](Atom?id=add)
+* [`getElement()`](Atom?id=getelement)
+* [`getNucleus()`](Atom?id=getnucleus)
+* [`getSub()`](Atom?id=getsub)
 * [`onAdded`](Atom?id=onadded)
+* [`onRender`](Atom?id=onrender)
 
-### onRender
-
+### add()
 ``` js
-onRender(atom)
+this.add(AtomKey, props, where)
+```
+* **Description:**
+Add an Atom inside an Atom's [**Nucleus**](Atom?id=nucleus).
+* **Param:**
+
+Param | Description | Type | Default value
+------------ | ------------- | ------------- | -------------
+AtomKey | key of Atom will be added | `string` |
+props | Atom's [`Prop`](AtomicClass?id=prop) array | `Prop Array` | [ ]
+where | Representing the position relative to the element's nucleus tag. Must be: `beforebegin`, `afterbegin`, `beforeend` or `afterend`. [Checkout this](https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentHTML#Parameters) to know more. | `string` | *beforeend*
+
+##### Prop:
+A key pair object containing the prop's key declarated in [Atom's Structure](Atom?id=props) and its value. Example:
+``` js
+{
+  key: "myTitle",
+  value: "This is my title"
+}
 ```
 
-* **Description:**
-this function is fired when an Atom was rendered.
+Where:
 
+`key`'s value is a `string`
+
+`value`'s value is a `string`
+
+* **Return:** void
+
+---
+
+### getElement()
+``` js
+this.getElement()
+```
+* **Description:**
+Get the Atom's [*element*](https://www.w3schools.com/jsref/dom_obj_all.asp)
+* **Param:** void
+
+* **Return:** the element as `DOM Element`
+
+---
+
+### getSub()
+``` js
+this.getSub(subName)
+```
+* **Description:**
+Get an Atom's [*sub element*](Atom?id=sub) by its name.
 * **Param:**
 
 Param | Description | Type
 ------------ | ------------- | -------------
-atom | Atom which was rendered  | `DOM Element`
+subName | Sub's name declarated in [Atom Structure - Sub](Atom?id=sub) | `string`
 
-### onAdded
+* **Return:** the sub element as `DOM Element`
+
+---
+
+### getNucleus()
+``` js
+this.getNucleus()
+```
+* **Description:**
+Get the Atom's [*Nucleus element*](Atom?id=nucleus)
+* **Param:** void
+
+* **Return:** the nucleus element as `DOM Element`
+
+---
+
+### onAdded()
 
 ``` js
-onAdded(atomAdded, atom)
+onAdded(atomAdded)
 ```
 
 * **Description:**
@@ -234,7 +296,21 @@ this function is fired when other Atom was added inside the Atom.
 Param | Description | Type
 ------------ | ------------- | -------------
 atomAdded | Atom which was added | `DOM Element`
-atom | Atom where was added inside your [`nucleus`](Atom?id=nucleus)  | `DOM Element`
+
+---
+
+### onRender()
+
+``` js
+onRender()
+```
+
+* **Description:**
+this function is fired when an Atom was rendered.
+
+* **Param:** void
+
+---
 
 ## Style (CSS)
 
