@@ -288,14 +288,17 @@ class Atomic {
   }
   createAtomClass(){
     this.Global.atomosRendered.list.forEach(function(AtomoRendered){
+      // console.log("+++++++++++", AtomoRendered);
       var bAtomFound = false;
+      var atom = document.querySelector('['+this.ClientVariables.Id+'="'+AtomoRendered.id+'"]');
+
       for(var index=0; index<this.Atomos.length && bAtomFound==false; index++) {
         if((AtomoRendered.key == this.Atomos[index].key) && (this.Atomos[index].mainClass!=null)) {
           bAtomFound = true;
-          var atom = document.querySelector('['+this.ClientVariables.Id+'="'+AtomoRendered.id+'"]');
 
           atom.Atomic = {
-            main: new this.Atomos[index].mainClass()
+            id: AtomoRendered.id,
+            main: Object.create(new this.Atomos[index].mainClass)
           };
 
           /* insert newFunc in object if func is undefined */
@@ -306,6 +309,7 @@ class Atomic {
               });
             }
           };
+          // insertNewFunc(atom.Atomic.main.meuID, 'meuID', AtomoRendered.id);
 
           insertNewFunc(atom.Atomic.main.getElement, 'getElement', function(){
             return atom;
@@ -321,20 +325,17 @@ class Atomic {
           });
         }
       }
+      // console.log(atom.Atomic);
     });
     this.notifyAtomOnRender();
   }
   notifyAtomOnRender(){
     this.Global.atomosRendered.list.forEach(function(AtomoRendered){
-      var bAtomFound = false;
-      for(var index=0; index<this.Atomos.length && bAtomFound==false; index++) {
-        if((AtomoRendered.key == this.Atomos[index].key) && (this.Atomos[index].mainClass!=null)) {
-          bAtomFound = true;
-          var atom = document.querySelector('['+this.ClientVariables.Id+'="'+AtomoRendered.id+'"]');
-          if(typeof atom.Atomic.main.onRender == 'function') {
-            atom.Atomic.main.onRender();
-          }
-        }
+      // console.log('--------'+AtomoRendered.id);
+      var atom = document.querySelector('['+this.ClientVariables.Id+'="'+AtomoRendered.id+'"]');
+      // console.log('--------------',atom.Atomic);
+      if(typeof atom.Atomic.main.onRender == 'function') {
+        atom.Atomic.main.onRender();
       }
     });
   }
