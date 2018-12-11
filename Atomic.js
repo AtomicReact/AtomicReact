@@ -334,7 +334,7 @@ class Atomic {
       // console.log('--------'+AtomoRendered.id);
       var atom = document.querySelector('['+this.ClientVariables.Id+'="'+AtomoRendered.id+'"]');
       // console.log('--------------',atom.Atomic);
-      if(typeof atom.Atomic.main.onRender == 'function') {
+      if((atom.Atomic!=undefined) && typeof atom.Atomic.main.onRender == 'function') {
         atom.Atomic.main.onRender();
       }
     });
