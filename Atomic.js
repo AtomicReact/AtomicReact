@@ -290,7 +290,7 @@ class Atomic {
     this.Global.atomosRendered.list.forEach(function(AtomoRendered){
       var bAtomFound = false;
       for(var index=0; index<this.Atomos.length && bAtomFound==false; index++) {
-        if((AtomoRendered.key == this.Atomos[index].key) && (this.Atomos[index].main!=null) && (this.Atomos[index].main.onRender!=null)) {
+        if((AtomoRendered.key == this.Atomos[index].key) && (this.Atomos[index].mainClass!=null)) {
           bAtomFound = true;
           var atom = document.querySelector('['+this.ClientVariables.Id+'="'+AtomoRendered.id+'"]');
 
@@ -320,7 +320,9 @@ class Atomic {
             return this.getSub(atom, subName);
           });
 
-          atom.Atomic.main.onRender();
+          if(typeof atom.Atomic.main.onRender == 'function') {
+            atom.Atomic.main.onRender();
+          }
         }
       }
     });
