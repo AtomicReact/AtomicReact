@@ -284,9 +284,9 @@ class Atomic {
 
     domElement.innerHTML = this.render(domElement.innerHTML);
 
-    this.notifyAtomOnRender();
+    this.createAtomClass();
   }
-  notifyAtomOnRender(){
+  createAtomClass(){
     this.Global.atomosRendered.list.forEach(function(AtomoRendered){
       var bAtomFound = false;
       for(var index=0; index<this.Atomos.length && bAtomFound==false; index++) {
@@ -319,7 +319,18 @@ class Atomic {
           insertNewFunc(atom.Atomic.main.getSub, 'getSub', function(subName){
             return this.getSub(atom, subName);
           });
-
+        }
+      }
+    });
+    this.notifyAtomOnRender();
+  }
+  notifyAtomOnRender(){
+    this.Global.atomosRendered.list.forEach(function(AtomoRendered){
+      var bAtomFound = false;
+      for(var index=0; index<this.Atomos.length && bAtomFound==false; index++) {
+        if((AtomoRendered.key == this.Atomos[index].key) && (this.Atomos[index].mainClass!=null)) {
+          bAtomFound = true;
+          var atom = document.querySelector('['+this.ClientVariables.Id+'="'+AtomoRendered.id+'"]');
           if(typeof atom.Atomic.main.onRender == 'function') {
             atom.Atomic.main.onRender();
           }
@@ -352,7 +363,7 @@ class Atomic {
     jsCore = "const "+this.ClientVariables.Atomic+ " = JSON.parse(decodeURI('"+ objToExportToClientStringfied + "'));";
 
     //exporta aqui e importa funcoes no lado do client
-    var functionsToExport = [this.printAtoms, this.isRunning, this.getGeoCursorTag, this.renderAtomo, this.loopRender, this.render, this.renderElement, this.notifyAtomOnRender, this.getAtom, this.getSub, this.getNucleus, this.add, this.ligaHotReloadNoClient, this.renderPageNoClient];
+    var functionsToExport = [this.printAtoms, this.isRunning, this.getGeoCursorTag, this.renderAtomo, this.loopRender, this.render, this.renderElement, this.createAtomClass, this.notifyAtomOnRender, this.getAtom, this.getSub, this.getNucleus, this.add, this.ligaHotReloadNoClient, this.renderPageNoClient];
     functionsToExport.forEach((function(functionToExport){
       jsCore += 'eval(decodeURI(\''+this.ClientVariables.Atomic+'.'+functionToExport.name+'='+this.exportFunction(functionToExport)+'\'));';
     }).bind(this));
@@ -487,7 +498,7 @@ class Atomic {
     var nucleusElement = this.getNucleus(atomElement);
     nucleusElement.insertAdjacentHTML(where, elementRenderizado);
 
-    this.notifyAtomOnRender();
+    this.createAtomClass();
 
     var key = atomElement.getAttributeNode(this.ClientVariables.Key).value;
     //notifyAtom onAdded

@@ -20,6 +20,7 @@ HotReload | Used for enable HotReload feature  | [`HotReload class`](HotReloadCl
 * [`getAtom()`](AtomicClass?id=getatom)
 * [`getNucleus()`](AtomicClass?id=getnucleus)
 * [`getSub()`](AtomicClass?id=getsub)
+* [`isRunning()`](AtomicClass?id=isrunning)
 * [`printAtoms()`](AtomicClass?id=printatoms)
 * [`renderElement()`](AtomicClass?id=renderelement)
 
@@ -75,6 +76,22 @@ AtomKey | Atom key | `string` |
 
 ---
 
+#### getNucleus()
+``` js
+Atomic.getNucleus(atomElement)
+```
+* **Description:**
+Get the Atom's [*Nucleus element*](Atom?id=nucleus)
+* **Param:**
+
+Param | Description | Type
+------------ | ------------- | -------------
+atomElement | Atom which will be get the nucleus | `DOM Element`
+
+* **Return:** the nucleus element as `DOM Element`
+
+---
+
 #### getSub()
 ``` js
 Atomic.getSub(atomElement, subName)
@@ -92,19 +109,15 @@ subName | Sub's name declarated in [Atom Structure - Sub](Atom?id=sub) | `string
 
 ---
 
-#### getNucleus()
+#### isRunning()
 ``` js
-Atomic.getNucleus(atomElement)
+Atomic.isRunning()
 ```
 * **Description:**
-Get the Atom's [*Nucleus element*](Atom?id=nucleus)
-* **Param:**
+Verify if AtomicReact is running
+* **Param:** void
 
-Param | Description | Type
------------- | ------------- | -------------
-atomElement | Atom which will be get the nucleus | `DOM Element`
-
-* **Return:** the nucleus element as `DOM Element`
+* **Return:** void
 
 ---
 
