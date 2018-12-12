@@ -73,10 +73,17 @@ class Atomic {
     this.Atomos = [];
 
     fs.readdirSync(this.Config.paths.html).forEach((function(file){
-      var parsedFile = path.parse(path.join(this.Config.paths.html, file));
+      var fileAtomoHtml = path.join(this.Config.paths.html, file);
+      var parsedFile = path.parse(fileAtomoHtml);
       if(parsedFile.ext.indexOf(".html")!=-1){
         // console.log(parsedFile.name);
-        this.addAtomo({key: parsedFile.name});
+        if (!fs.existsSync(fileAtomoHtml)) {
+          return console.log(consoleFlags.erro, "File "+fileAtomoHtml+" not exist");
+        }
+        this.addAtomo({
+          key: parsedFile.name,
+          data: fs.readFileSync(fileAtomoHtml).toString()
+        });
       }
     }).bind(this));
 
@@ -92,8 +99,10 @@ class Atomic {
     }
   }
   addAtomo(Atomo) {
+    Atomo.data = this.replaceExpressao(this.AtomicVariables.Sub, this.ClientVariables.Sub, Atomo.data);
+    Atomo.data = this.replaceExpressao(this.AtomicVariables.Nucleus, this.ClientVariables.Nucleus, Atomo.data, true);
+
     this.Atomos.push(Atomo);
-    this.loadAtomo(this.Atomos.length-1);
   }
   replaceExpressao(expressao, expressaoParaSerReplaced, source, expressaoIsAFlag) {
     expressaoIsAFlag = expressaoIsAFlag||false;
@@ -115,20 +124,6 @@ class Atomic {
       source = source.slice(0, regexTag.lastIndex - match[0].length) + valor + source.slice(regexTag.lastIndex, source.length);
     }
     return source;
-  }
-  loadAtomo(pos) {
-    if(this.Atomos[pos]==null || this.Atomos[pos].data!=null || this.Atomos[pos].data!=undefined) { return; }
-    var fileAtomoHtml = path.join(this.Config.paths.html, this.Atomos[pos].key+'.html');
-
-    if (!fs.existsSync(fileAtomoHtml)) {
-      return console.log(consoleFlags.erro, "File "+fileAtomoHtml+" not exist");
-    }
-    this.Atomos[pos].data = fs.readFileSync(fileAtomoHtml).toString();
-
-    //substui regular expressoes (atomic.sub para data-atomic-sub, ...)
-    this.Atomos[pos].data = this.replaceExpressao(this.AtomicVariables.Sub, this.ClientVariables.Sub, this.Atomos[pos].data);
-    this.Atomos[pos].data = this.replaceExpressao(this.AtomicVariables.Nucleus, this.ClientVariables.Nucleus, this.Atomos[pos].data, true);
-    // console.log(this.Atomos[pos].data);
   }
   printAtoms() {
     if(this.Global.isOnClientSide) { console.log('Atoms Loaded:'); }
@@ -291,7 +286,7 @@ class Atomic {
       // console.log("+++++++++++", AtomoRendered);
       var bAtomFound = false;
       var atom = document.querySelector('['+this.ClientVariables.Id+'="'+AtomoRendered.id+'"]');
-
+      if(atom==null) {return;}
       for(var index=0; index<this.Atomos.length && bAtomFound==false; index++) {
         if((AtomoRendered.key == this.Atomos[index].key) && (this.Atomos[index].mainClass!=null)) {
           bAtomFound = true;
@@ -333,6 +328,7 @@ class Atomic {
     this.Global.atomosRendered.list.forEach(function(AtomoRendered){
       // console.log('--------'+AtomoRendered.id);
       var atom = document.querySelector('['+this.ClientVariables.Id+'="'+AtomoRendered.id+'"]');
+      if(atom==null) {return;}
       // console.log('--------------',atom.Atomic);
       if((atom.Atomic!=undefined) && typeof atom.Atomic.main.onRender == 'function') {
         atom.Atomic.main.onRender();
@@ -350,7 +346,8 @@ class Atomic {
     var objToExportToClient = {
       Global: JSON.parse(JSON.stringify(this.Global)), //gambi para clonar objeto
       Atomos: [],
-      ClientVariables: this.ClientVariables
+      ClientVariables: this.ClientVariables,
+      AtomicVariables: this.AtomicVariables
     };
     if(this.HotReload!=null) {
       objToExportToClient.HotReload = {
@@ -364,7 +361,7 @@ class Atomic {
     jsCore = "const "+this.ClientVariables.Atomic+ " = JSON.parse(decodeURI('"+ objToExportToClientStringfied + "'));";
 
     //exporta aqui e importa funcoes no lado do client
-    var functionsToExport = [this.printAtoms, this.isRunning, this.getGeoCursorTag, this.renderAtomo, this.loopRender, this.render, this.renderElement, this.createAtomClass, this.notifyAtomOnRender, this.getAtom, this.getSub, this.getNucleus, this.add, this.ligaHotReloadNoClient, this.renderPageNoClient];
+    var functionsToExport = [this.addAtomo, this.printAtoms, this.isRunning, this.getGeoCursorTag, this.renderAtomo, this.replaceExpressao, this.loopRender, this.render, this.renderElement, this.createAtomClass, this.notifyAtomOnRender, this.getAtom, this.getSub, this.getNucleus, this.add, this.ligaHotReloadNoClient, this.renderPageNoClient];
     functionsToExport.forEach((function(functionToExport){
       jsCore += 'eval(decodeURI(\''+this.ClientVariables.Atomic+'.'+functionToExport.name+'='+this.exportFunction(functionToExport)+'\'));';
     }).bind(this));
