@@ -4,8 +4,8 @@ var fs = require('fs');
 const { exec, spawn } = require('child_process');
 
 var ConsoleFlags = require('./ConsoleFlags.js');
-var ConsoleIO = require('./tools/ConsoleIO.js');
-var FileTool = require('./tools/File.js');
+var ConsoleIO = require('./Tools/ConsoleIO.js');
+var FileTool = require('./Tools/File.js');
 
 class AtomicCLI {
   constructor() {
