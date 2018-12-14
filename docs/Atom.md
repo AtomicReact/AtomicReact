@@ -153,8 +153,8 @@ In `MyFirstAtom.html`:
 In `MyFirstAtom.js`:
 ```js
 class MyMain {
-  onRender(atom) {
-    var btnShowAlert = Atomic.getSub(atom, 'btnShowAlert'); //get button element DOM
+  onRender() {
+    var btnShowAlert = this.getSub('btnShowAlert'); //get button element DOM
 
     btnShowAlert.onclick = function(e){ //button's onclick event
       alert("the button was clicked"); // alert a message
@@ -232,7 +232,7 @@ class MySecondAtomMain {
     myFirstAtom.Atomic.main.myFunction();
 
     // You can also access myFunction using Global Atomic Class:
-    Atomic.get('myFirstAtom').main.myFunction();
+    Atomic.getAtom('myFirstAtom').main.myFunction(); //see note²
   }
 }
 module.exports.main = MySecondAtomMain;
@@ -246,7 +246,7 @@ module.exports.main = MySecondAtomMain;
   <myFirstAtom atomic.sub="myFirstAtomSub"></myFirstAtom>
 </div>
 ```
-
+2. Checkout [`Atomic.getAtom()`](AtomicClass?id=getatom)
 ---
 
 The main class exported to Atom element has some reserved functions. See below:
@@ -288,7 +288,7 @@ Where:
 
 `value`'s value is a `string`
 
-* **Return:** void
+* **Return:** atom element added as `DOM Element`
 
 ---
 

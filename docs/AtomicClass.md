@@ -56,7 +56,7 @@ Where:
 
 `value`'s value is a `string`
 
-* **Return:** void
+* **Return:** atom element added as `DOM Element`
 
 ---
 

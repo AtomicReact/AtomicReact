@@ -499,12 +499,15 @@ class Atomic {
     this.createAtomClass();
 
     var key = atomElement.getAttributeNode(this.ClientVariables.Key).value;
+    var atomAdded = document.querySelector('['+this.ClientVariables.Id+'="'+this.Global.atomosRendered.list[0].id+'"]');
     //notifyAtom onAdded
     this.Atomos.forEach(function(Atomo, index){
       if((key == Atomo.key) && (this.Atomos[index].main!=null) && (this.Atomos[index].main.onAdded!=null)) {
-        atomElement.Atomic.main.onAdded(document.querySelector('['+this.ClientVariables.Id+'="'+this.Global.atomosRendered.list[0].id+'"]'));
+        atomElement.Atomic.main.onAdded(atomAdded);
       }
     });
+
+    return atomAdded;
   }
   ligaHotReloadNoClient(){
     // console.log('ligaHotReloadNoClient disparado');
