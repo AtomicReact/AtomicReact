@@ -238,7 +238,7 @@ class MySecondAtomMain {
 module.exports.main = MySecondAtomMain;
 ```
 **Note**:
-1. in example above *myFirstAtom* is a [sub part](Atom?id=sub) of *mySecondAtom*:
+* [1] - In example above *myFirstAtom* is a [sub part](Atom?id=sub) of *mySecondAtom*:
 
 `mySecondAtom.html`
 ```html
@@ -246,7 +246,8 @@ module.exports.main = MySecondAtomMain;
   <myFirstAtom atomic.sub="myFirstAtomSub"></myFirstAtom>
 </div>
 ```
-2. Checkout [`Atomic.getAtom()`](AtomicClass?id=getatom)
+* [2] - Checkout [`Atomic.getAtom()`](AtomicClass?id=getatom)
+
 ---
 
 The main class exported to Atom element has some reserved functions. See below:
