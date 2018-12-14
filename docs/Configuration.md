@@ -7,8 +7,7 @@ From initial `AtomicReact_config.js`:
 module.exports = {
   atomicDir: 'myAtomicReactFolder',
   bundleDir: 'myPublicDir/AtomicReactBundle',
-  debug: true,
-  production: false
+  debug: true
 }
 ```
 Where:
@@ -18,5 +17,3 @@ Where:
 `bundleDir` : the path where all Atoms will be bundled, normally a public dir. **Note:** in this documentation, we call `BundleDir` to refer this path
 
 `debug` : whether mensages in console like infos and warns will be showed
-
-`production` : whether production mode. If dev modules like [`HotReload`](HotReloadClass) will be used in client side.
