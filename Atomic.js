@@ -32,7 +32,8 @@ class Atomic {
     this.Config = (Config!=null) ? JSON.parse(JSON.stringify(Config)):{
       atomicDir: "",
       bundleDir: "",
-      debug: true
+      debug: true,
+      production: false
     };
 
     if(!this.Config.atomicDir) { return console.log(consoleFlags.erro, "You must set an atomicDir where all yours atoms will be"); }
@@ -349,7 +350,7 @@ class Atomic {
       ClientVariables: this.ClientVariables,
       AtomicVariables: this.AtomicVariables
     };
-    if(this.HotReload!=null) {
+    if(this.HotReload!=null && this.Config.production!=true) {
       objToExportToClient.HotReload = {
         port: this.HotReload.port,
         addrs: this.HotReload.addrs
@@ -367,7 +368,7 @@ class Atomic {
     }).bind(this));
 
     //Liga HotReload
-    if(this.HotReload!=null) {
+    if(this.HotReload!=null && this.Config.production!=true) {
       jsCore += this.ClientVariables.Atomic+"."+this.ligaHotReloadNoClient.name+"();";
     }
     jsCore += "Atomic.renderPageNoClient();";

@@ -175,7 +175,9 @@ module.exports.main = MyMain;
 
 Inside `AtomicDir/js` will be all Atom's logic. Each Atom has your own logic, so if you create an Atom called by `MyFirstAtom.html` on `AtomicDir/html`, its logic will be in `AtomicDir/js/MyFirstAtom.js`.
 
-Your code will be **inside a class** and exports it with `module.exports.main` like:
+### Main Class
+
+All Atom's logic code will be **inside the main class** and exports it with `module.exports.main` like:
 
 ```js
 class MyMain {
@@ -198,8 +200,56 @@ module.exports.main = MyMain; //export MyMain Class as main
 ```
 
 **Note**:
-* use `module.exports.main = <anyClass>` to export your main class (see last line in example above)
+* use `module.exports.main = <anyClass>` to export the main class (see last line in example above)
 * four reserved functions were used in example above:[`getElement()`](Atom?id=getelement), [`getNucleus()`](Atom?id=getnucleus), [`onAdded`](Atom?id=onadded), [`onRender`](Atom?id=onrender).
+
+The main class is exported to two places: [`Atomic Class Global`](AtomicClass) and to **Atomic object inside atom element**. See [Accessing Main Class](Atom?id=accessing-main-class) to know more.
+
+#### Accessing Main Class
+
+Sometimes may we want to access the main class from another Atom. We can do this accesing the `Atomic.main` class in an Atom element.
+
+For example, let's supose we have two Atoms (*myFirstAtom* and *mySecondAtom*) and the *myFirstAtom*'s logic is:
+
+`myFirstAtom.js`
+```js
+class MyFirstAtomMain {
+  onRender() {}
+  myFunction() {
+    alert('Hey! this is myFunction !');
+  }
+}
+module.exports.main = MyFirstAtomMain;
+```
+
+And we want to call **myFunction()** in *myFirstAtom*'s main class from *mySecondAtom*. So the *mySecondAtom*'s logic will be:
+
+`mySecondAtom.js`
+```js
+class MySecondAtomMain {
+  onRender() {
+    var myFirstAtom = this.getSub('myFirstAtomSub'); //see the note¹
+    myFirstAtom.Atomic.main.myFunction();
+
+    // You can also access myFunction using Global Atomic Class:
+    Atomic.get('myFirstAtom').main.myFunction();
+  }
+}
+module.exports.main = MySecondAtomMain;
+```
+**Note**:
+1. in example above *myFirstAtom* is a [sub part](Atom?id=sub) of *mySecondAtom*:
+
+`mySecondAtom.html`
+```html
+<div>
+  <myFirstAtom atomic.sub="myFirstAtomSub"></myFirstAtom>
+</div>
+```
+
+---
+
+The main class exported to Atom element has some reserved functions. See below:
 
 ### Overview
 * [`add()`](Atom?id=add)
@@ -211,7 +261,7 @@ module.exports.main = MyMain; //export MyMain Class as main
 
 ### add()
 ``` js
-this.add(AtomKey, props, where)
+add(AtomKey, props, where)
 ```
 * **Description:**
 Add an Atom inside an Atom's [**Nucleus**](Atom?id=nucleus).
@@ -244,7 +294,7 @@ Where:
 
 ### getElement()
 ``` js
-this.getElement()
+getElement()
 ```
 * **Description:**
 Get the Atom's [*element*](https://www.w3schools.com/jsref/dom_obj_all.asp)
@@ -256,7 +306,7 @@ Get the Atom's [*element*](https://www.w3schools.com/jsref/dom_obj_all.asp)
 
 ### getSub()
 ``` js
-this.getSub(subName)
+getSub(subName)
 ```
 * **Description:**
 Get an Atom's [*sub element*](Atom?id=sub) by its name.
@@ -272,7 +322,7 @@ subName | Sub's name declarated in [Atom Structure - Sub](Atom?id=sub) | `string
 
 ### getNucleus()
 ``` js
-this.getNucleus()
+getNucleus()
 ```
 * **Description:**
 Get the Atom's [*Nucleus element*](Atom?id=nucleus)
