@@ -1,7 +1,7 @@
 var fs = require('fs');
 var path = require('path');
 var consoleFlags = require('./ConsoleFlags.js');
-var FileTool = require('./Tools/File.js');
+var FileTool = require('./tools/File.js');
 
 class Atomic {
   constructor(Config, HotReload) {
