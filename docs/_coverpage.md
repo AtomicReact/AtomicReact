@@ -12,4 +12,4 @@
 > A framework to build Web Apps with atomicity concept
 
 [Get Started](getStarted.md)
-[GitHub](https://github.com/Guihgo/AtomicReact/)
+[Playground](https://playground-atomicreact.herokuapp.com)
