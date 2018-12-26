@@ -113,7 +113,7 @@ After AtomicReact render the page, your view will be:
 </HTML>
 ```
 
-That's all folks.
+That's all folks. You can see this on [Playground](https://playground-atomicreact.herokuapp.com/18QieJGnQoTn7wUVX6s82IENsPl4S0bjx)
 
 **Next importants steps:**
   * Learn more about [`Atom`](Atom)

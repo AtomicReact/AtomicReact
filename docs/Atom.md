@@ -62,7 +62,7 @@ In `MyFirstAtom.html` file:
 
 **`nucleus`** is the place where all Atom's children will be.
 
-**To set** the Atom's `nucleus`, just type `atomic.nucleus` inside any Atom's element.
+**To set** the Atom's `nucleus`, just type `atomic.nucleus` inside Atom's struture.
 
 ```html
 <AnyTag atomic.nucleus></AnyTag>
@@ -77,29 +77,27 @@ In `MyFirstAtom.html` file:
   </MyFirstAtom>
 ```
 
-You can also add an Atom programatically with [`Atomic.add()`](AtomicClass?id=add) function.
+You can also add an Atom programatically with [`add()`](Atom?id=add) function.
 
 #### Exemple:
 
 In `MyFirstAtom.html`:
 ```html
 <div>
-  <h1>I'm on atom's nucleus</h1>
-  <div atomic.nucleus></div> <!-- Set this div as nucleus -->
-  <h1>I'm under atom's nucleus</h1>
+  <h1>This is MyFirstAtom</h1>
+  <ul atomic.nucleus></ul> <!-- Set this ul as nucleus -->
 </div>
 ```
 
 In `index.html`:
 ```html
 <MyFirstAtom>
-  <ul>
     <li>Foo</li>
     <li>Bar</li>
     <li>The life is good</li>
-  </ul>
 </MyFirstAtom>
 ```
+You can see this example on [Playground](https://playground-atomicreact.herokuapp.com/1ve7ZgLSM8rsN8ZPDgKM-25F-YQn8nbQ7)
 
 ### Props
 
@@ -130,10 +128,11 @@ In `index.html`:
 ```html
 <MyFirstAtom props.theTitle="This is my Title" props.borderColor="#FF0000"></MyFirstAtom>
 ```
+You can see this example on [Playground](https://playground-atomicreact.herokuapp.com/1K16qhgvUc-IVJVMDiWisjO9tBPf7Lxyw)
 
 ### Sub
 
-An Atom can have *important elements* which we could like handle them, they are **`sub`  particles**. The `atomic.sub` is used for set any element inside an Atom as its *sub part* and easily to get it with [`Atomic.getSub()`](AtomicClass?id=getsub) function. An Atom can have none, one or more `sub`.
+An Atom can have *important elements* which we could like handle them, they are **`sub`  particles**. The `atomic.sub` is used for set any element inside an Atom as its *sub part* and easily to get it with [`getSub()`](Atom?id=getsub) function. An Atom can have none, one or more `sub`.
 
 **To set** any element as `sub`, just type `atomic.sub="anySubName"` inside element's tagging.
 ```html
@@ -164,6 +163,13 @@ class MyMain {
 module.exports.main = MyMain;
 ```
 
+In `index.html`:
+```html
+<MyFirstAtom></MyFirstAtom>
+```
+
+You can see this example on [Playground](https://playground-atomicreact.herokuapp.com/1oijsksTIpt0CjajAgpXPJA2FfV89OFqT)
+
 ## Logic (JS)
 
 ``` text
@@ -181,6 +187,15 @@ All Atom's logic code will be **inside the main class** and exports it with `mod
 
 ```js
 class MyMain {
+  /* [...] */
+}
+module.exports.main = MyMain; //export MyMain Class as main
+```
+
+So we can use reserved functions, create custom functions inside the main class, like this:
+
+```js
+class MyMain {
   onRender() {
     /* Does something when this atom is rendered */
     console.log('atom: ', this.getElement());
@@ -188,22 +203,25 @@ class MyMain {
     this.myFunction();
   }
   onAdded(atomAdded) {
-    /* Does something when other atom is added inside this atom  */
+    /* Does something when other atom is added inside this atom's nucleus */
     console.log('atomAdded: ', atomAdded);
     console.log('atom: ', this.getElement());
   }
   myFunction() {
+    /* myFunction is a custom function */
     alert('Hey! this is myFunction !');
   }
 }
 module.exports.main = MyMain; //export MyMain Class as main
 ```
 
+You can see this example on [Playground](https://playground-atomicreact.herokuapp.com/1trq_CV833nF3vT6tjX1INshjhR4uPWHn)
+
 **Note**:
 * use `module.exports.main = <anyClass>` to export the main class (see last line in example above)
 * four reserved functions were used in example above:[`getElement()`](Atom?id=getelement), [`getNucleus()`](Atom?id=getnucleus), [`onAdded`](Atom?id=onadded), [`onRender`](Atom?id=onrender).
 
-The main class is exported to two places: [`Atomic Class Global`](AtomicClass) and to **Atomic object inside atom element**. See [Accessing Main Class](Atom?id=accessing-main-class) to know more.
+The main class is exported to two places: [`Global Atomic Class`](AtomicClass) and to **Atomic object inside atom element**. See [Accessing Main Class](Atom?id=accessing-main-class) to know more.
 
 #### Accessing Main Class
 
@@ -237,6 +255,9 @@ class MySecondAtomMain {
 }
 module.exports.main = MySecondAtomMain;
 ```
+
+You can see this example on [Playground](https://playground-atomicreact.herokuapp.com/1hFkTzjJt82ZU9oAu12Ikzhxgxa4-AFT9)
+
 **Note**:
 * [1] - In example above *myFirstAtom* is a [sub part](Atom?id=sub) of *mySecondAtom*:
 
@@ -250,7 +271,7 @@ module.exports.main = MySecondAtomMain;
 
 ---
 
-The main class exported to Atom element has some reserved functions. See below:
+The main class **exported to Atom element** has some reserved functions. See below:
 
 ### Overview
 * [`add()`](Atom?id=add)
