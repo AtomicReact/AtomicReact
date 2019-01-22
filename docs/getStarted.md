@@ -1,15 +1,27 @@
 # Get Started :rocket:
 
 ## Installation
-1. Install Atomic package globally via *npm* (to use CLI commands)
+
+1. Create package.json via npm - [npm documentation](https://docs.npmjs.com/creating-a-package-json-file)
+
+```bash
+  npm init
+```
+
+2. Install Atomic package globally via _npm_ (to use CLI commands)
+
 ```bash
   npm install atomicreact -g
 ```
-2. Install Atomic package in your project via *npm*
+
+3. Install Atomic package in your project via _npm_
+
 ```bash
   npm install atomicreact --save
 ```
-3. **Initialize & Run Atomic** inside your project folder:
+
+4. **Initialize & Run Atomic** inside your project folder:
+
 ```bash
   Atomic
 ```
@@ -18,102 +30,99 @@ So, some files and dirs will be created and now you are already can to [**create
 
 ## Creating an Atom
 
-There are 3 subs folders in `AtomicDir` (*myAtomicReactFolder* by default):
-``` text
+There are 3 subs folders in `AtomicDir` (_myAtomicReactFolder_ by default):
+
+```text
 └── AtomicDir
     ├── html
     ├── js
     └── css
 ```
 
-The `html`sub folder  is the Atom's structure.
+The `html`sub folder is the Atom's structure.
 
 The `js` sub folder is the Atom's logic.
 
 The `css` sub folder is the Atom's style.
 
-**To create an Atom** just create any *.html* file in `html` sub folder. **The file name is the Atom name or the Atom key**. Note if you let's the `debug` as *true* in `AtomicReact_config.js` file you should see the Atom name on console.
+**To create an Atom** just create any _.html_ file in `html` sub folder. **The file name is the Atom name or the Atom key**. Note if you let's the `debug` as _true_ in `AtomicReact_config.js` file you should see the Atom name on console.
 
 For while just put the follow html code inside your Atom.
-``` html
+
+```html
 <div>
   <h1>{props.myTitle}</h1>
   <h2>Hi! I'm a Atom</h2>
   <div atomic.nucleus></div>
 </div>
 ```
-*Notes:*
-  * Checkout the [`Atom`](Atom) for know more about Atom structure, logic and style
+
+_Notes:_
+
+- Checkout the [`Atom`](Atom) for know more about Atom structure, logic and style
 
 ## Using an Atom
 
-Let's supose you already have a *http server* serving an *html* file. Maybe with *Http Server from NodeJS* , *Wamp Server*, *Apache Server*, whatever.
+Let's supose you already have a _http server_ serving an _html_ file. Maybe with _Http Server from NodeJS_ , _Wamp Server_, _Apache Server_, whatever.
 
-**To use an Atom** you need just import the bundles files from `BundleDir` in your *html* file. Like this:
+**To use an Atom** you need just import the bundles files from `BundleDir` in your _html_ file. Like this:
 
-``` html
+```html
 <script src="./AtomicReactBundle/atomicreact.core.js"></script>
 <script src="./AtomicReactBundle/atomicreact.bundle.js"></script>
-<link rel="stylesheet" href="./AtomicReactBundle/atomicreact.bundle.css">
+<link rel="stylesheet" href="./AtomicReactBundle/atomicreact.bundle.css" />
 ```
 
 And **use it tagging Atom key**:
 
-``` html
+```html
 <body>
-  <MyAtom props.myTitle="This's my title">
-    <h4>i'm in nucleus</h4>
-  </MyAtom>
+  <MyAtom props.myTitle="This's my title"> <h4>i'm in nucleus</h4> </MyAtom>
 </body>
 ```
 
-The *html* file will look like this:
+The _html_ file will look like this:
 
-``` html
-<HTML>
-<head>
-	<title>Hello AtomicReact App</title>
+```html
+<html>
+  <head>
+    <title>Hello AtomicReact App</title>
 
-	<script src="./AtomicReactBundle/atomicreact.core.js"></script>
-	<script src="./AtomicReactBundle/atomicreact.bundle.js"></script>
-	<link rel="stylesheet" href="./AtomicReactBundle/atomicreact.bundle.css">
+    <script src="./AtomicReactBundle/atomicreact.core.js"></script>
+    <script src="./AtomicReactBundle/atomicreact.bundle.js"></script>
+    <link rel="stylesheet" href="./AtomicReactBundle/atomicreact.bundle.css" />
+  </head>
 
-</head>
-
-<body>
-  <MyAtom props.myTitle="This's my title">
-    <h4>i'm in nucleus</h4>
-  </MyAtom>
-</body>
-</HTML>
+  <body>
+    <MyAtom props.myTitle="This's my title"> <h4>i'm in nucleus</h4> </MyAtom>
+  </body>
+</html>
 ```
 
 After AtomicReact render the page, your view will be:
 
-``` html
-<HTML>
-<head>
-	<title>Hello AtomicReact App</title>
+```html
+<html>
+  <head>
+    <title>Hello AtomicReact App</title>
 
-	<script src="./AtomicReactBundle/atomicreact.core.js"></script>
-	<script src="./AtomicReactBundle/atomicreact.bundle.js"></script>
-	<link rel="stylesheet" href="./AtomicReactBundle/atomicreact.bundle.css">
+    <script src="./AtomicReactBundle/atomicreact.core.js"></script>
+    <script src="./AtomicReactBundle/atomicreact.bundle.js"></script>
+    <link rel="stylesheet" href="./AtomicReactBundle/atomicreact.bundle.css" />
+  </head>
 
-</head>
-
-<body>
-  <div data-atomic-key="MyAtom" data-atomic-id="MyAtom_0">
-    <h1>This's my title</h1>
-    <h2>Hi! I'm a Atom</h2>
-    <div data-atomic-nucleus>
-      <h4>i'm in nucleus</h4>
+  <body>
+    <div data-atomic-key="MyAtom" data-atomic-id="MyAtom_0">
+      <h1>This's my title</h1>
+      <h2>Hi! I'm a Atom</h2>
+      <div data-atomic-nucleus><h4>i'm in nucleus</h4></div>
     </div>
-  </div>
-</body>
-</HTML>
+  </body>
+</html>
 ```
 
 That's all folks. You can see this on [Playground](https://playground-atomicreact.herokuapp.com/18QieJGnQoTn7wUVX6s82IENsPl4S0bjx)
 
 **Next importants steps:**
-  * Learn more about [`Atom`](Atom)
+
+- Learn more about [`Atom`](Atom)
