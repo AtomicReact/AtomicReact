@@ -1,13 +1,18 @@
-* [Introducing](/)
-* [Get Started](getStarted.md)
-* [AtomicReact_config.js](Configuration.md)
-* [AtomicReact_run.js](Running.md)
+- [Introducing](/)
+- [Get Started](getStarted.md)
+- [AtomicReact_config.js](Configuration.md)
+- [AtomicReact_run.js](Running.md)
+
 ---
-* [Atom](Atom.md)
-* [Atomic CLI](AtomicCLI.md)
-* [Atomic Class](AtomicClass.md)
-* [HotReload Class](HotReloadClass.md)
+
+- [Atom](Atom.md)
+- [Atomic CLI](AtomicCLI.md)
+- [Atomic Class](AtomicClass.md)
+- [HotReload Class](HotReloadClass.md)
+
 ---
-* [Playground](https://playground-atomicreact.herokuapp.com/)
-* [Third Parts](ThirdPart.md)
-* [Thanks](Thanks.md)
+
+- [Playground](https://playground-atomicreact.herokuapp.com/)
+- [Third Parts](ThirdPart.md)
+- [Thanks](Thanks.md)
+- [Contributing Guide](ContributingGuide.md)

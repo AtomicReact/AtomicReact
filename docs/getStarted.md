@@ -4,27 +4,27 @@
 
 1. Create package.json via npm - [npm documentation](https://docs.npmjs.com/creating-a-package-json-file)
 
-```bash
-  npm init
-```
+   ```bash
+     npm init
+   ```
 
 2. Install Atomic package globally via _npm_ (to use CLI commands)
 
-```bash
-  npm install atomicreact -g
-```
+   ```bash
+     npm install atomicreact -g
+   ```
 
 3. Install Atomic package in your project via _npm_
 
-```bash
-  npm install atomicreact --save
-```
+   ```bash
+     npm install atomicreact --save
+   ```
 
 4. **Initialize & Run Atomic** inside your project folder:
 
-```bash
-  Atomic
-```
+   ```bash
+     Atomic
+   ```
 
 So, some files and dirs will be created and now you are already can to [**create your first Atom**](getStarted?id=creating-an-atom)
 
