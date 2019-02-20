@@ -26,11 +26,11 @@
      Atomic
    ```
 
-So, some files and dirs will be created and now you are already can to [**create your first Atom**](getStarted?id=creating-an-atom)
+Then some files and dirs will be created and now you are already able to [**create your first Atom**](getStarted?id=creating-an-atom)
 
 ## Creating an Atom
 
-There are 3 subs folders in `AtomicDir` (_myAtomicReactFolder_ by default):
+There are 3 subfolders in `AtomicDir` (_myAtomicReactFolder_ by default):
 
 ```text
 └── AtomicDir
@@ -39,13 +39,13 @@ There are 3 subs folders in `AtomicDir` (_myAtomicReactFolder_ by default):
     └── css
 ```
 
-The `html`sub folder is the Atom's structure.
+The `html` subfolder is the Atom's structure.
 
-The `js` sub folder is the Atom's logic.
+The `js` subfolder is the Atom's logic.
 
-The `css` sub folder is the Atom's style.
+The `css` subfolder is the Atom's style.
 
-**To create an Atom** just create any _.html_ file in `html` sub folder. **The file name is the Atom name or the Atom key**. Note if you let's the `debug` as _true_ in `AtomicReact_config.js` file you should see the Atom name on console.
+**To create an Atom** just create any _.html_ file in `html` subfolder. **The file name is the Atom name or the Atom key**. Note if you let's the `debug` as _true_ in `AtomicReact_config.js` file you should see the Atom name on console.
 
 For while just put the follow html code inside your Atom.
 

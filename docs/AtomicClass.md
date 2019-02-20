@@ -1,6 +1,6 @@
 # Atomic Class
 
-Atomic class is the core of AtomicReact. It render an Atom and bundle the files.
+Atomic class is the core of AtomicReact. It renders an Atom and bundles the files.
 
 ## Constructor
 
@@ -11,7 +11,7 @@ constructor(Config [,HotReload])
 Param | Description | Type |
 ------------ | ------------- | -------------
 Config | Configuration object. [Chekout this link](getStarted?id=configuration-atomicreact_configjs) to know more about | `object`
-HotReload | Used for enable HotReload feature  | [`HotReload class`](HotReloadClass) |
+HotReload | Used to enable the HotReload feature  | [`HotReload class`](HotReloadClass) |
 
 ## API Reference
 
