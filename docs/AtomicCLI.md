@@ -1,6 +1,6 @@
 # Atomic CLI
 
-AtomicReact CLI is used to help the developer and to automate commands.
+AtomicReact CLI is used by the developer to automate commands.
 
 ## Overview
 * [`Atomic init`](AtomicCLI?id=atomic-init)

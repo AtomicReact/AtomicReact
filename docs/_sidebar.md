@@ -13,6 +13,6 @@
 ---
 
 - [Playground](https://playground-atomicreact.herokuapp.com/)
-- [Third Parts](ThirdPart.md)
+- [Third Parties](ThirdPart.md)
 - [Thanks](Thanks.md)
 - [Contributing Guide](ContributingGuide.md)

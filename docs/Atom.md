@@ -1,13 +1,13 @@
 # Atom
 
-The minimal particle is called by **Atom**. One Atom is formed by 3 parts:
+The minimal particle is called by **Atom**. One Atom is composed by 3 parts:
 * [**Structure (HTML)**](Atom?id=structure-html)
 * [**Logic (JS)**](Atom?id=logic-js)
 * [**Style (CSS)**](Atom?id=style-css)
 
-Necessarily, an Atom **need to have a structure but doesn't need a logic and style**.
-After runs [`Atomic` command](AtomicCLI),  is created your `AtomicDir` where your Atoms will be.
-In `AtomicDir` there are three dirs: *html, js, css*.
+Fundamentally, an Atom **need to have a structure but doesn't need a logic and style**.
+After runnning [`Atomic` command](AtomicCLI),  your `AtomicDir` is created and there will be your Atoms.
+In the `AtomicDir` there are three directories: *html, js, css*.
 ``` text
 └── AtomicDir
     ├── html
@@ -15,15 +15,15 @@ In `AtomicDir` there are three dirs: *html, js, css*.
     └── css
 ```
 
-The `html`sub folder  is the **Atom's structure**.
+The `html`subfolder is the **Atom's structure**.
 
-The `js` sub folder is the **Atom's logic**.
+The `js` subfolder is the **Atom's logic**.
 
-The `css` sub folder is the **Atom's style**.
+The `css` subfolder is the **Atom's style**.
 
-**To create an Atom** just create any *.html* file in `html` sub folder. **The file name is the Atom name or the Atom key**. Note if you let's the `debug` as *true* in `AtomicReact_config.js` file you should see the Atom loaded on console.
+**In order to generate an Atom** just create an *.html* file in the `html` subfolder. **The name of the file is the Atom name or the Atom key**. Note that if you change the `debug` to *true* in the `AtomicReact_config.js` file then you should see the Atom loaded on console.
 
-Let's suppose you created a file called by `MyFirstAtom.html` in `html` sub folder. So, the Atom Key is: *`MyFirstAtom`*.
+Let's suppose you have created a file called `MyFirstAtom.html` in the `html` subfolder. Therefore the Atom Key is: *`MyFirstAtom`*.
 
 ## Structure (HTML)
 
@@ -34,9 +34,9 @@ Let's suppose you created a file called by `MyFirstAtom.html` in `html` sub fold
     └── css
 ```
 
-Inside `AtomicDir/html` will be Atom's structure. Each Atom has your own file structure with `.html` extension. **The file name is the Atom name or the Atom key**, so if you create a file called by `MyFirstAtom.html` inside `AtomicDir/html` your **Atom key** is `MyFirstAtom`.
+Inside `AtomicDir/html` there will be Atom's structure. Each Atom has its own file structure with an `.html` extension. **The name of the file is the Atom name or the Atom key**, so if you create a file called `MyFirstAtom.html` inside `AtomicDir/html` then your **Atom key** is `MyFirstAtom`.
 
-Atom's struture is any *html* struture, but is recommended each structure be on a **single tag**. For exemple:
+Atom's struture is any *html* struture, but it is recommended that each structure stays within a **single tag**. For exemple:
 
 In `MyFirstAtom.html` file:
 
@@ -47,7 +47,7 @@ In `MyFirstAtom.html` file:
 </div>
 ```
 
-**Not recommended (but you can):**
+**Not recommended (but possible):**
 ```html
 <div>Foo</div>
 <div>Bar</div>
@@ -60,16 +60,16 @@ In `MyFirstAtom.html` file:
 
 ### Nucleus
 
-**`nucleus`** is the place where all Atom's children will be.
+**`nucleus`** is the place where all Atom's children are located.
 
-**To set** the Atom's `nucleus`, just type `atomic.nucleus` inside Atom's struture.
+**In order to set** the Atom's `nucleus`, just type `atomic.nucleus` inside Atom's struture.
 
 ```html
 <AnyTag atomic.nucleus></AnyTag>
 <!-- Note: AnyTag maybe a Html Tag or a Atom Key also -->
 ```
 
-**To add** something in *nucleus*, just insert inside Atom's tagging. See below:
+**To add** something in *nucleus*, just insert it inside Atom's tagging. See below:
 ```html
   <MyFirstAtom>
     <!-- All here will be on Nucleus even this comment  -->
@@ -101,15 +101,15 @@ You can see this example on [Playground](https://playground-atomicreact.herokuap
 
 ### Props
 
-`props` are the Atom's proprieties. Are used to set Atom's initial state.
+`props` are the Atom's properties. They're used to set Atom's initial state.
 
-**To use** a `props`, just type `props.anyPropKey` **between pairs of braces** any where in *Atom's Structure*, like this:
+**To use** `props`, just type `props.anyPropKey` **between pairs of braces** anywhere in the *Atom's Structure*, as follows:
 
 ```html
 {props.<anyPropKey>}
 ```
 
-**To set** a `props` value, just type `props.anyPropKey="someValue"` inside Atom's tagging. See below:
+**To assign**  `props` a value, just type `props.anyPropKey="someValue"` inside Atom's tagging, see below:
 
 ```html
 <MyFirstAtom props.anyPropKey="someValue"></MyFirstAtom>
@@ -132,12 +132,12 @@ You can see this example on [Playground](https://playground-atomicreact.herokuap
 
 ### Sub
 
-An Atom can have *important elements* which we could like handle them, they are **`sub`  particles**. The `atomic.sub` is used for set any element inside an Atom as its *sub part* and easily to get it with [`getSub()`](Atom?id=getsub) function. An Atom can have none, one or more `sub`.
+An Atom may have *important elements* which we can handle them, they're called **`sub`  particles**. The `atomic.sub` is used for setting any element inside an Atom as its *sub part* and easily to get it with [`getSub()`](Atom?id=getsub) function. An Atom can have none, one or many `sub`.
 
-**To set** any element as `sub`, just type `atomic.sub="anySubName"` inside element's tagging.
+**To set** any element as `sub`, just type `atomic.sub="anySubName"` inside the elements tagging.
 ```html
 <AnyTag atomic.sub="anySubName"></AnyTag>
-<!-- Note: AnyTag maybe a Html Tag or a Atom Key also -->
+<!-- Note: AnyTag may be a Html Tag or a Atom Key also -->
 ```
 
 #### Exemple:
@@ -179,11 +179,11 @@ You can see this example on [Playground](https://playground-atomicreact.herokuap
     └── css
 ```
 
-Inside `AtomicDir/js` will be all Atom's logic. Each Atom has your own logic, so if you create an Atom called by `MyFirstAtom.html` on `AtomicDir/html`, its logic will be in `AtomicDir/js/MyFirstAtom.js`.
+Inside `AtomicDir/js` there is Atom's whole logic. Each Atom has its own logic, so if you create an Atom called by `MyFirstAtom.html` on `AtomicDir/html`, its respective logic will be in `AtomicDir/js/MyFirstAtom.js`.
 
 ### Main Class
 
-All Atom's logic code will be **inside the main class** and exports it with `module.exports.main` like:
+All Atom's logic code will be **inside the main class** and you can export it with `module.exports.main` like:
 
 ```js
 class MyMain {
@@ -192,7 +192,7 @@ class MyMain {
 module.exports.main = MyMain; //export MyMain Class as main
 ```
 
-So we can use reserved functions, create custom functions inside the main class, like this:
+So we can use reserved functions or create custom functions inside the main class, like this:
 
 ```js
 class MyMain {
@@ -225,9 +225,9 @@ The main class is exported to two places: [`Global Atomic Class`](AtomicClass) a
 
 #### Accessing Main Class
 
-Sometimes may we want to access the main class from another Atom. We can do this accesing the `Atomic.main` class in an Atom element.
+Sometimes we may want to access the main class from another Atom. We can do this accesing the `Atomic.main` class in an Atom element.
 
-For example, let's supose we have two Atoms (*myFirstAtom* and *mySecondAtom*) and the *myFirstAtom*'s logic is:
+For example, let's suppose we have two Atoms (*myFirstAtom* and *mySecondAtom*) and the *myFirstAtom*'s logic is:
 
 `myFirstAtom.js`
 ```js
@@ -240,7 +240,7 @@ class MyFirstAtomMain {
 module.exports.main = MyFirstAtomMain;
 ```
 
-And we want to call **myFunction()** in *myFirstAtom*'s main class from *mySecondAtom*. So the *mySecondAtom*'s logic will be:
+And then we want to call **myFunction()** in *myFirstAtom*'s main class from *mySecondAtom*. So the *mySecondAtom*'s logic will be:
 
 `mySecondAtom.js`
 ```js
@@ -296,7 +296,7 @@ props | Atom's [`Prop`](AtomicClass?id=prop) array | `Prop Array` | [ ]
 where | Representing the position relative to the element's nucleus tag. Must be: `beforebegin`, `afterbegin`, `beforeend` or `afterend`. [Checkout this](https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentHTML#Parameters) to know more. | `string` | *beforeend*
 
 ##### Prop:
-A key pair object containing the prop's key declarated in [Atom's Structure](Atom?id=props) and its value. Example:
+A key pair object containing the prop's key declared in [Atom's Structure](Atom?id=props) and its value. As follows:
 ``` js
 {
   key: "myTitle",
@@ -361,7 +361,7 @@ onAdded(atomAdded)
 ```
 
 * **Description:**
-this function is fired when other Atom was added inside the Atom.
+this function is fired when another Atom is added inside the Atom.
 
 * **Param:**
 
@@ -378,7 +378,7 @@ onRender()
 ```
 
 * **Description:**
-this function is fired when an Atom was rendered.
+this function is fired when an Atom is rendered.
 
 * **Param:** void
 
@@ -393,9 +393,9 @@ this function is fired when an Atom was rendered.
     └── css    <<<---
 ```
 
-Inside `AtomicDir/css` will be all Atom's style. Is recommended each Atom's style stay be in a file. When AtomicReact bundle the styles, it just joins all css files into one.
+Inside `AtomicDir/css` will be all of Atom's style. It's recommended that each Atom's style stay within a single file. When AtomicReact bundle the styles, it just joins all css files into one.
 
-To style an Atom we just **code a normal CSS with selectors** using `data-atomic-key`, `data-atomic-nucleus` and `data-atomic-sub` attributes. See the example below:
+In order to style an Atom we just **code a normal CSS with selectors** using `data-atomic-key`, `data-atomic-nucleus` and `data-atomic-sub` attributes. See the example below:
 
 **To consider the examples below, suppose the following `MyFirstAtom` Atom's Structure:**
 
