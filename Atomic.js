@@ -29,16 +29,16 @@ class Atomic {
       Sub: "atomic.sub"
     }
 
-    this.Config = (Config!=null) ? JSON.parse(JSON.stringify(Config)):{
+    this.Config = (Config != null) ? JSON.parse(JSON.stringify(Config)) : {
       atomicDir: "",
       bundleDir: "",
       debug: true
     };
 
-    if(!this.Config.atomicDir) { return console.log(consoleFlags.erro, "You must set an atomicDir where all yours atoms will be"); }
+    if (!this.Config.atomicDir) { return console.log(consoleFlags.erro, "You must set an atomicDir where all yours atoms will be"); }
     this.Config.atomicDir = path.join(process.cwd(), this.Config.atomicDir);
-    this.Config.bundleDir = path.join(process.cwd(), this.Config.bundleDir||"");
-    this.Config.debug = (this.Config.debug==undefined) ? true:this.Config.debug;
+    this.Config.bundleDir = path.join(process.cwd(), this.Config.bundleDir || "");
+    this.Config.debug = (this.Config.debug == undefined) ? true : this.Config.debug;
 
     this.Config.paths = {
       html: path.join(this.Config.atomicDir, "html"),
@@ -53,14 +53,14 @@ class Atomic {
 
     /* HotReload */
     this.HotReload = HotReload || null;
-    if(this.HotReload!=null) {
+    if (this.HotReload != null) {
       // console.log("this.HotReload.webSocketsClients.length: "+this.HotReload.webSocketsClients.length);
       this.HotReload.watchingFiles = []; //reseta arquivos que ja estavam sendo watcheds
       //inicial watchs (atomicDir)
       this.HotReload.addToWatch(this.Config.atomicDir);
       // this.HotReload.addToWatch(process.cwd());
 
-      this.HotReload.getEventEmitter().on('reload', (function(msg){
+      this.HotReload.getEventEmitter().on('reload', (function (msg) {
         // console.log("HotReload -> changes event emitted", msg);
         this.init();
       }).bind(this));
@@ -72,13 +72,13 @@ class Atomic {
     /* Carrega Data dos Atomos */
     this.Atomos = [];
 
-    fs.readdirSync(this.Config.paths.html).forEach((function(file){
+    fs.readdirSync(this.Config.paths.html).forEach((function (file) {
       var fileAtomoHtml = path.join(this.Config.paths.html, file);
       var parsedFile = path.parse(fileAtomoHtml);
-      if(parsedFile.ext.indexOf(".html")!=-1){
+      if (parsedFile.ext.indexOf(".html") != -1) {
         // console.log(parsedFile.name);
         if (!fs.existsSync(fileAtomoHtml)) {
-          return console.log(consoleFlags.erro, "File "+fileAtomoHtml+" not exist");
+          return console.log(consoleFlags.erro, "File " + fileAtomoHtml + " not exist");
         }
         this.addAtomo({
           key: parsedFile.name,
@@ -88,14 +88,14 @@ class Atomic {
     }).bind(this));
 
     this.bundle();
-    if(this.Config.debug) { this.printAtoms(); }
+    if (this.Config.debug) { this.printAtoms(); }
   }
   isRunning() {
-    if(this.Global.isOnClientSide) {
-      console.log('AtomicReact is running on version: '+this.Global.version);
+    if (this.Global.isOnClientSide) {
+      console.log('AtomicReact is running on version: ' + this.Global.version);
     }
     else {
-      console.log(consoleFlags.info,'AtomicReact is running on version: '+this.Global.version);
+      console.log(consoleFlags.info, 'AtomicReact is running on version: ' + this.Global.version);
     }
   }
   addAtomo(Atomo) {
@@ -105,11 +105,11 @@ class Atomic {
     this.Atomos.push(Atomo);
   }
   replaceExpressao(expressao, expressaoParaSerReplaced, source, expressaoIsAFlag) {
-    expressaoIsAFlag = expressaoIsAFlag||false;
-    var regexTag = new RegExp('<(.)*\\s+'+expressao+'(\\s*=[^>]*)', 'gi');
+    expressaoIsAFlag = expressaoIsAFlag || false;
+    var regexTag = new RegExp('<(.)*\\s+' + expressao + '(\\s*=[^>]*)', 'gi');
     // console.log('expressaoIsAFlag:', expressaoIsAFlag);
-    if(expressaoIsAFlag==true) {
-      regexTag = new RegExp('<(.)*\\s+'+expressao+'([^>]*)', 'gi');
+    if (expressaoIsAFlag == true) {
+      regexTag = new RegExp('<(.)*\\s+' + expressao + '([^>]*)', 'gi');
     }
     // console.log(expressao);
     expressao = expressao.replace('.', '\\.');
@@ -117,7 +117,7 @@ class Atomic {
     var regexToReplace = new RegExp(expressao, 'gi');
     var match;
     var valor;
-    while(match = regexTag.exec(source)){
+    while (match = regexTag.exec(source)) {
       valor = match[0].replace(regexToReplace, expressaoParaSerReplaced);
       // console.log(valor);
       // console.log("================");
@@ -126,16 +126,16 @@ class Atomic {
     return source;
   }
   printAtoms() {
-    if(this.Global.isOnClientSide) { console.log('Atoms Loaded:'); }
+    if (this.Global.isOnClientSide) { console.log('Atoms Loaded:'); }
     else { console.log(consoleFlags.info, 'Atoms loaded:'); }
-    for(var i=0; i<this.Atomos.length; i++) {
-      if(this.Global.isOnClientSide) { console.log('   ['+(i+1)+'] '+this.Atomos[i].key); }
-      else { console.log(consoleFlags.info, '   ['+(i+1)+'] '+this.Atomos[i].key); }
+    for (var i = 0; i < this.Atomos.length; i++) {
+      if (this.Global.isOnClientSide) { console.log('   [' + (i + 1) + '] ' + this.Atomos[i].key); }
+      else { console.log(consoleFlags.info, '   [' + (i + 1) + '] ' + this.Atomos[i].key); }
     }
   }
   getGeoCursorTag(source, TagKey, caseSensitivy) {
-    caseSensitivy = (caseSensitivy==null || caseSensitivy==undefined) ? true:caseSensitivy;
-    if(this.Global.isOnClientSide || (!caseSensitivy)) {
+    caseSensitivy = (caseSensitivy == null || caseSensitivy == undefined) ? true : caseSensitivy;
+    if (this.Global.isOnClientSide || (!caseSensitivy)) {
       source = source.toLowerCase();
       TagKey = TagKey.toLowerCase();
     }
@@ -152,29 +152,29 @@ class Atomic {
         end: -1
       }
     };
-    var regexOpenOuClose = new RegExp('</?(('+TagKey+')|('+TagKey+'\\s[^>]*))>', "g");
-    var regexOpen = new RegExp('<(('+TagKey+')|('+TagKey+'\\s[^>]*))>', "g");
+    var regexOpenOuClose = new RegExp('</?((' + TagKey + ')|(' + TagKey + '\\s[^>]*))>', "g");
+    var regexOpen = new RegExp('<((' + TagKey + ')|(' + TagKey + '\\s[^>]*))>', "g");
     var match;
     var contadorTagsAbertas = 0;
     var encontrou = false;
-    while((match = regexOpenOuClose.exec(source)) && encontrou==false ){
-      if(match[0].search(regexOpen)>-1) {
+    while ((match = regexOpenOuClose.exec(source)) && encontrou == false) {
+      if (match[0].search(regexOpen) > -1) {
         // console.log('========Open=========');
-        if(contadorTagsAbertas==0) {
+        if (contadorTagsAbertas == 0) {
           // console.log('Este é o primeiro open');
           geoCursor.open.start = regexOpenOuClose.lastIndex - match[0].length;
           geoCursor.open.end = regexOpenOuClose.lastIndex;
         }
-        contadorTagsAbertas+=1;
+        contadorTagsAbertas += 1;
       } else {
         // console.log('=======Close=========');
-        contadorTagsAbertas-=1;
-        if(contadorTagsAbertas==0) {
+        contadorTagsAbertas -= 1;
+        if (contadorTagsAbertas == 0) {
           // console.log('Este é ultimo close');
           geoCursor.close.start = regexOpenOuClose.lastIndex - match[0].length;
           geoCursor.close.end = regexOpenOuClose.lastIndex;
 
-          encontrou=true;
+          encontrou = true;
         }
       }
       // console.log('start index= ' +(regexOpenOuClose.lastIndex - match[0].length));
@@ -187,88 +187,88 @@ class Atomic {
     // console.log(Atomo.key);
     // console.log(source);
     var geoCursorAtomo = this.getGeoCursorTag(source, Atomo.key);
-    if(geoCursorAtomo.open.start==-1) {return {Source: source, Acabou: true};}
+    if (geoCursorAtomo.open.start == -1) { return { Source: source, Acabou: true }; }
 
     var AtomoData = Atomo.data;
 
     //atributos
-    var atributos = source.slice(geoCursorAtomo.open.start,geoCursorAtomo.open.end);
+    var atributos = source.slice(geoCursorAtomo.open.start, geoCursorAtomo.open.end);
     var customAtributos = atributos.slice(0, atributos.length);
     // console.log(customAtributos);
 
     //props
     // var regexPropAttr = new RegExp(/props\.\w*\s*=\s*(\")\s*([^\"]*)/, 'g');
-    var regexPropAttr = new RegExp(this.ClientVariables.Props+'(\\.\\w*\\s*=\\s*(\\")\\s*([^\\"]*))', 'g');
+    var regexPropAttr = new RegExp(this.ClientVariables.Props + '(\\.\\w*\\s*=\\s*(\\")\\s*([^\\"]*))', 'g');
     var match;
-    var campo,valor;
-    while(match = regexPropAttr.exec(atributos)){
+    var campo, valor;
+    while (match = regexPropAttr.exec(atributos)) {
       // console.log(match);
-      campo = match[0].slice(0,match[0].indexOf('=')).trim();
+      campo = match[0].slice(0, match[0].indexOf('=')).trim();
       valor = match[0];
-      customAtributos = customAtributos.replace(valor+'"', ''); //Apaga esse props dos atributos para que eu possa ter um customAtributos limpo
-      valor = valor.slice(valor.indexOf('"')+1, valor.length);
-      AtomoData = AtomoData.replace(new RegExp('{((\\s)*)'+campo+'((\\s)*)}', 'gi'), valor);
+      customAtributos = customAtributos.replace(valor + '"', ''); //Apaga esse props dos atributos para que eu possa ter um customAtributos limpo
+      valor = valor.slice(valor.indexOf('"') + 1, valor.length);
+      AtomoData = AtomoData.replace(new RegExp('{((\\s)*)' + campo + '((\\s)*)}', 'gi'), valor);
     }
 
     //custom atributos:  (id, class, ....) devem ser add na tag do AtomoData
-    customAtributos = customAtributos.slice(customAtributos.indexOf(" "), customAtributos.length-1);
+    customAtributos = customAtributos.slice(customAtributos.indexOf(" "), customAtributos.length - 1);
 
     //nucleus
     var nucleus = source.slice(geoCursorAtomo.open.end, geoCursorAtomo.close.start);
     // var geoCursorNucleus = this.getGeoCursorTag(AtomoData, this.ClientVariables.Tags.nucleus);
     // AtomoData = AtomoData.slice(0,geoCursorNucleus.open.start)+nucleus+AtomoData.slice(geoCursorNucleus.close.end,AtomoData.length);
-    var regExpNucleusTag = new RegExp('<(.)*'+this.ClientVariables.Nucleus+'[^>]*', 'gi');
+    var regExpNucleusTag = new RegExp('<(.)*' + this.ClientVariables.Nucleus + '[^>]*', 'gi');
     // console.log(AtomoData);
     var openEndNucleusTag = -1;
-    while(match = regExpNucleusTag.exec(AtomoData)) {
-      openEndNucleusTag = regExpNucleusTag.lastIndex+1;
+    while (match = regExpNucleusTag.exec(AtomoData)) {
+      openEndNucleusTag = regExpNucleusTag.lastIndex + 1;
     }
     // console.log(openEndNucleusTag);
     // console.log(AtomoData.slice(openEndNucleusTag-10, openEndNucleusTag+1));
-    AtomoData = AtomoData.slice(0,openEndNucleusTag)+nucleus+AtomoData.slice(openEndNucleusTag,AtomoData.length);
+    AtomoData = AtomoData.slice(0, openEndNucleusTag) + nucleus + AtomoData.slice(openEndNucleusTag, AtomoData.length);
 
     //Add Atomic.Key
-    var atomicKey = " "+this.ClientVariables.Key+"='"+Atomo.key+"'";
+    var atomicKey = " " + this.ClientVariables.Key + "='" + Atomo.key + "'";
 
     //Add Atomic.Id
-    var atomicId = Atomo.key+"_"+this.Global.atomosRendered.count;
+    var atomicId = Atomo.key + "_" + this.Global.atomosRendered.count;
     // console.log("this.Global.isOnClientSide: "+this.Global.isOnClientSide);
-    if(this.Global.isOnClientSide==true) { this.Global.atomosRendered.list.push({key:Atomo.key, id:atomicId}); }
-    atomicId = " "+this.ClientVariables.Id+"='"+atomicId+"'";
+    if (this.Global.isOnClientSide == true) { this.Global.atomosRendered.list.push({ key: Atomo.key, id: atomicId }); }
+    atomicId = " " + this.ClientVariables.Id + "='" + atomicId + "'";
 
     //Add Atomic.Sub
     var atomicSub = '';
-    var regexSubAttr = new RegExp(this.ClientVariables.Sub+'(\\s*=\\s*(\\")\\s*([^\\"]*))', 'g');
-    while(match = regexSubAttr.exec(atributos)){
-      campo = match[0].slice(0,match[0].indexOf('=')).trim();
+    var regexSubAttr = new RegExp(this.ClientVariables.Sub + '(\\s*=\\s*(\\")\\s*([^\\"]*))', 'g');
+    while (match = regexSubAttr.exec(atributos)) {
+      campo = match[0].slice(0, match[0].indexOf('=')).trim();
       valor = match[0];
-      atomicSub = " "+atomicSub + match[0] + '"';
+      atomicSub = " " + atomicSub + match[0] + '"';
     }
     // console.log(atomicSub);
 
     var openEndFirstTagOnAtomoData = this.getGeoCursorTag(AtomoData, '[^>]*').open.end - 1;
-    AtomoData = AtomoData.slice(0, openEndFirstTagOnAtomoData)+customAtributos+atomicKey+atomicId+atomicSub+AtomoData.slice(openEndFirstTagOnAtomoData, AtomoData.length);
+    AtomoData = AtomoData.slice(0, openEndFirstTagOnAtomoData) + customAtributos + atomicKey + atomicId + atomicSub + AtomoData.slice(openEndFirstTagOnAtomoData, AtomoData.length);
 
-    this.Global.atomosRendered.count = this.Global.atomosRendered.count+1;
+    this.Global.atomosRendered.count = this.Global.atomosRendered.count + 1;
     // console.log(AtomoData);
 
     AtomoData = this.render(AtomoData);
     // console.log('geoCursorNucleus: '+geoCursorNucleus);
     // console.log('AtomoDataComNucleus: '+AtomoDataComNucleus);
-    source = source.slice(0,geoCursorAtomo.open.start)+AtomoData+source.slice(geoCursorAtomo.close.end,source.length);
+    source = source.slice(0, geoCursorAtomo.open.start) + AtomoData + source.slice(geoCursorAtomo.close.end, source.length);
 
-    return {Source: source, Acabou: false};
+    return { Source: source, Acabou: false };
   }
   loopRender(source, Atomo) {
     var RetornoRenderAtomo = this.renderAtomo(source, Atomo);
-    if(RetornoRenderAtomo.Acabou) {
+    if (RetornoRenderAtomo.Acabou) {
       return RetornoRenderAtomo.Source;
     } else {
       return this.loopRender(RetornoRenderAtomo.Source, Atomo);
     }
   }
   render(source) {
-    this.Atomos.forEach((function(Atomo){
+    this.Atomos.forEach((function (Atomo) {
       source = this.loopRender(source, Atomo);
     }).bind(this));
     // console.log(source);
@@ -281,14 +281,14 @@ class Atomic {
 
     this.createAtomClass();
   }
-  createAtomClass(){
-    this.Global.atomosRendered.list.forEach(function(AtomoRendered){
+  createAtomClass() {
+    this.Global.atomosRendered.list.forEach(function (AtomoRendered) {
       // console.log("+++++++++++", AtomoRendered);
       var bAtomFound = false;
-      var atom = document.querySelector('['+this.ClientVariables.Id+'="'+AtomoRendered.id+'"]');
-      if(atom==null) {return;}
-      for(var index=0; index<this.Atomos.length && bAtomFound==false; index++) {
-        if((AtomoRendered.key == this.Atomos[index].key) && (this.Atomos[index].mainClass!=null)) {
+      var atom = document.querySelector('[' + this.ClientVariables.Id + '="' + AtomoRendered.id + '"]');
+      if (atom == null) { return; }
+      for (var index = 0; index < this.Atomos.length && bAtomFound == false; index++) {
+        if ((AtomoRendered.key == this.Atomos[index].key) && (this.Atomos[index].mainClass != null)) {
           bAtomFound = true;
 
           atom.Atomic = {
@@ -297,8 +297,8 @@ class Atomic {
           };
 
           /* insert newFunc in object if func is undefined */
-          var insertNewFunc= function(func, name, newFunc){
-            if(func==undefined) {
+          var insertNewFunc = function (func, name, newFunc) {
+            if (func == undefined) {
               Object.defineProperty(Object.getPrototypeOf(atom.Atomic.main), name, {
                 value: newFunc
               });
@@ -306,16 +306,16 @@ class Atomic {
           };
           // insertNewFunc(atom.Atomic.main.meuID, 'meuID', AtomoRendered.id);
 
-          insertNewFunc(atom.Atomic.main.getElement, 'getElement', function(){
+          insertNewFunc(atom.Atomic.main.getElement, 'getElement', function () {
             return atom;
           });
-          insertNewFunc(atom.Atomic.main.add, 'add', function(AtomKey, props, where){
+          insertNewFunc(atom.Atomic.main.add, 'add', function (AtomKey, props, where) {
             return this.add(atom, AtomKey, props, where);
           });
-          insertNewFunc(atom.Atomic.main.getNucleus, 'getNucleus', function(){
+          insertNewFunc(atom.Atomic.main.getNucleus, 'getNucleus', function () {
             return this.getNucleus(atom);
           });
-          insertNewFunc(atom.Atomic.main.getSub, 'getSub', function(subName){
+          insertNewFunc(atom.Atomic.main.getSub, 'getSub', function (subName) {
             return this.getSub(atom, subName);
           });
         }
@@ -324,13 +324,13 @@ class Atomic {
     });
     this.notifyAtomOnRender();
   }
-  notifyAtomOnRender(){
-    this.Global.atomosRendered.list.forEach(function(AtomoRendered){
+  notifyAtomOnRender() {
+    this.Global.atomosRendered.list.forEach(function (AtomoRendered) {
       // console.log('--------'+AtomoRendered.id);
-      var atom = document.querySelector('['+this.ClientVariables.Id+'="'+AtomoRendered.id+'"]');
-      if(atom==null) {return;}
+      var atom = document.querySelector('[' + this.ClientVariables.Id + '="' + AtomoRendered.id + '"]');
+      if (atom == null) { return; }
       // console.log('--------------',atom.Atomic);
-      if((atom.Atomic!=undefined) && typeof atom.Atomic.main.onRender == 'function') {
+      if ((atom.Atomic != undefined) && typeof atom.Atomic.main.onRender == 'function') {
         atom.Atomic.main.onRender();
       }
     });
@@ -339,7 +339,7 @@ class Atomic {
     return encodeURI(funcao.toString().replace(funcao.name, 'function').replace(/this/g, this.ClientVariables.Atomic)).replace(/'/g, '%27');
   }
   bundle() {
-    if(this.Config.debug) { console.log(consoleFlags.info, "===Bundling==="); }
+    if (this.Config.debug) { console.log(consoleFlags.info, "===Bundling==="); }
     /* Core JS */
     var jsCore = "";
 
@@ -349,7 +349,7 @@ class Atomic {
       ClientVariables: this.ClientVariables,
       AtomicVariables: this.AtomicVariables
     };
-    if(this.HotReload!=null) {
+    if (this.HotReload != null) {
       objToExportToClient.HotReload = {
         port: this.HotReload.port,
         addrs: this.HotReload.addrs
@@ -358,17 +358,17 @@ class Atomic {
 
     objToExportToClient.Global.isOnClientSide = true;
     var objToExportToClientStringfied = encodeURI(JSON.stringify(objToExportToClient)).replace(/'/g, '%27'); //fix problemas das aspas com encodeURI - encodeURI do nodejs não encode o ', por isso fazemos isso manualmente
-    jsCore = "const "+this.ClientVariables.Atomic+ " = JSON.parse(decodeURI('"+ objToExportToClientStringfied + "'));";
+    jsCore = "const " + this.ClientVariables.Atomic + " = JSON.parse(decodeURI('" + objToExportToClientStringfied + "'));";
 
     //exporta aqui e importa funcoes no lado do client
     var functionsToExport = [this.addAtomo, this.printAtoms, this.isRunning, this.getGeoCursorTag, this.renderAtomo, this.replaceExpressao, this.loopRender, this.render, this.renderElement, this.createAtomClass, this.notifyAtomOnRender, this.getAtom, this.getSub, this.getNucleus, this.add, this.ligaHotReloadNoClient, this.renderPageNoClient];
-    functionsToExport.forEach((function(functionToExport){
-      jsCore += 'eval(decodeURI(\''+this.ClientVariables.Atomic+'.'+functionToExport.name+'='+this.exportFunction(functionToExport)+'\'));';
+    functionsToExport.forEach((function (functionToExport) {
+      jsCore += 'eval(decodeURI(\'' + this.ClientVariables.Atomic + '.' + functionToExport.name + '=' + this.exportFunction(functionToExport) + '\'));';
     }).bind(this));
 
     //Liga HotReload
-    if(this.HotReload!=null) {
-      jsCore += this.ClientVariables.Atomic+"."+this.ligaHotReloadNoClient.name+"();";
+    if (this.HotReload != null) {
+      jsCore += this.ClientVariables.Atomic + "." + this.ligaHotReloadNoClient.name + "();";
     }
     jsCore += "Atomic.renderPageNoClient();";
 
@@ -384,14 +384,14 @@ class Atomic {
       Atomos: this.Atomos
     };
     var objToExportToClientStringfied = encodeURI(JSON.stringify(objToExportToClient)).replace(/'/g, '%27'); //fix problemas das aspas com encodeURI - encodeURI do nodejs não encode o ', por isso fazemos isso manualmente
-    jsBundle = "JSON.parse(decodeURI('"+ objToExportToClientStringfied + "')).Atomos.forEach(function(Atomo){"+this.ClientVariables.Atomic+".Atomos.push(Atomo);});";
+    jsBundle = "JSON.parse(decodeURI('" + objToExportToClientStringfied + "')).Atomos.forEach(function(Atomo){" + this.ClientVariables.Atomic + ".Atomos.push(Atomo);});";
 
     var jsAtomoFile;
     // console.log(this.Config.paths.js);
-    this.Atomos.forEach((function(Atomo, index){
+    this.Atomos.forEach((function (Atomo, index) {
       jsAtomoFile = path.join(this.Config.paths.js, Atomo.key + '.js');
       if (!fs.existsSync(jsAtomoFile)) {
-        if(this.Config.debug) {console.log(consoleFlags.warn, "File "+jsAtomoFile+" not exist");}
+        if (this.Config.debug) { console.log(consoleFlags.warn, "File " + jsAtomoFile + " not exist"); }
         return;
       }
 
@@ -399,7 +399,7 @@ class Atomic {
       try {
         delete require.cache[path.resolve(jsAtomoFile)];
         AtomoImported = require(jsAtomoFile);
-      } catch(e) {
+      } catch (e) {
         console.log(consoleFlags.erro, e.message);
         console.log(consoleFlags.erro, e.stack);
         // console.log( Object.getOwnPropertyNames(e));
@@ -409,19 +409,19 @@ class Atomic {
 
       // console.log(Object.getOwnPropertyNames(AtomoImported));
       var AtomoImportedObjName = Object.getOwnPropertyNames(AtomoImported);
-      Object.values(AtomoImported).forEach((function(value, indexValues){
+      Object.values(AtomoImported).forEach((function (value, indexValues) {
         // console.log(typeof value);
         // console.log(AtomoImportedObjName[indexValues]);
-        if(AtomoImportedObjName[indexValues]=="main") {
-          jsBundle += 'eval(decodeURI(\''+this.ClientVariables.Atomic+'.getAtom(\"'+Atomo.key+'\").mainClass = '+encodeURI(value.toString()).replace(/'/g, '%27')+'\'));';
-          jsBundle += 'eval(decodeURI(\''+this.ClientVariables.Atomic+'.getAtom(\"'+Atomo.key+'\").'+AtomoImportedObjName[indexValues]+' = new ('+this.ClientVariables.Atomic+'.getAtom(\"'+Atomo.key+'\")).mainClass();\'));';
+        if (AtomoImportedObjName[indexValues] == "main") {
+          jsBundle += 'eval(decodeURI(\'' + this.ClientVariables.Atomic + '.getAtom(\"' + Atomo.key + '\").mainClass = ' + encodeURI(value.toString()).replace(/'/g, '%27') + '\'));';
+          jsBundle += 'eval(decodeURI(\'' + this.ClientVariables.Atomic + '.getAtom(\"' + Atomo.key + '\").' + AtomoImportedObjName[indexValues] + ' = new (' + this.ClientVariables.Atomic + '.getAtom(\"' + Atomo.key + '\")).mainClass();\'));';
         }
       }).bind(this));
       // console.log(Object.values(AtomoImported)[2].toString());
       // console.log(Object.values(AtomoImported));
       // console.log(AtomoImportedObjName);
-      if(AtomoImported.main==undefined && this.Config.debug==true) {
-        console.log(consoleFlags.warn, "["+Atomo.key+"] don't have main class");
+      if (AtomoImported.main == undefined && this.Config.debug == true) {
+        console.log(consoleFlags.warn, "[" + Atomo.key + "] don't have main class");
       }
 
     }).bind(this));
@@ -429,10 +429,11 @@ class Atomic {
     /* Bundle CSS */
     var cssBundle = "";
     var cssAtomoFile;
-    this.Atomos.forEach((function(Atomo, index){
+    this.Atomos.forEach((function (Atomo, index) {
       cssAtomoFile = path.join(this.Config.paths.css, Atomo.key + '.css');
-      if (!fs.existsSync(cssAtomoFile) && this.Config.debug) {
-        return console.log(consoleFlags.warn, "File "+cssAtomoFile+" not exist");
+      if (!fs.existsSync(cssAtomoFile)) {
+        if (this.Config.debug) console.log(consoleFlags.warn, "File " + cssAtomoFile + " not exist");
+        return;
       }
       cssBundle += fs.readFileSync(cssAtomoFile).toString();
     }).bind(this));
@@ -441,8 +442,8 @@ class Atomic {
     var packageJson = JSON.parse(fs.readFileSync(path.join(process.cwd(), "package.json")));
     var nodeModulesPath = path.join(process.cwd(), "node_modules");
     try {
-      if(this.Config.debug && packageJson.atomicReact.dependencies.length>0) { console.log(consoleFlags.info, "Dependencies Loaded"); }
-      packageJson.atomicReact.dependencies.forEach((function(dp){ //dp = dependencie name
+      if (this.Config.debug && packageJson.atomicReact.dependencies.length > 0) { console.log(consoleFlags.info, "Dependencies Loaded"); }
+      packageJson.atomicReact.dependencies.forEach((function (dp) { //dp = dependencie name
         var dpPath = path.join(nodeModulesPath, dp);
 
         var dpConfig = require(path.join(dpPath, "AtomicReact_config.js"));
@@ -451,11 +452,11 @@ class Atomic {
         var dpBundleCssPath = path.join(dpBundleJsPath, "atomicreact.bundle.css");
         dpBundleJsPath = path.join(dpBundleJsPath, "atomicreact.bundle.js");
 
-        if(fs.existsSync(dpBundleJsPath)) { jsBundle += fs.readFileSync(dpBundleJsPath).toString(); }
-        if(fs.existsSync(dpBundleCssPath)) { cssBundle += fs.readFileSync(dpBundleCssPath).toString(); }
-        if(this.Config.debug) { console.log(consoleFlags.info, "\t[+] "+dp); }
+        if (fs.existsSync(dpBundleJsPath)) { jsBundle += fs.readFileSync(dpBundleJsPath).toString(); }
+        if (fs.existsSync(dpBundleCssPath)) { cssBundle += fs.readFileSync(dpBundleCssPath).toString(); }
+        if (this.Config.debug) { console.log(consoleFlags.info, "\t[+] " + dp); }
       }).bind(this));
-    } catch(e){/*console.log(e);*/};
+    } catch (e) {/*console.log(e);*/ };
 
     //Save de bundle
     var jsBundlePath = path.join(this.Config.bundleDir, 'atomicreact.bundle.js');
@@ -466,18 +467,18 @@ class Atomic {
   }
   getAtom(AtomKey) {
     var index = -1;
-    for(var i=0; i<this.Atomos.length; i++){
-      if(AtomKey==this.Atomos[i].key) {
+    for (var i = 0; i < this.Atomos.length; i++) {
+      if (AtomKey == this.Atomos[i].key) {
         index = i;
       }
     }
     return this.Atomos[index];
   }
   getSub(atomElement, subName) {
-    return atomElement.querySelector('['+this.ClientVariables.Sub+'="'+subName+'"]');
+    return atomElement.querySelector('[' + this.ClientVariables.Sub + '="' + subName + '"]');
   }
   getNucleus(atomElement) {
-    return document.querySelector('[data-atomic-id='+atomElement.getAttribute('data-atomic-id')+'] > ['+this.ClientVariables.Nucleus+']');
+    return document.querySelector('[data-atomic-id=' + atomElement.getAttribute('data-atomic-id') + '] > [' + this.ClientVariables.Nucleus + ']');
   }
   add(atomElement, AtomKey, props, where) {
     props = props || [];
@@ -486,8 +487,8 @@ class Atomic {
     var elementoToBeCreate = document.createElement(AtomKey);
 
     //add props
-    props.forEach(function(prop){
-      elementoToBeCreate.setAttribute(this.ClientVariables.Props+"."+prop.key, prop.value);
+    props.forEach(function (prop) {
+      elementoToBeCreate.setAttribute(this.ClientVariables.Props + "." + prop.key, prop.value);
     });
 
     this.Global.atomosRendered.list = []; //limpa a lista de atomos renderizados
@@ -499,30 +500,30 @@ class Atomic {
     this.createAtomClass();
 
     var key = atomElement.getAttributeNode(this.ClientVariables.Key).value;
-    var atomAdded = document.querySelector('['+this.ClientVariables.Id+'="'+this.Global.atomosRendered.list[0].id+'"]');
+    var atomAdded = document.querySelector('[' + this.ClientVariables.Id + '="' + this.Global.atomosRendered.list[0].id + '"]');
     //notifyAtom onAdded
-    this.Atomos.forEach(function(Atomo, index){
-      if((key == Atomo.key) && (this.Atomos[index].main!=null) && (this.Atomos[index].main.onAdded!=null)) {
+    this.Atomos.forEach(function (Atomo, index) {
+      if ((key == Atomo.key) && (this.Atomos[index].main != null) && (this.Atomos[index].main.onAdded != null)) {
         atomElement.Atomic.main.onAdded(atomAdded);
       }
     });
 
     return atomAdded;
   }
-  ligaHotReloadNoClient(){
+  ligaHotReloadNoClient() {
     // console.log('ligaHotReloadNoClient disparado');
-    if(this.WebSocketClient!=null && this.WebSocketClient!=undefined) { return; }
-    this.WebSocketClient = new WebSocket("ws://"+this.HotReload.addrs+":"+this.HotReload.port);
-    this.WebSocketClient.onmessage = function(e){
+    if (this.WebSocketClient != null && this.WebSocketClient != undefined) { return; }
+    this.WebSocketClient = new WebSocket("ws://" + this.HotReload.addrs + ":" + this.HotReload.port);
+    this.WebSocketClient.onmessage = function (e) {
       console.log(e.data);
-      if(e.data=="<atomicreact.hotreload.RELOAD>"){
+      if (e.data == "<atomicreact.hotreload.RELOAD>") {
         location.reload();
       }
     }
   }
   renderPageNoClient() {
-    window.addEventListener("load", function(event) {
-    	Atomic.renderElement(document.getElementsByTagName('html')[0]);
+    window.addEventListener("load", function (event) {
+      Atomic.renderElement(document.getElementsByTagName('html')[0]);
     });
   }
 }
