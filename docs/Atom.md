@@ -6,7 +6,7 @@ The minimal particle is called by **Atom**. One Atom is composed by 3 parts:
 * [**Style (CSS)**](Atom?id=style-css)
 
 Fundamentally, an Atom **need to have a structure but doesn't need a logic and style**.
-After runnning [`Atomic` command](AtomicCLI),  your `AtomicDir` is created and there will be your Atoms.
+After runnning [`Atomic` command](AtomicCLI?id=atomic),  your `AtomicDir` is created and there will be your Atoms.
 In the `AtomicDir` there are three directories: *html, js, css*.
 ``` text
 └── AtomicDir

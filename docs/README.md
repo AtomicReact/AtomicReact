@@ -7,14 +7,13 @@ AtomicReact is a framework to build Web Apps with atomicity concept
 
 * **Fast to Get Started**: Install and run!
 * **Strong Ecosystem**:
-    *  Build encapsulated Atoms that manage their own state, then compose them to make complex UIs.
+    *  Build encapsulated Atoms, then compose them to make complex UIs.
     *  Easy to use Atoms from other developers
     *  Atom is made by structure, logic and style! In our words: Atom = { html, js, css }
 * **Don't waste time recompiling**: Code and view in same time with HotReload feature
 * **NodeJs Modules Compatibility**: Easy to build with Express, Gulp, Grunt, UglifyJS2, ...
 * **Fast Front-End Development**: Create once, reuse afterwards
 * **Organized**: Each part in its own directory
-* **Build from what you already know**: HTML, CSS and JAVASCRIPT
 * **Share**: Fast to share your Atoms with others developers.
 
 ## Requirements
@@ -37,4 +36,4 @@ In `AtomicDir` there are three dirs: html, js, css.
 ```
 **To create an Atom**, just create one file with anyone name in `AtomicDir/html` folder.
 
-[Let's get started!](getStarted?id=installation) :rocket:
+[Let's get started!](getStarted?id=installation) 🚀

@@ -1,4 +1,4 @@
-# Get Started :rocket:
+# Get Started 🚀
 
 ## Installation
 
