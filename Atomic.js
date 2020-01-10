@@ -232,6 +232,8 @@ class Atomic {
 
     //Add Atomic.Id
     var atomicId = Atomo.key + "_" + this.Global.atomosRendered.count;
+    //Update atomic-nucleus para atomic-nucleus= atomicId
+    AtomoData = this.replaceExpressao(this.ClientVariables.Nucleus, this.ClientVariables.Nucleus + "=" + atomicId, AtomoData, true);
     // console.log("this.Global.isOnClientSide: "+this.Global.isOnClientSide);
     if (this.Global.isOnClientSide == true) { this.Global.atomosRendered.list.push({ key: Atomo.key, id: atomicId }); }
     atomicId = " " + this.ClientVariables.Id + "='" + atomicId + "'";
@@ -478,7 +480,7 @@ class Atomic {
     return atomElement.querySelector('[' + this.ClientVariables.Sub + '="' + subName + '"]');
   }
   getNucleus(atomElement) {
-    return document.querySelector('[data-atomic-id=' + atomElement.getAttribute('data-atomic-id') + '] > [' + this.ClientVariables.Nucleus + ']');
+    return document.querySelector('[' + this.ClientVariables.Nucleus + '=' + atomElement.getAttribute('data-atomic-id') + ']');
   }
   add(atomElement, AtomKey, props, where) {
     props = props || [];
