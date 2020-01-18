@@ -183,7 +183,7 @@ class Atomic {
     // console.log(geoCursor);
     return geoCursor;
   }
-  renderAtomo(source, Atomo) {
+  renderAtomo(source, Atomo, lista) {
     // console.log(Atomo.key);
     // console.log(source);
     var geoCursorAtomo = this.getGeoCursorTag(source, Atomo.key);
@@ -235,7 +235,7 @@ class Atomic {
     //Update atomic-nucleus para atomic-nucleus= atomicId
     AtomoData = this.replaceExpressao(this.ClientVariables.Nucleus, this.ClientVariables.Nucleus + "=" + atomicId, AtomoData, true);
     // console.log("this.Global.isOnClientSide: "+this.Global.isOnClientSide);
-    if (this.Global.isOnClientSide == true) { this.Global.atomosRendered.list.push({ key: Atomo.key, id: atomicId }); }
+    if (this.Global.isOnClientSide == true) { lista.push({ key: Atomo.key, id: atomicId }); }
     atomicId = " " + this.ClientVariables.Id + "='" + atomicId + "'";
 
     //Add Atomic.Sub
@@ -254,37 +254,37 @@ class Atomic {
     this.Global.atomosRendered.count = this.Global.atomosRendered.count + 1;
     // console.log(AtomoData);
 
-    AtomoData = this.render(AtomoData);
+    AtomoData = this.render(AtomoData, lista);
     // console.log('geoCursorNucleus: '+geoCursorNucleus);
     // console.log('AtomoDataComNucleus: '+AtomoDataComNucleus);
     source = source.slice(0, geoCursorAtomo.open.start) + AtomoData + source.slice(geoCursorAtomo.close.end, source.length);
 
     return { Source: source, Acabou: false };
   }
-  loopRender(source, Atomo) {
-    var RetornoRenderAtomo = this.renderAtomo(source, Atomo);
+  loopRender(source, Atomo, lista) {
+    var RetornoRenderAtomo = this.renderAtomo(source, Atomo, lista);
     if (RetornoRenderAtomo.Acabou) {
-      return RetornoRenderAtomo.Source;
+      return RetornoRenderAtomo.Source
     } else {
-      return this.loopRender(RetornoRenderAtomo.Source, Atomo);
+      return this.loopRender(RetornoRenderAtomo.Source, Atomo, lista);
     }
   }
-  render(source) {
+  render(source, lista = []) {
     this.Atomos.forEach((function (Atomo) {
-      source = this.loopRender(source, Atomo);
+      source = this.loopRender(source, Atomo, lista);
     }).bind(this));
     // console.log(source);
-    return source;
+    return source
   }
   renderElement(domElement) {
-    this.Global.atomosRendered.list = []; //limpa a lista de atomos renderizados
+    // this.Global.atomosRendered.list = []; //limpa a lista de atomos renderizados
+    let lista = [];
+    domElement.innerHTML = this.render(domElement.innerHTML, lista);
 
-    domElement.innerHTML = this.render(domElement.innerHTML);
-
-    this.createAtomClass();
+    this.createAtomClass(lista);
   }
-  createAtomClass() {
-    this.Global.atomosRendered.list.forEach(function (AtomoRendered) {
+  createAtomClass(lista) {
+    lista.forEach(function (AtomoRendered) {
       // console.log("+++++++++++", AtomoRendered);
       var bAtomFound = false;
       var atom = document.querySelector('[' + this.ClientVariables.Id + '="' + AtomoRendered.id + '"]');
@@ -324,10 +324,10 @@ class Atomic {
       }
       // console.log(atom.Atomic);
     });
-    this.notifyAtomOnRender();
+    this.notifyAtomOnRender(lista);
   }
-  notifyAtomOnRender() {
-    this.Global.atomosRendered.list.forEach(function (AtomoRendered) {
+  notifyAtomOnRender(lista) {
+    lista.forEach(function (AtomoRendered) {
       // console.log('--------'+AtomoRendered.id);
       var atom = document.querySelector('[' + this.ClientVariables.Id + '="' + AtomoRendered.id + '"]');
       if (atom == null) { return; }
@@ -487,22 +487,25 @@ class Atomic {
     where = where || "beforeend";
 
     var elementoToBeCreate = document.createElement(AtomKey);
-
+    // console.log('Atomic', elementoToBeCreate)
     //add props
     props.forEach(function (prop) {
       elementoToBeCreate.setAttribute(this.ClientVariables.Props + "." + prop.key, prop.value);
     });
 
-    this.Global.atomosRendered.list = []; //limpa a lista de atomos renderizados
-    var elementRenderizado = this.render(elementoToBeCreate.outerHTML);
+    // this.Global.atomosRendered.list = []; //limpa a lista de atomos renderizados
+    let lista = [];
+    var elementRenderizado = this.render(elementoToBeCreate.outerHTML, lista);
 
     var nucleusElement = this.getNucleus(atomElement);
     nucleusElement.insertAdjacentHTML(where, elementRenderizado);
 
-    this.createAtomClass();
+    this.createAtomClass(lista);
+
+    // console.log('Atomic id', lista[0].id)
 
     var key = atomElement.getAttributeNode(this.ClientVariables.Key).value;
-    var atomAdded = document.querySelector('[' + this.ClientVariables.Id + '="' + this.Global.atomosRendered.list[0].id + '"]');
+    var atomAdded = document.querySelector('[' + this.ClientVariables.Id + '="' + lista[0].id + '"]');
     //notifyAtom onAdded
     this.Atomos.forEach(function (Atomo, index) {
       if ((key == Atomo.key) && (this.Atomos[index].main != null) && (this.Atomos[index].main.onAdded != null)) {
