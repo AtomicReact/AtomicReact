@@ -21,7 +21,8 @@ class Atomic {
       Id: "data-atomic-id", //id = id dado para um atomo
       Key: "data-atomic-key", //key = nome do atomo
       Nucleus: "data-atomic-nucleus",
-      Sub: "data-atomic-sub"
+      Sub: "data-atomic-sub",
+      SubOf: "data-atomic-subof" //usado para identificar de qual atomo uma sub particula pertence
     };
 
     this.AtomicVariables = {
@@ -232,9 +233,12 @@ class Atomic {
 
     //Add Atomic.Id
     var atomicId = Atomo.key + "_" + this.Global.atomosRendered.count;
+
     //Update atomic-nucleus para atomic-nucleus= atomicId
     AtomoData = this.replaceExpressao(this.ClientVariables.Nucleus, this.ClientVariables.Nucleus + "=" + atomicId, AtomoData, true);
-    // console.log("this.Global.isOnClientSide: "+this.Global.isOnClientSide);
+    //Add SubOf: qual atomo uma particula pertence
+    AtomoData = this.replaceExpressao(this.ClientVariables.Sub, this.ClientVariables.SubOf + "=" + atomicId + " " + this.ClientVariables.Sub, AtomoData, true);
+
     if (this.Global.isOnClientSide == true) { lista.push({ key: Atomo.key, id: atomicId }); }
     atomicId = " " + this.ClientVariables.Id + "='" + atomicId + "'";
 
@@ -477,7 +481,7 @@ class Atomic {
     return this.Atomos[index];
   }
   getSub(atomElement, subName) {
-    return atomElement.querySelector('[' + this.ClientVariables.Sub + '="' + subName + '"]');
+    return atomElement.querySelector('[' + this.ClientVariables.SubOf + '=' + atomElement.getAttribute('data-atomic-id') + '][' + this.ClientVariables.Sub + '="' + subName + '"]');
   }
   getNucleus(atomElement) {
     return document.querySelector('[' + this.ClientVariables.Nucleus + '=' + atomElement.getAttribute('data-atomic-id') + ']');
