@@ -215,7 +215,7 @@ class Atomic {
     while (match = regExpNucleusTag.exec(AtomoData)) {
       openEndNucleusTag = regExpNucleusTag.lastIndex + 1;
     }
-
+    //insere o nucleo dentro da tag do nucleo
     AtomoData = AtomoData.slice(0, openEndNucleusTag) + nucleus + AtomoData.slice(openEndNucleusTag, AtomoData.length);
 
     //Add Atomic.Key
