@@ -185,8 +185,6 @@ class Atomic {
     return geoCursor;
   }
   renderAtomo(source, Atomo, lista) {
-    // console.log(Atomo.key);
-    // console.log(source);
     var geoCursorAtomo = this.getGeoCursorTag(source, Atomo.key);
     if (geoCursorAtomo.open.start == -1) { return { Source: source, Acabou: true }; }
 
@@ -195,20 +193,16 @@ class Atomic {
     //atributos
     var atributos = source.slice(geoCursorAtomo.open.start, geoCursorAtomo.open.end);
     var customAtributos = atributos.slice(0, atributos.length);
-    // console.log(customAtributos);
 
     //props
-    // var regexPropAttr = new RegExp(/props\.\w*\s*=\s*(\")\s*([^\"]*)/, 'g');
     var regexPropAttr = new RegExp(this.ClientVariables.Props + '(\\.\\w*\\s*=\\s*(\\")\\s*([^\\"]*))', 'g');
     var match;
     var campo, valor;
-    while (match = regexPropAttr.exec(atributos)) {
-      // console.log(match);
-      campo = match[0].slice(0, match[0].indexOf('=')).trim();
-      valor = match[0];
-      customAtributos = customAtributos.replace(valor + '"', ''); //Apaga esse props dos atributos para que eu possa ter um customAtributos limpo
-      valor = valor.slice(valor.indexOf('"') + 1, valor.length);
-      AtomoData = AtomoData.replace(new RegExp('{((\\s)*)' + campo + '((\\s)*)}', 'gi'), valor);
+    while (match = regexPropAttr.exec(atributos)) { //para cada prop que está em atributos
+      customAtributos = customAtributos.replace(match[0] + '"', ''); //Apaga esse props dos atributos para que eu possa ter um customAtributos limpo
+      campo = match[0].slice(0, match[0].indexOf('=')).trim(); //ex: props.nome
+      valor = match[0].slice(match[0].indexOf('"') + 1, match[0].length); //ex: fulano
+      AtomoData = AtomoData.replace(new RegExp('{((\\s)*)' + campo + '((\\s)*)}', 'gi'), valor); //substitui {props.nome} pelo seu valor fornecido
     }
 
     //custom atributos:  (id, class, ....) devem ser add na tag do AtomoData
@@ -216,16 +210,12 @@ class Atomic {
 
     //nucleus
     var nucleus = source.slice(geoCursorAtomo.open.end, geoCursorAtomo.close.start);
-    // var geoCursorNucleus = this.getGeoCursorTag(AtomoData, this.ClientVariables.Tags.nucleus);
-    // AtomoData = AtomoData.slice(0,geoCursorNucleus.open.start)+nucleus+AtomoData.slice(geoCursorNucleus.close.end,AtomoData.length);
     var regExpNucleusTag = new RegExp('<(.)*' + this.ClientVariables.Nucleus + '[^>]*', 'gi');
-    // console.log(AtomoData);
     var openEndNucleusTag = -1;
     while (match = regExpNucleusTag.exec(AtomoData)) {
       openEndNucleusTag = regExpNucleusTag.lastIndex + 1;
     }
-    // console.log(openEndNucleusTag);
-    // console.log(AtomoData.slice(openEndNucleusTag-10, openEndNucleusTag+1));
+
     AtomoData = AtomoData.slice(0, openEndNucleusTag) + nucleus + AtomoData.slice(openEndNucleusTag, AtomoData.length);
 
     //Add Atomic.Key
