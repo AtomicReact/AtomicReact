@@ -100,28 +100,29 @@ class Atomic {
     }
   }
   addAtomo(Atomo) {
-    Atomo.data = this.replaceExpressao(this.AtomicVariables.Sub, this.ClientVariables.Sub, Atomo.data);
-    Atomo.data = this.replaceExpressao(this.AtomicVariables.Nucleus, this.ClientVariables.Nucleus, Atomo.data, true);
-
     this.Atomos.push(Atomo);
   }
   replaceExpressao(expressao, expressaoParaSerReplaced, source, expressaoIsAFlag) {
     expressaoIsAFlag = expressaoIsAFlag || false;
-    var regexTag = new RegExp('<(.)*\\s+' + expressao + '(\\s*=[^>]*)', 'gi');
-    // console.log('expressaoIsAFlag:', expressaoIsAFlag);
+    var regexTag = new RegExp('<(.)*\\s+' + expressao + '(\\s*=(.)*>)', 'gi');
+
     if (expressaoIsAFlag == true) {
-      regexTag = new RegExp('<(.)*\\s+' + expressao + '([^>]*)', 'gi');
+      regexTag = new RegExp('<(.)*\\s+' + expressao + '((.)*>)', 'gi');
     }
-    // console.log(expressao);
+
     expressao = expressao.replace('.', '\\.');
-    // console.log(expressao);
+
     var regexToReplace = new RegExp(expressao, 'gi');
     var match;
     var valor;
     while (match = regexTag.exec(source)) {
       valor = match[0].replace(regexToReplace, expressaoParaSerReplaced);
-      // console.log(valor);
-      // console.log("================");
+      console.log(' match[0]', match[0]);
+      console.log('valor', valor);
+      console.log('regexTag.lastIndex', regexTag.lastIndex);
+      console.log('match[0].length', match[0].length);
+      console.log('inicio', source.slice(0, regexTag.lastIndex - match[0].length));
+      console.log('fim', source.slice(regexTag.lastIndex, source.length));
       source = source.slice(0, regexTag.lastIndex - match[0].length) + valor + source.slice(regexTag.lastIndex, source.length);
     }
     return source;
@@ -190,6 +191,16 @@ class Atomic {
 
     var AtomoData = Atomo.data;
 
+    //AtomicKey
+    var atomicKey = " " + this.ClientVariables.Key + "='" + Atomo.key + "'";
+    //AtomicId
+    var atomicId = Atomo.key + "_" + this.Global.atomosRendered.count;
+
+    //Update atomic.nucleus para data-atomic-nucleus=atomicId
+    AtomoData = this.replaceExpressao(this.AtomicVariables.Nucleus, this.ClientVariables.Nucleus + "=" + atomicId, AtomoData, true);
+    //Update atomic.sub para data-atomic-sub e Add SubOf (qual atomo uma particula pertence)
+    AtomoData = this.replaceExpressao(this.AtomicVariables.Sub, this.ClientVariables.SubOf + "=" + atomicId + " " + this.ClientVariables.Sub, AtomoData, true);
+
     //atributos
     var atributos = source.slice(geoCursorAtomo.open.start, geoCursorAtomo.open.end);
     var customAtributos = atributos.slice(0, atributos.length);
@@ -218,45 +229,30 @@ class Atomic {
     //insere o nucleo dentro da tag do nucleo
     AtomoData = AtomoData.slice(0, openEndNucleusTag) + nucleus + AtomoData.slice(openEndNucleusTag, AtomoData.length);
 
-    //Add Atomic.Key
-    var atomicKey = " " + this.ClientVariables.Key + "='" + Atomo.key + "'";
-
-    //Add Atomic.Id
-    var atomicId = Atomo.key + "_" + this.Global.atomosRendered.count;
-
-    //Update atomic-nucleus para atomic-nucleus= atomicId
-    AtomoData = this.replaceExpressao(this.ClientVariables.Nucleus, this.ClientVariables.Nucleus + "=" + atomicId, AtomoData, true);
-    //Add SubOf: qual atomo uma particula pertence
-    AtomoData = this.replaceExpressao(this.ClientVariables.Sub, this.ClientVariables.SubOf + "=" + atomicId + " " + this.ClientVariables.Sub, AtomoData, true);
-
     if (this.Global.isOnClientSide == true) { lista.push({ key: Atomo.key, id: atomicId }); }
     atomicId = " " + this.ClientVariables.Id + "='" + atomicId + "'";
 
-    //Add Atomic.Sub
+    //sub que está em atributos 
     var atomicSub = '';
     var regexSubAttr = new RegExp(this.ClientVariables.Sub + '(\\s*=\\s*(\\")\\s*([^\\"]*))', 'g');
     while (match = regexSubAttr.exec(atributos)) {
-      campo = match[0].slice(0, match[0].indexOf('=')).trim();
-      valor = match[0];
       atomicSub = " " + atomicSub + match[0] + '"';
     }
-    // console.log(atomicSub);
 
     var openEndFirstTagOnAtomoData = this.getGeoCursorTag(AtomoData, '[^>]*').open.end - 1;
     AtomoData = AtomoData.slice(0, openEndFirstTagOnAtomoData) + customAtributos + atomicKey + atomicId + atomicSub + AtomoData.slice(openEndFirstTagOnAtomoData, AtomoData.length);
 
     this.Global.atomosRendered.count = this.Global.atomosRendered.count + 1;
-    // console.log(AtomoData);
 
     AtomoData = this.render(AtomoData, lista);
-    // console.log('geoCursorNucleus: '+geoCursorNucleus);
-    // console.log('AtomoDataComNucleus: '+AtomoDataComNucleus);
+
     source = source.slice(0, geoCursorAtomo.open.start) + AtomoData + source.slice(geoCursorAtomo.close.end, source.length);
 
     return { Source: source, Acabou: false };
   }
   loopRender(source, Atomo, lista) {
     var RetornoRenderAtomo = this.renderAtomo(source, Atomo, lista);
+    console.log(RetornoRenderAtomo.Source)
     if (RetornoRenderAtomo.Acabou) {
       return RetornoRenderAtomo.Source
     } else {
