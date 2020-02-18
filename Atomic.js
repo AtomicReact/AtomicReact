@@ -104,10 +104,10 @@ class Atomic {
   }
   replaceExpressao(expressao, expressaoParaSerReplaced, source, expressaoIsAFlag) {
     expressaoIsAFlag = expressaoIsAFlag || false;
-    var regexTag = new RegExp('<(.)*\\s+' + expressao + '(\\s*=(.)*>)', 'gi');
+    var regexTag = new RegExp('<(.)*\\s+' + expressao + '(\\s*=([^>]*))', 'gi');
 
     if (expressaoIsAFlag == true) {
-      regexTag = new RegExp('<(.)*\\s+' + expressao + '((.)*>)', 'gi');
+      regexTag = new RegExp('<(.)*\\s+' + expressao + '([^>]*)', 'gi');
     }
 
     expressao = expressao.replace('.', '\\.');
@@ -116,13 +116,8 @@ class Atomic {
     var match;
     var valor;
     while (match = regexTag.exec(source)) {
+      console.log(match[0], regexToReplace)
       valor = match[0].replace(regexToReplace, expressaoParaSerReplaced);
-      console.log(' match[0]', match[0]);
-      console.log('valor', valor);
-      console.log('regexTag.lastIndex', regexTag.lastIndex);
-      console.log('match[0].length', match[0].length);
-      console.log('inicio', source.slice(0, regexTag.lastIndex - match[0].length));
-      console.log('fim', source.slice(regexTag.lastIndex, source.length));
       source = source.slice(0, regexTag.lastIndex - match[0].length) + valor + source.slice(regexTag.lastIndex, source.length);
     }
     return source;
@@ -199,7 +194,7 @@ class Atomic {
     //Update atomic.nucleus para data-atomic-nucleus=atomicId
     AtomoData = this.replaceExpressao(this.AtomicVariables.Nucleus, this.ClientVariables.Nucleus + "=" + atomicId, AtomoData, true);
     //Update atomic.sub para data-atomic-sub e Add SubOf (qual atomo uma particula pertence)
-    AtomoData = this.replaceExpressao(this.AtomicVariables.Sub, this.ClientVariables.SubOf + "=" + atomicId + " " + this.ClientVariables.Sub, AtomoData, true);
+    AtomoData = this.replaceExpressao(this.AtomicVariables.Sub, this.ClientVariables.SubOf + "=" + atomicId + " " + this.ClientVariables.Sub, AtomoData);
 
     //atributos
     var atributos = source.slice(geoCursorAtomo.open.start, geoCursorAtomo.open.end);
@@ -252,7 +247,6 @@ class Atomic {
   }
   loopRender(source, Atomo, lista) {
     var RetornoRenderAtomo = this.renderAtomo(source, Atomo, lista);
-    console.log(RetornoRenderAtomo.Source)
     if (RetornoRenderAtomo.Acabou) {
       return RetornoRenderAtomo.Source
     } else {
