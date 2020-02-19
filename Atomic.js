@@ -116,7 +116,6 @@ class Atomic {
     var match;
     var valor;
     while (match = regexTag.exec(source)) {
-      console.log(match[0], regexToReplace)
       valor = match[0].replace(regexToReplace, expressaoParaSerReplaced);
       source = source.slice(0, regexTag.lastIndex - match[0].length) + valor + source.slice(regexTag.lastIndex, source.length);
     }
