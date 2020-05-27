@@ -149,7 +149,7 @@ class Atomic {
       }
     };
     var regexOpenOuClose = new RegExp(`</?((` + TagKey + `)|((` + TagKey + `).*((=("|').*("|')))([^>]*))|(` + TagKey + `\\s[^>]*))>`, "g");
-    var regexOpen = new RegExp(`<((` + TagKey + `)|((` + TagKey + `).*((=("|').*("|')))([^>]*))|(` + TagKey + `\\s[^>]*)|)>`, "g");
+    var regexOpen = new RegExp(`<((` + TagKey + `)|(` + TagKey + `\\s[^>]*)|)>`, "g");
     var match;
     var contadorTagsAbertas = 0;
     var encontrou = false;
