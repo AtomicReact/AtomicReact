@@ -148,8 +148,8 @@ class Atomic {
         end: -1
       }
     };
-    var regexOpenOuClose = new RegExp('</?((' + TagKey + ')|(' + TagKey + '\\s[^>]*))>', "g");
-    var regexOpen = new RegExp('<((' + TagKey + ')|(' + TagKey + '\\s[^>]*))>', "g");
+    var regexOpenOuClose = new RegExp(`</?((` + TagKey + `)|((` + TagKey + `).*((=("|').*("|')))([^>]*))|(` + TagKey + `\\s[^>]*))>`, "g");
+    var regexOpen = new RegExp(`<((` + TagKey + `)|((` + TagKey + `).*((=("|').*("|')))([^>]*))|(` + TagKey + `\\s[^>]*)|)>`, "g");
     var match;
     var contadorTagsAbertas = 0;
     var encontrou = false;
@@ -202,13 +202,16 @@ class Atomic {
     //props
     var regexPropAttr = new RegExp(this.ClientVariables.Props + '(\\.\\w*\\s*=\\s*(\\")\\s*([^\\"]*))', 'g');
     var match;
-    var campo, valor;
+    var campo;
+    var valor = null;
     while (match = regexPropAttr.exec(atributos)) { //para cada prop que está em atributos
       customAtributos = customAtributos.replace(match[0] + '"', ''); //Apaga esse props dos atributos para que eu possa ter um customAtributos limpo
       campo = match[0].slice(0, match[0].indexOf('=')).trim(); //ex: props.nome
       valor = match[0].slice(match[0].indexOf('"') + 1, match[0].length); //ex: fulano
       AtomoData = AtomoData.replace(new RegExp('{((\\s)*)' + campo + '((\\s)*)}', 'gi'), valor); //substitui {props.nome} pelo seu valor fornecido
     }
+    //limpa as props não configuradas acima: Issue#11
+    AtomoData = AtomoData.replace(new RegExp('{((\\s)*)' + this.ClientVariables.Props + '(\\.\\w*\\s*)}', 'gi'), ""); //substitui {props.nome} pelo seu valor fornecido
 
     //custom atributos:  (id, class, ....) devem ser add na tag do AtomoData
     customAtributos = customAtributos.slice(customAtributos.indexOf(" "), customAtributos.length - 1);
