@@ -1,12 +1,12 @@
 # Atom
 
-The minimal particle is called by **Atom**. One Atom is composed by 3 parts:
+The smallest particle is called by **Atom**. One Atom is composed by 3 parts:
 * [**Structure (HTML)**](Atom?id=structure-html)
 * [**Logic (JS)**](Atom?id=logic-js)
 * [**Style (CSS)**](Atom?id=style-css)
 
-Fundamentally, an Atom **need to have a structure but doesn't need a logic and style**.
-After runnning [`Atomic` command](AtomicCLI?id=atomic),  your `AtomicDir` is created and there will be your Atoms.
+Fundamentally, an Atom **needs to have a structure but doesn't need a logic and style**.
+After runnning [`Atomic` command](AtomicCLI?id=atomic),  your `AtomicDir` is created and that's where your Atoms will be .
 In the `AtomicDir` there are three directories: *html, js, css*.
 ``` text
 └── AtomicDir
@@ -34,9 +34,9 @@ Let's suppose you have created a file called `MyFirstAtom.html` in the `html` su
     └── css
 ```
 
-Inside `AtomicDir/html` there will be Atom's structure. Each Atom has its own file structure with an `.html` extension. **The name of the file is the Atom name or the Atom key**, so if you create a file called `MyFirstAtom.html` inside `AtomicDir/html` then your **Atom key** is `MyFirstAtom`.
+Inside `AtomicDir/html` will be the Atom's structure. Each Atom has its own file structure with an `.html` extension. **The name of the file is the Atom name or the Atom key**, so if you create a file called `MyFirstAtom.html` inside `AtomicDir/html` then your **Atom key** is `MyFirstAtom`.
 
-Atom's struture is any *html* struture, but it is recommended that each structure stays within a **single tag**. For exemple:
+The Atom's struture is any *html* struture, but it is recommended that each structure stays within a **single tag**. For exemple:
 
 In `MyFirstAtom.html` file:
 
@@ -77,7 +77,7 @@ In `MyFirstAtom.html` file:
   </MyFirstAtom>
 ```
 
-You can also add an Atom programatically with [`add()`](Atom?id=add) function.
+You can also add an Atom programmatically with [`add()`](Atom?id=add) function.
 
 #### Exemple:
 
@@ -132,7 +132,7 @@ You can see this example on [Playground](https://playground-atomicreact.herokuap
 
 ### Sub
 
-An Atom may have *important elements* which we can handle them, they're called **`sub`  particles**. The `atomic.sub` is used for setting any element inside an Atom as its *sub part* and easily to get it with [`getSub()`](Atom?id=getsub) function. An Atom can have none, one or many `sub`.
+An Atom may have *important elements* which can be handled, they're called **`sub`  particles**. The `atomic.sub` is used for setting any element inside an Atom as its *sub part* making it easier to get with the [`getSub()`](Atom?id=getsub) function. An Atom can have none, one or many `sub`.
 
 **To set** any element as `sub`, just type `atomic.sub="anySubName"` inside the elements tagging.
 ```html
@@ -179,7 +179,7 @@ You can see this example on [Playground](https://playground-atomicreact.herokuap
     └── css
 ```
 
-Inside `AtomicDir/js` there is Atom's whole logic. Each Atom has its own logic, so if you create an Atom called by `MyFirstAtom.html` on `AtomicDir/html`, its respective logic will be in `AtomicDir/js/MyFirstAtom.js`.
+Inside `AtomicDir/js` is the Atom's whole logic. Each Atom has its own logic, so if you create an Atom called by `MyFirstAtom.html` on `AtomicDir/html`, its respective logic will be in `AtomicDir/js/MyFirstAtom.js`.
 
 ### Main Class
 
@@ -378,7 +378,7 @@ onRender()
 ```
 
 * **Description:**
-this function is fired when an Atom is rendered.
+this function is called when an Atom is rendered.
 
 * **Param:** void
 
@@ -393,7 +393,7 @@ this function is fired when an Atom is rendered.
     └── css    <<<---
 ```
 
-Inside `AtomicDir/css` will be all of Atom's style. It's recommended that each Atom's style stay within a single file. When AtomicReact bundle the styles, it just joins all css files into one.
+Inside `AtomicDir/css` will be all of the Atom's style. It's recommended that each Atom's style stays within a single file. When AtomicReact bundles the styles, it just joins all css files into one.
 
 In order to style an Atom we just **code a normal CSS with selectors** using `data-atomic-key`, `data-atomic-nucleus` and `data-atomic-sub` attributes. See the example below:
 
@@ -416,7 +416,7 @@ Let's suppose we want to style `MyFirstAtom` Atom with `border: 1px solid #F00`:
 ```
 
 ### Styling the Atom's Nucleus
-Let's suppose we want to style the Atom's nucleus with `background-color: #00F`:
+And suppose we want to style the Atom's nucleus with `background-color: #00F`:
 
 ```css
 [data-atomic-key="MyFirstAtom"] > [data-atomic-nucleus]{
@@ -425,7 +425,7 @@ Let's suppose we want to style the Atom's nucleus with `background-color: #00F`:
 ```
 
 ### Styling the Atom's Sub
-Let's suppose we want to style the `myTitle` Atom's sub with `color: #0F0`:
+And that we want to style the `myTitle` Atom's sub with `color: #0F0`:
 
 ```css
 [data-atomic-key="MyFirstAtom"] > [data-atomic-sub="myTitle"]{
