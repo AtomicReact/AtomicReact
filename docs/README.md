@@ -19,14 +19,14 @@ AtomicReact is a framework to build Web Apps with atomicity concept
 ## Requirements
 1. [NodeJs](https://nodejs.org) (with NPM of course)
 
-## Get a little teoria before ?!
-AtomicReact was designed in atoms concept. What things in the universe are made of?
-Let's get an essencial thing to our lives: The Water. The water is made with a lot of molecules whose each one is composed by one oxigen and two hidrogen atoms.
-Basically Atom Concept is create things from the minimal particle of them.
+## Getting a little theoretical
+AtomicReact was designed using atoms as concept. What are the things in the universe made of?
+Let's use an essencial thing in our lives as an example: The Water. The water molecule is made up of two hydrogen atoms and one oxygen atom.
+Basically Atom Concept is create things from the smallest particle of them.
 
 ## How it works
-In AtomicReact the minimal particle is called by Atom. One Atom is formed by 3 parts: Structure (HTML) & Logic (JS) & Style (CSS). Necessarily, an Atom need to have a structure but doesn't need a logic and style.
-After runs `Atomic` command,  is created your `AtomicDir` where your Atoms will be.
+In AtomicReact the smallest particle is called an Atom. One Atom is formed by 3 parts: Structure (HTML) & Logic (JS) & Style (CSS). Necessarily, an Atom need to have a structure but doesn't need a logic and style.
+After running `Atomic` command, your `AtomicDir` is created and that's where your Atoms will be.
 In `AtomicDir` there are three dirs: html, js, css.
 ``` text
 └── AtomicDir
@@ -34,6 +34,6 @@ In `AtomicDir` there are three dirs: html, js, css.
     ├── js
     └── css
 ```
-**To create an Atom**, just create one file with anyone name in `AtomicDir/html` folder.
+**To create an Atom**, just create a file inside the `AtomicDir/html` folder.
 
 [Let's get started!](getStarted?id=installation) 🚀
