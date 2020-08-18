@@ -45,9 +45,9 @@ The `js` subfolder is the Atom's logic.
 
 The `css` subfolder is the Atom's style.
 
-**To create an Atom** just create any _.html_ file in `html` subfolder. **The file name is the Atom name or the Atom key**. Note if you let's the `debug` as _true_ in `AtomicReact_config.js` file you should see the Atom name on console.
+**To create an Atom** just create any _.html_ file in `html` subfolder. **The file name is the Atom name or the Atom key**. Note if you let the `debug` as _true_ in `AtomicReact_config.js` file you should see the Atom name on console.
 
-For while just put the follow html code inside your Atom.
+For now just put the following html code inside your Atom.
 
 ```html
 <div>
@@ -99,7 +99,7 @@ The _html_ file will look like this:
 </html>
 ```
 
-After AtomicReact render the page, your view will be:
+After AtomicReact renders the page, you will see this:
 
 ```html
 <html>
