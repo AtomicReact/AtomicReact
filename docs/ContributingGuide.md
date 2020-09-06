@@ -19,7 +19,7 @@
 4. Go to cloned repository root dirs and initialize the [Docsify](https://docsify.js.org/#/quickstart?id=initialize)
 
    ```bash
-   docsify init ./docs
+   docsify serve ./docs
    ```
 
    **Notes:**
