@@ -12,7 +12,7 @@
 
 ---
 
-- [Playground](https://playground-atomicreact.herokuapp.com/)
+- [Playground](https://playground-fre5.onrender.com/)
 - [Third Parties](ThirdPart.md)
 - [Thanks](Thanks.md)
 - [Contributing Guide](ContributingGuide.md)

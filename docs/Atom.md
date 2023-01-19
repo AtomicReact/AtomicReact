@@ -97,7 +97,7 @@ In `index.html`:
     <li>The life is good</li>
 </MyFirstAtom>
 ```
-You can see this example on [Playground](https://playground-atomicreact.herokuapp.com/1ve7ZgLSM8rsN8ZPDgKM-25F-YQn8nbQ7)
+You can see this example on [Playground](https://playground-fre5.onrender.com/1ve7ZgLSM8rsN8ZPDgKM-25F-YQn8nbQ7)
 
 ### Props
 
@@ -128,7 +128,7 @@ In `index.html`:
 ```html
 <MyFirstAtom props.theTitle="This is my Title" props.borderColor="#FF0000"></MyFirstAtom>
 ```
-You can see this example on [Playground](https://playground-atomicreact.herokuapp.com/1K16qhgvUc-IVJVMDiWisjO9tBPf7Lxyw)
+You can see this example on [Playground](https://playground-fre5.onrender.com/1K16qhgvUc-IVJVMDiWisjO9tBPf7Lxyw)
 
 ### Sub
 
@@ -168,7 +168,7 @@ In `index.html`:
 <MyFirstAtom></MyFirstAtom>
 ```
 
-You can see this example on [Playground](https://playground-atomicreact.herokuapp.com/1oijsksTIpt0CjajAgpXPJA2FfV89OFqT)
+You can see this example on [Playground](https://playground-fre5.onrender.com/1oijsksTIpt0CjajAgpXPJA2FfV89OFqT)
 
 ## Logic (JS)
 
@@ -215,7 +215,7 @@ class MyMain {
 module.exports.main = MyMain; //export MyMain Class as main
 ```
 
-You can see this example on [Playground](https://playground-atomicreact.herokuapp.com/1trq_CV833nF3vT6tjX1INshjhR4uPWHn)
+You can see this example on [Playground](https://playground-fre5.onrender.com/1trq_CV833nF3vT6tjX1INshjhR4uPWHn)
 
 **Note**:
 * use `module.exports.main = <anyClass>` to export the main class (see last line in example above)
@@ -256,7 +256,7 @@ class MySecondAtomMain {
 module.exports.main = MySecondAtomMain;
 ```
 
-You can see this example on [Playground](https://playground-atomicreact.herokuapp.com/1hFkTzjJt82ZU9oAu12Ikzhxgxa4-AFT9)
+You can see this example on [Playground](https://playground-fre5.onrender.com/1hFkTzjJt82ZU9oAu12Ikzhxgxa4-AFT9)
 
 **Note**:
 * [1] - In example above *myFirstAtom* is a [sub part](Atom?id=sub) of *mySecondAtom*:

@@ -121,7 +121,7 @@ After AtomicReact renders the page, you will see this:
 </html>
 ```
 
-That's all folks. You can see this on [Playground](https://playground-atomicreact.herokuapp.com/18QieJGnQoTn7wUVX6s82IENsPl4S0bjx)
+That's all folks. You can see this on [Playground](https://playground-fre5.onrender.com/18QieJGnQoTn7wUVX6s82IENsPl4S0bjx)
 
 **Next importants steps:**
 

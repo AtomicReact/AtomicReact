@@ -13,4 +13,4 @@
 > A framework to build Web Apps with atomicity concept
 
 [Get Started](getStarted.md)
-[Playground](https://playground-atomicreact.herokuapp.com)
+[Playground](https://playground-fre5.onrender.com)
