@@ -1,4 +1,3 @@
-
 import { existsSync, mkdirSync, readFile, writeFile } from "fs";
 import { relative, sep, join } from "path";
 
