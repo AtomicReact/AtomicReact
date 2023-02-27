@@ -1,4 +1,3 @@
-
 export interface IClientVariables {
     Atomic: string,//("Atomic"+Atomic.global.name),
     Props: string,

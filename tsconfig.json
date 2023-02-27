@@ -96,7 +96,8 @@
   },
   "exclude": [
     "./*.js",
-    "./init/*.*"
+    "./init/*.*",
+    "./helper/*.*"
   ],
   "ts-node": {
     "transpileOnly":true,

@@ -1,8 +1,8 @@
 import { appendFileSync, createReadStream, createWriteStream, existsSync, fstat, readdirSync, readFileSync, statSync, writeFileSync, WriteStream } from "fs";
 import path, { dirname, join, parse, ParsedPath, relative, resolve } from "path";
-import { ConsoleFlags } from "./tools/ConsoleFlags.js";
+import { ConsoleFlags } from "./tools/console_flags.js";
 import { HotReload } from "./modules/hot_reload.js"
-import { createDirIfNotExist } from "./tools/File.js";
+import { createDirIfNotExist } from "./tools/file.js";
 import { fileURLToPath } from "url";
 import TS, { TranspileOptions } from "typescript";
 import { AtomicReact, AtomicVariables, ClientVariables, IAtom, IAtomicVariables, IAtomList, IClientVariables, IGlobal } from "./lib.js";
@@ -186,7 +186,7 @@ export class Atomic {
 
     /* Bundle Core */
     const coreBundlePath = join(this.config.bundleDir, 'atomicreact.core.js');
-    writeFileSync(coreBundlePath, "/*<Loader>*/\r\n" + readFileSync(resolve(join(__dirname, "../init/loader.js")), { encoding: "utf-8" }) + "/*</Loader>*/\r\n", { encoding: "utf-8" })
+    writeFileSync(coreBundlePath, readFileSync(resolve(join(__dirname, "../helper/loader.js")), { encoding: "utf-8" }), { encoding: "utf-8" })
 
     const atomicReactModule = "AtomicReact"
     const transpiledCore = TS.transpileModule(readFileSync(resolve(join(__dirname, `lib.js`))).toString(), Atomic.getTranspileOptions(atomicReactModule.toLowerCase()))
@@ -195,7 +195,7 @@ export class Atomic {
 
     /* Bundle Logic */
     const logicBundlePath = join(this.config.bundleDir, 'atomicreact.bundle.js');
-    writeFileSync(logicBundlePath, readFileSync(resolve(join(__dirname, "../init/switchBundle.js")), { encoding: "utf-8" }).replaceAll("{{PACKAGE_NAME}}", this.config.packageName))
+    writeFileSync(logicBundlePath, readFileSync(resolve(join(__dirname, "../helper/switch_bundle.js")), { encoding: "utf-8" }).replaceAll("{{PACKAGE_NAME}}", this.config.packageName))
     Atomic.readAtomsDir(this.config.atomicDir, (atomKey, filePath) => {
       // if (atomKey != "atom1" && atomKey != "dashboard") return;
       if (this.config.debug) console.log(`\t[LOGIC] [${atomKey}] => ${filePath}`);

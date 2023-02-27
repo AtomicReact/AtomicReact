@@ -3,8 +3,8 @@
 import { existsSync, readdirSync, readFile, readFileSync, writeFile, writeFileSync } from "fs";
 import { join, parse } from "path";
 import { exec } from "child_process";
-import { ConsoleFlags } from "./src/tools/ConsoleFlags.js"
-import { ConsoleIO } from "./src/tools/ConsoleIO.js"
+import { ConsoleFlags } from "./src/tools/console_flags.js/index.js"
+import { ConsoleIO } from "./src/tools/console_io.js/index.js"
 
 class AtomicCLI {
   constructor() {
@@ -67,7 +67,7 @@ class AtomicCLI {
   };
   run() {
     // console.log('Atomic run commanded');
-    var childProcess = exec('node AtomicReact_run.js', { maxBuffer: 1000 * 1024 }, (err, stdout, stderr) => {
+    var childProcess = exec('node --loader ts-node/esm run.ts', { maxBuffer: 1000 * 1024 }, (err, stdout, stderr) => {
       if (err) {
         console.error(err);
         return;

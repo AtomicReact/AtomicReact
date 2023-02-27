@@ -1,5 +1,4 @@
-// @ts-nocheck
-
+/*<Loader>*/
 if (this["PACKAGE_NAME"] == undefined) {
     Object.defineProperty(this, "PACKAGE_NAME", { value: "default", configurable: true });
 }
@@ -181,3 +180,4 @@ if (addAtomStruct == undefined) {
         this[ATOMIC_REACT][ATOMS][PACKAGE_NAME][atomKey].__proto__.struct = struct
     }
 }
+/*</Loader>*/
