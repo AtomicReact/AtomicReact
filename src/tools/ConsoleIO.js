@@ -1,6 +1,6 @@
-const EventEmitter = require('events');
+import EventEmitter from "events";
 
-class ConsoleIO {
+export class ConsoleIO {
   constructor() {
     this.eventEmiter = new EventEmitter();
     this.buff = "";
@@ -33,5 +33,3 @@ class ConsoleIO {
     return this.eventEmiter;
   }
 }
-
-module.exports = ConsoleIO;

@@ -1,11 +1,22 @@
-var Atomic = require('atomicreact').Atomic;
-var AtomicHotReload = require('atomicreact').HotReload;
+import { Atomic, HotReload, IConfig } from "atomicreact"
 
-/* initialize HotReload */
-var myHotReload = new AtomicHotReload(1337, 'localhost'); //initialize HotReload on localhost:1337
+const config: IConfig = {
+    atomicDir: "src/dashboard/atomicreact",
+    bundleDir: "frontend/atomicreact",
+    debug: false
+}
 
-/* initialize Atomic */
-var myAtomic = new Atomic(require('./AtomicReact_config.js'), myHotReload); //initialize Atomic using HotReload
+export function run() {
+    console.log(process.env.ENV)
 
-/* Listen all changes in custom files */
-myHotReload.addToWatch(require('path').join(__dirname, 'index.html'));
+    /* initialize HotReload */
+    const myHotReload = (process.env.ENV == "development") ? new HotReload(1337, 'localhost') : null; //initialize HotReload on localhost:1337
+
+    /* Listen all changes in custom files */
+    // myHotReload.addToWatch(require('path').join(__dirname, 'index.html'));
+
+    /* initialize Atomic */
+    const atomic = new Atomic(config, myHotReload); //initialize Atomic using HotReload
+    return atomic
+}
+
