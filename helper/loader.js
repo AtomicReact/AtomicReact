@@ -6,6 +6,7 @@ if (this["PACKAGE_NAME"] == undefined) {
 const ATOMIC_REACT = "atomicreact"
 const DEFINES = "defines"
 const ATOMS = "atoms"
+const LIB = "lib"
 
 if (this[ATOMIC_REACT] == undefined) {
     Object.defineProperty(this, ATOMIC_REACT, { value: {} })
@@ -53,7 +54,7 @@ if (getValueOfPath == undefined) {
 
 if (resolveModuleName == undefined) {
     function resolveModuleName(moduleName) {
-        return moduleName.replaceAll("../", "").replaceAll("./", "").replaceAll(".ts", "").replaceAll(".js", "")
+        return moduleName.replaceAll("../", "").replaceAll("./", "").replaceAll(".tsx", "").replaceAll(".jsx", "").replaceAll(".ts", "").replaceAll(".js", "")
     }
 }
 
@@ -77,7 +78,7 @@ if (require == undefined) {
     function require(moduleName, contextPath = "") {
 
         if (moduleName === ATOMIC_REACT) {
-            return (this[ATOMIC_REACT]["lib"] || this[ATOMIC_REACT])
+            return (this[ATOMIC_REACT][LIB] || this[ATOMIC_REACT])
         }
 
         if (moduleName.indexOf("./") >= 0) {
@@ -94,6 +95,7 @@ if (require == undefined) {
 
 if (define == undefined) {
     function define(moduleName, inputs, func, forceDefine = false) {
+
         let _exports = { "__esModule": true }
 
         if (moduleName === ATOMIC_REACT && !ATOMIC_REACT[moduleName]) {
@@ -104,6 +106,9 @@ if (define == undefined) {
             }
             if (this.AtomicReact == undefined) {
                 Object.defineProperty(this, "AtomicReact", { value: this[ATOMIC_REACT].lib.AtomicReact })
+            }
+            if (this.JSX == undefined) {
+                Object.defineProperty(this, "JSX", { value: this[ATOMIC_REACT].lib.JSX })
             }
 
             return
@@ -117,9 +122,11 @@ if (define == undefined) {
 
         const imports = [require, _exports, ...inputs.slice(2).map(i => require(i, contextPath))]
 
-        let canDefine = true
+        let importFail = false
         for (let i = 0; i < imports.length; i++) {
             if (imports[i] !== null) continue
+
+            importFail = true
 
             /* let's schedule to define this module when the import was defined */
             let moduleNameFuture = sumPath(contextPath, inputs[i])
@@ -142,20 +149,25 @@ if (define == undefined) {
             })
         }
 
+        try {
+            func(...imports)
+        } catch (e) {
+            importFail = true
+        }
 
-        func(...imports)
         Object.defineProperty(context, path, { value: _exports, configurable: true })
 
+        if (importFail) return
         Object.getOwnPropertyNames(_exports).forEach(_exportKey => {
 
             if (_exports[_exportKey].__proto__.name && _exports[_exportKey].__proto__.name == "AtomicClass") {
                 const atomKey = _exports[_exportKey].name
 
                 console.log(`Found atom class: ${_exports[_exportKey].name}`)
-                const atom = AtomicReact.atoms.find(atom => atom.key === atomKey)
+                /* const atom = AtomicReact.atoms.find(atom => atom.key === atomKey)
                 if (atom) {
                     atom.mainClass = _exports[_exportKey]
-                }
+                } */
             }
 
         })

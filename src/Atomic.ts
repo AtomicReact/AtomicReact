@@ -5,10 +5,10 @@ import { HotReload } from "./modules/hot_reload.js"
 import { createDirIfNotExist } from "./tools/file.js";
 import { fileURLToPath } from "url";
 import TS, { TranspileOptions } from "typescript";
-import { AtomicReact, AtomicVariables, ClientVariables, IAtom, IAtomicVariables, IAtomList, IClientVariables, IGlobal } from "./lib.js";
+export * from "./lib.js"
+import { ClientVariables, IAtom, IGlobal, resolveModuleName } from "./lib.js";
 
 export { HotReload } from "./modules/hot_reload.js"
-export * from "./lib.js"
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const __filename = fileURLToPath(import.meta.url)
@@ -118,6 +118,8 @@ export class Atomic {
     return {
       moduleName: moduleName,
       compilerOptions: {
+        jsx: TS.JsxEmit.React,
+        reactNamespace: "JSX",
         isolatedModules: true,
         allowSyntheticDefaultImports: true,
         preserveValueImports: true,
@@ -145,7 +147,7 @@ export class Atomic {
         key: atomKey,
         struct: readFileSync(filePath).toString()
       });
-    })
+    }, [".html"])
 
     /* Core JS */
     // let jsCore = "";
@@ -200,13 +202,11 @@ export class Atomic {
       // if (atomKey != "atom1" && atomKey != "dashboard") return;
       if (this.config.debug) console.log(`\t[LOGIC] [${atomKey}] => ${filePath}`);
 
-      const relativePath = relative(this.config.atomicDir, filePath).replaceAll("\\", "/").replaceAll(".ts", "").replaceAll(".js", "")
+      const relativePath = resolveModuleName(relative(this.config.atomicDir, filePath))
 
       const transpiled = TS.transpileModule(readFileSync(filePath).toString(), Atomic.getTranspileOptions(relativePath))
       appendFileSync(logicBundlePath, transpiled.outputText);
-
-      // appendFileSync(logicBundlePath, transpiled.sourceMapText);
-    }, [".js", ".ts"])
+    }, [".js", ".ts" , ".tsx"])
 
     /* appendFileSync(logicBundlePath, readFileSync(resolve(join(__dirname, "../init/switchBundle.js")), { encoding: "utf-8" }).replaceAll("{{PACKAGE_NAME}}", this.config.packageName+"_other"))
     Atomic.readAtomsDir(this.config.atomicDir, (atomKey, filePath) => {

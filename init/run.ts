@@ -4,7 +4,7 @@ import { join, resolve } from "path";
 
 const config: IConfig = {
     atomicDir: "src/atomicreact", /* Dir where your atoms is */
-    bundleDir: "frontend/atomicreact", /* Dir where bundles will be create */
+    bundleDir: "public_static/libs/atomicreact", /* Dir where bundles will be create */
     debug: true, /* Enable log */
     packageName: JSON.parse(readFileSync(resolve(process.cwd(), "package.json"), {encoding: "utf-8"})).name /* Use package.name as atomicreact module name. Set as you prefer */
 }

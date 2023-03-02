@@ -376,3 +376,22 @@ export class AtomicClass {
     /* Event fired when another Atom is added inside this Atom */
     onAdded(atomAdded: IAtomicElement) { }
 }
+
+export function resolveModuleName(moduleName) {                               
+    return moduleName.replaceAll("\\", "/").replaceAll("../", "").replaceAll("./", "").replaceAll(".tsx", "").replaceAll(".jsx", "").replaceAll(".ts", "").replaceAll(".js", "")
+}
+
+export const JSX = {
+    createElement(name: string, props: { [id: string]: string }, ...content: string[]) {
+        props = props || {};
+        const propsstr = Object.keys(props)
+            .map(key => {
+                const value = props[key];
+                return `${key}="${value}"`;
+                // if (key === "className") return `class=${value}`;
+                // else return `${key}=${value}`;
+            })
+            .join(" ");
+        return `<${name} ${propsstr}> ${content.join("")}</${name}>`;
+    },
+};
