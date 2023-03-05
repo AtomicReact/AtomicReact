@@ -1,4 +1,4 @@
-import { appendFileSync, createReadStream, createWriteStream, existsSync, fstat, readdirSync, readFileSync, statSync, writeFileSync, WriteStream } from "fs";
+import { appendFileSync, cp, createReadStream, createWriteStream, existsSync, fstat, readdirSync, readFileSync, statSync, writeFileSync, WriteStream } from "fs";
 import path, { dirname, join, parse, ParsedPath, relative, resolve } from "path";
 import { ConsoleFlags } from "./tools/console_flags.js";
 import { HotReload } from "./modules/hot_reload.js"
@@ -6,7 +6,7 @@ import { createDirIfNotExist } from "./tools/file.js";
 import { fileURLToPath } from "url";
 import TS, { TranspileOptions } from "typescript";
 export * from "./lib.js"
-import { ClientVariables, IAtom, IGlobal, resolveModuleName } from "./lib.js";
+import { AtomicReact, IAtom, IGlobal, resolveModuleName } from "./lib.js";
 
 export { HotReload } from "./modules/hot_reload.js"
 
@@ -111,14 +111,17 @@ export class Atomic {
   }
 
   static exportFunction(funcao: Function) {
-    return encodeURI(funcao.toString().replace(funcao.name, 'function').replace(/this/g, ClientVariables.Atomic)).replace(/'/g, '%27');
+    return encodeURI(funcao.toString().replace(funcao.name, 'function').replace(/this/g, AtomicReact.ClientVariables.Atomic)).replace(/'/g, '%27');
   }
 
   static getTranspileOptions(moduleName: string): TranspileOptions {
     return {
       moduleName: moduleName,
       compilerOptions: {
-        jsx: TS.JsxEmit.React,
+        jsx: TS.JsxEmit.ReactJSX,
+        jsxFactory: "factory",
+        jsxFragmentFactory: "fragment",
+        jsxImportSource: "atomicreact/lib/JSX",
         reactNamespace: "JSX",
         isolatedModules: true,
         allowSyntheticDefaultImports: true,
@@ -142,12 +145,12 @@ export class Atomic {
   async bundle() {
     if (this.config.debug) { console.log(ConsoleFlags.info, "===Bundling==="); }
 
-    Atomic.readAtomsDir(this.config.atomicDir, (atomKey, filePath) => {
-      this.addAtomo({
-        key: atomKey,
-        struct: readFileSync(filePath).toString()
-      });
-    }, [".html"])
+    // Atomic.readAtomsDir(this.config.atomicDir, (atomKey, filePath) => {
+    //   this.addAtomo({
+    //     key: atomKey,
+    //     struct: readFileSync(filePath).toString()
+    //   });
+    // }, [".html"])
 
     /* Core JS */
     // let jsCore = "";
@@ -191,7 +194,8 @@ export class Atomic {
     writeFileSync(coreBundlePath, readFileSync(resolve(join(__dirname, "../helper/loader.js")), { encoding: "utf-8" }), { encoding: "utf-8" })
 
     const atomicReactModule = "AtomicReact"
-    const transpiledCore = TS.transpileModule(readFileSync(resolve(join(__dirname, `lib.js`))).toString(), Atomic.getTranspileOptions(atomicReactModule.toLowerCase()))
+    const compilerOptions = Atomic.getTranspileOptions(atomicReactModule.toLowerCase())
+    const transpiledCore = TS.transpileModule(readFileSync(resolve(join(__dirname, `lib.js`))).toString(), compilerOptions)
     appendFileSync(coreBundlePath, transpiledCore.outputText);
 
 
@@ -207,6 +211,9 @@ export class Atomic {
       const transpiled = TS.transpileModule(readFileSync(filePath).toString(), Atomic.getTranspileOptions(relativePath))
       appendFileSync(logicBundlePath, transpiled.outputText);
     }, [".js", ".ts" , ".tsx"])
+
+    // const compilerHost = TS.createCompilerHost(compilerOptions.compilerOptions)
+    // compilerHost.readDirectory(this.config.atomicDir, ["tsx"])
 
     /* appendFileSync(logicBundlePath, readFileSync(resolve(join(__dirname, "../init/switchBundle.js")), { encoding: "utf-8" }).replaceAll("{{PACKAGE_NAME}}", this.config.packageName+"_other"))
     Atomic.readAtomsDir(this.config.atomicDir, (atomKey, filePath) => {
@@ -226,12 +233,12 @@ export class Atomic {
 
 
     /* Export atoms */
-    let atomsToExport = {
-      atoms: this.atoms
-    };
-    const atomsToExportStringfied = encodeURI(JSON.stringify(atomsToExport)).replace(/'/g, '%27'); //fix problemas das aspas com encodeURI - encodeURI do nodejs não encode o ', por isso fazemos isso manualmente
+    // let atomsToExport = {
+      // atoms: this.atoms
+    // };
+    // const atomsToExportStringfied = encodeURI(JSON.stringify(atomsToExport)).replace(/'/g, '%27'); //fix problemas das aspas com encodeURI - encodeURI do nodejs não encode o ', por isso fazemos isso manualmente
     // const atoms = "JSON.parse(decodeURI('" + atomsToExportStringfied + "')).atoms.forEach(function(atom){" + atomicReactModule + ".atoms.push(atom);});";
-    appendFileSync(logicBundlePath, `JSON.parse(decodeURI('${atomsToExportStringfied}')).atoms.forEach(function(atom){require('${atomicReactModule.toLowerCase()}').${atomicReactModule}.atoms.push(atom);});`);
+    // appendFileSync(logicBundlePath, `JSON.parse(decodeURI('${atomsToExportStringfied}')).atoms.forEach(function(atom){require('${atomicReactModule.toLowerCase()}').${atomicReactModule}.atoms.push(atom);});`);
 
     /* First render */
     // const renderOnLoad = `${atomicReactModule}.renderPageOnLoad();`

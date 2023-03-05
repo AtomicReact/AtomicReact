@@ -8,26 +8,10 @@ export interface IClientVariables {
     SubOf: string //usado para
 }
 
-export const ClientVariables: IClientVariables = {
-    Atomic: "Atomic",//("Atomic"+Atomic.global.name),
-    Props: "props",
-    Id: "data-atomic-id", //id = id dado para um atomo
-    Key: "data-atomic-key", //key = nome do atomo
-    Nucleus: "data-atomic-nucleus",
-    Sub: "data-atomic-sub",
-    SubOf: "data-atomic-subof" //usado para
-}
-
 export interface IAtomicVariables {
     Nucleus: string,
     Sub: string
 }
-
-export const AtomicVariables: IAtomicVariables = {
-    Nucleus: "atomic.nucleus",
-    Sub: "atomic.sub"
-}
-
 export interface IAtomicElement extends Element {
     Atomic: {
         id: string,
@@ -74,11 +58,26 @@ export class AtomicReact {
 
     static hotReload: IHotReload
 
+    static ClientVariables: IClientVariables = {
+        Atomic: "Atomic",//("Atomic"+Atomic.global.name),
+        Props: "props",
+        Id: "data-atomic-id", //id = id dado para um atomo
+        Key: "data-atomic-key", //key = nome do atomo
+        Nucleus: "data-atomic-nucleus",
+        Sub: "data-atomic-sub",
+        SubOf: "data-atomic-subof" //usado para
+    }
+
+    static AtomicVariables: IAtomicVariables = {
+        Nucleus: "nucleus",
+        Sub: "sub"
+    }
+
     constructor() {
 
     }
 
-    static getAtom(atomKey: IAtom["key"]) : any  {
+    static getAtom(atomKey: IAtom["key"]): any {
 
     }
 
@@ -86,9 +85,9 @@ export class AtomicReact {
     //     return []
     // }
 
-    static renderPageOnLoad() {
+    static renderPageOnLoad(atomicClass: AtomicClass) {
         window.addEventListener("load", function (event) {
-            AtomicReact.renderElement(document.getElementsByTagName('html')[0]);
+            AtomicReact.renderElement(atomicClass, document.getElementsByTagName('html')[0]);
         });
     }
 
@@ -104,7 +103,7 @@ export class AtomicReact {
         }
     }
 
-    static makeID(length) {
+    static makeID(length = 8) {
         let result = '';
         const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
         const charactersLength = characters.length;
@@ -116,7 +115,7 @@ export class AtomicReact {
         return result;
     }
 
-    static replaceExpressao(expressao, expressaoParaSerReplaced, source, expressaoIsAFlag = false) {
+    static replaceExpressao(expressao, expressaoParaSerReplaced, source, expressaoIsAFlag = false) : string {
         expressaoIsAFlag = expressaoIsAFlag || false;
         let regexTag = new RegExp('<(.)*\\s+' + expressao + '(\\s*=([^>]*))', 'gi');
 
@@ -180,7 +179,7 @@ export class AtomicReact {
                     encontrou = true;
                 }
             }
-            
+
         }
 
         return geoCursor;
@@ -193,21 +192,21 @@ export class AtomicReact {
         let atomStruct = atom.struct;
 
         //AtomicKey
-        let atomicKey = " " + ClientVariables.Key + "='" + atom.key + "'";
+        let atomicKey = " " + AtomicReact.ClientVariables.Key + "='" + atom.key + "'";
         //AtomicId
         let atomicId = atom.key + "_" + AtomicReact.makeID(10);
 
         //Update atomic.nucleus para data-atomic-nucleus=atomicId
-        atomStruct = AtomicReact.replaceExpressao(AtomicVariables.Nucleus, ClientVariables.Nucleus + "=" + atomicId, atomStruct, true);
+        atomStruct = AtomicReact.replaceExpressao(AtomicReact.AtomicVariables.Nucleus, AtomicReact.ClientVariables.Nucleus + "=" + atomicId, atomStruct, true);
         //Update atomic.sub para data-atomic-sub e Add SubOf (qual atomo uma particula pertence)
-        atomStruct = AtomicReact.replaceExpressao(AtomicVariables.Sub, ClientVariables.SubOf + "=" + atomicId + " " + ClientVariables.Sub, atomStruct);
+        atomStruct = AtomicReact.replaceExpressao(AtomicReact.AtomicVariables.Sub, AtomicReact.ClientVariables.SubOf + "=" + atomicId + " " + AtomicReact.ClientVariables.Sub, atomStruct);
 
         //atributos
         let atributos = source.slice(geoCursorAtomo.open.start, geoCursorAtomo.open.end);
         let customAtributos = atributos.slice(0, atributos.length);
 
         //props
-        let regexPropAttr = new RegExp(ClientVariables.Props + '(\\.\\w*\\s*=\\s*(\\")\\s*([^\\"]*))', 'g');
+        let regexPropAttr = new RegExp(AtomicReact.ClientVariables.Props + '(\\.\\w*\\s*=\\s*(\\")\\s*([^\\"]*))', 'g');
         let match;
         let campo;
         let valor = null;
@@ -218,14 +217,14 @@ export class AtomicReact {
             atomStruct = atomStruct.replace(new RegExp('{((\\s)*)' + campo + '((\\s)*)}', 'gi'), valor); //substitui {props.nome} pelo seu valor fornecido
         }
         //limpa as props não configuradas acima: Issue#11
-        atomStruct = atomStruct.replace(new RegExp('{((\\s)*)' + ClientVariables.Props + '(\\.\\w*\\s*)}', 'gi'), ""); //substitui {props.nome} pelo seu valor fornecido
+        atomStruct = atomStruct.replace(new RegExp('{((\\s)*)' + AtomicReact.ClientVariables.Props + '(\\.\\w*\\s*)}', 'gi'), ""); //substitui {props.nome} pelo seu valor fornecido
 
         //custom atributos:  (id, class, ....) devem ser add na tag do AtomoData
         customAtributos = customAtributos.slice(customAtributos.indexOf(" "), customAtributos.length - 1);
 
         //nucleus
         let nucleus = source.slice(geoCursorAtomo.open.end, geoCursorAtomo.close.start);
-        let regExpNucleusTag = new RegExp('<(.)*' + ClientVariables.Nucleus + '[^>]*', 'gi');
+        let regExpNucleusTag = new RegExp('<(.)*' + AtomicReact.ClientVariables.Nucleus + '[^>]*', 'gi');
         let openEndNucleusTag = -1;
         while (match = regExpNucleusTag.exec(atomStruct)) {
             openEndNucleusTag = regExpNucleusTag.lastIndex + 1;
@@ -234,11 +233,11 @@ export class AtomicReact {
         atomStruct = atomStruct.slice(0, openEndNucleusTag) + nucleus + atomStruct.slice(openEndNucleusTag, atomStruct.length);
 
         atomList.push({ key: atom.key, id: atomicId });
-        atomicId = " " + ClientVariables.Id + "='" + atomicId + "'";
+        atomicId = " " + AtomicReact.ClientVariables.Id + "='" + atomicId + "'";
 
         //sub que está em atributos 
         let atomicSub = '';
-        let regexSubAttr = new RegExp(ClientVariables.Sub + '(\\s*=\\s*(\\")\\s*([^\\"]*))', 'g');
+        let regexSubAttr = new RegExp(AtomicReact.ClientVariables.Sub + '(\\s*=\\s*(\\")\\s*([^\\"]*))', 'g');
         while (match = regexSubAttr.exec(atributos)) {
             atomicSub = " " + atomicSub + match[0] + '"';
         }
@@ -269,11 +268,16 @@ export class AtomicReact {
         return source
     }
 
-    static renderElement(domElement: Element) {
-        let atomList = [];
-        domElement.innerHTML = AtomicReact.render(domElement.innerHTML, atomList);
+    // static renderElement(domElement: Element) {
+    //     let atomList = [];
+    //     domElement.innerHTML = AtomicReact.render(domElement.innerHTML, atomList);
 
-        AtomicReact.createAtomClass(atomList);
+    //     AtomicReact.createAtomClass(atomList);
+    // }
+    static renderElement(atomicClass: AtomicClass, domElement: Element) {
+        domElement.innerHTML = atomicClass.render();
+
+        // AtomicReact.createAtomClass(atomList);
     }
 
     static createAtomClass(atomList: IAtomList[]) {
@@ -304,13 +308,13 @@ export class AtomicReact {
         });
     }
     static getSub<T>(atomElement: IAtomicElement, subName: string): T {
-        return atomElement.querySelector('[' + ClientVariables.SubOf + '=' + atomElement.getAttribute('data-atomic-id') + '][' + ClientVariables.Sub + '="' + subName + '"]') as unknown as T;
+        return atomElement.querySelector('[' + AtomicReact.ClientVariables.SubOf + '=' + atomElement.getAttribute('data-atomic-id') + '][' + AtomicReact.ClientVariables.Sub + '="' + subName + '"]') as unknown as T;
     }
     static getNucleus(atomElement: IAtomicElement) {
-        return document.querySelector('[' + ClientVariables.Nucleus + '=' + atomElement.getAttribute('data-atomic-id') + ']');
+        return document.querySelector('[' + AtomicReact.ClientVariables.Nucleus + '=' + atomElement.getAttribute('data-atomic-id') + ']');
     }
     static getElement(atomId: string): IAtomicElement {
-        return document.querySelector('[' + ClientVariables.Id + '="' + atomId + '"]') as IAtomicElement;
+        return document.querySelector('[' + AtomicReact.ClientVariables.Id + '="' + atomId + '"]') as IAtomicElement;
     }
     static add(atomElement: IAtomicElement, atomKey: IAtom["key"], props: IProp[], where: InsertPosition) {
         props = props || [];
@@ -320,7 +324,7 @@ export class AtomicReact {
 
         //add props
         props.forEach((prop) => {
-            elementoToBeCreate.setAttribute(ClientVariables.Props + "." + prop.key, prop.value);
+            elementoToBeCreate.setAttribute(AtomicReact.ClientVariables.Props + "." + prop.key, prop.value);
         });
 
         let atomList: Array<IAtomList> = [];
@@ -331,7 +335,7 @@ export class AtomicReact {
 
         AtomicReact.createAtomClass(atomList);
 
-        let key = atomElement.getAttributeNode(ClientVariables.Key).value;
+        let key = atomElement.getAttributeNode(AtomicReact.ClientVariables.Key).value;
         let atomAdded = AtomicReact.getElement(atomList[0].id);
 
         //notifyAtom onAdded
@@ -351,8 +355,28 @@ export class AtomicReact {
 
 export class AtomicClass {
 
-    constructor(public id: string) {
+    public struct: ()=>string = null
 
+    constructor(public id?: string) {
+        if(!this.id) this.id = AtomicReact.makeID()
+    }
+
+    render() : string {
+        if(!this.struct) return ""
+        let rendered = this.struct()
+
+        const tag = rendered.trim()
+        if (tag.startsWith("<") && tag.endsWith(">")) {
+            const posToSplit = (tag.at(tag.length - 2) == "/") ? tag.length - 2 : tag.indexOf(">")
+            rendered = `${tag.slice(0, posToSplit)} ${AtomicReact.ClientVariables.Key}="${this["__proto__"]["constructor"]["name"]}" ${AtomicReact.ClientVariables.Id}="${this.id}"${tag.slice(posToSplit, tag.length)}`
+        }
+        /* Add rendered to element */
+
+        /* Find all atomic keys and id and create atom in them */
+
+        /* Fire onRender events */
+
+        return rendered
     }
 
     getElement(): IAtomicElement {
@@ -377,14 +401,14 @@ export class AtomicClass {
     onAdded(atomAdded: IAtomicElement) { }
 }
 
-export function resolveModuleName(moduleName) {                               
+export function resolveModuleName(moduleName) {
     return moduleName.replaceAll("\\", "/").replaceAll("../", "").replaceAll("./", "").replaceAll(".tsx", "").replaceAll(".jsx", "").replaceAll(".ts", "").replaceAll(".js", "")
 }
 
 export const JSX = {
     createElement(name: string, props: { [id: string]: string }, ...content: string[]) {
         props = props || {};
-        const propsstr = Object.keys(props)
+        const propsAsString = Object.keys(props)
             .map(key => {
                 const value = props[key];
                 return `${key}="${value}"`;
@@ -392,6 +416,76 @@ export const JSX = {
                 // else return `${key}=${value}`;
             })
             .join(" ");
-        return `<${name} ${propsstr}> ${content.join("")}</${name}>`;
+        const tag = name.trim()
+        if (tag.startsWith("<") && tag.endsWith(">")) {
+            const posToSplit = (tag.at(tag.length - 2) == "/") ? tag.length - 2 : tag.indexOf(">")
+            return `${tag.slice(0, posToSplit)} ${propsAsString}${tag.slice(posToSplit, tag.length)}`
+        }
+        return `<${name} ${propsAsString}> ${content.join("")}</${name}>`;
     },
+    ["jsx-runtime"]: {
+        jsxs(name: string | Function, props: { [id: string]: any }) {
+
+            let atomKey = null
+            if (typeof name == "function") {
+                atomKey = name.name
+                name = (name as Function).call(this, props) as string
+            }
+
+            props = props || {}
+            if (!props["children"] || typeof props["children"] == "string") props["children"] = [props["children"]]
+            let attributes = Object.keys(props)
+                .map(key => {
+                    if (key == "children") return null
+                    const value = props[key]
+                    return `${key}="${value}"`
+                })
+                .filter(i => i != null)
+
+            if (atomKey) {
+                const atomId = AtomicReact.makeID()
+                attributes.push(...[`${AtomicReact.ClientVariables.Key}="${atomKey}"`, `${AtomicReact.ClientVariables.Id}="${atomId}"`])
+                name = AtomicReact.replaceExpressao(`${AtomicReact.AtomicVariables.Nucleus}="true"`, `${AtomicReact.ClientVariables.Nucleus}="${atomId}"`, name, true)
+
+                if (props["children"].length>0) {
+                    let regExpNucleusTag = new RegExp('<(.)*' + AtomicReact.ClientVariables.Nucleus + '[^>]*', 'gi');
+                    let openEndNucleusTag = -1;
+                    while (regExpNucleusTag.exec(name)) {
+                        openEndNucleusTag = regExpNucleusTag.lastIndex + 1;
+                    } 
+                    name = `${name.slice(0, openEndNucleusTag)}${props["children"].join("")}${name.slice(openEndNucleusTag, name.length)}` 
+                }
+                
+            }
+            const attributesAsString = attributes.join(" ")
+
+            const tag = name.trim()
+            if (tag.startsWith("<") && tag.endsWith(">")) {
+                const posToSplit = (tag.at(tag.length - 2) == "/") ? tag.length - 2 : tag.indexOf(">")
+                return `${tag.slice(0, posToSplit)} ${attributesAsString}${tag.slice(posToSplit, tag.length)}`
+            }
+            return `<${name} ${attributesAsString}> ${(props["children"]).join("")}</${name}>`;
+        },
+        jsx(name: string, props: { [id: string]: any }) {
+            return JSX["jsx-runtime"].jsxs(name, props)
+            // props = props || {}
+            // if (!props["children"] || typeof props["children"] == "string") props["children"] = [props["children"]]
+            // const propsAsString = Object.keys(props)
+            //     .map(key => {
+            //         if (key == "children") return null
+            //         const value = props[key]
+            //         return `${key}="${value}"`
+            //     })
+            //     .filter(i => i != null)
+            //     .join(" ")
+
+            // const tag = name.trim()
+            // if (tag.startsWith("<") && tag.endsWith(">")) {
+            //     const posToSplit = (tag.at(tag.length - 2) == "/") ? tag.length - 2 : tag.indexOf(">")
+            //     return `${tag.slice(0, posToSplit)} ${propsAsString}${tag.slice(posToSplit, tag.length)}`
+            // }
+            // return `<${name} ${propsAsString}> ${(props["children"]).join("")}</${name}>`;
+        },
+
+    }
 };

@@ -4,6 +4,7 @@
   "description": "AtomicReact is a framework to build web apps with atomicity concept",
   "main": "dist/atomic.js",
   "type": "module",
+  "files": ["./dist"],
   "scripts": {
     "build": "rm -rf ./dist && tsc -b tsconfig.json && cp -f ./package.json ./dist/package.json"
   },

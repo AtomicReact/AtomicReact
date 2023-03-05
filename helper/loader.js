@@ -77,8 +77,10 @@ if (sumPath == undefined) {
 if (require == undefined) {
     function require(moduleName, contextPath = "") {
 
-        if (moduleName === ATOMIC_REACT) {
-            return (this[ATOMIC_REACT][LIB] || this[ATOMIC_REACT])
+        const moduleParts = moduleName.split("/")
+        if (moduleParts[0] === ATOMIC_REACT) {
+            if (moduleParts.length==1) return (this[ATOMIC_REACT][LIB] || this[ATOMIC_REACT])
+            else return getValueOfPath(this, moduleParts)
         }
 
         if (moduleName.indexOf("./") >= 0) {
@@ -151,11 +153,11 @@ if (define == undefined) {
 
         try {
             func(...imports)
+            Object.defineProperty(context, path, { value: _exports, configurable: true })
         } catch (e) {
             importFail = true
         }
 
-        Object.defineProperty(context, path, { value: _exports, configurable: true })
 
         if (importFail) return
         Object.getOwnPropertyNames(_exports).forEach(_exportKey => {
