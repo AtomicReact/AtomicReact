@@ -79,7 +79,7 @@ if (require == undefined) {
 
         const moduleParts = moduleName.split("/")
         if (moduleParts[0] === ATOMIC_REACT) {
-            if (moduleParts.length==1) return (this[ATOMIC_REACT][LIB] || this[ATOMIC_REACT])
+            if (moduleParts.length == 1) return (this[ATOMIC_REACT][LIB] || this[ATOMIC_REACT])
             else return getValueOfPath(this, moduleParts)
         }
 
@@ -120,7 +120,7 @@ if (define == undefined) {
 
         let { context, path, contextPath } = gotoEndOfPath(this[ATOMIC_REACT][ATOMS], PACKAGE_NAME, paths)
 
-        console.log("==>>> ", moduleName, contextPath)
+        // console.log("==>>> ", moduleName, contextPath)
 
         const imports = [require, _exports, ...inputs.slice(2).map(i => require(i, contextPath))]
 
@@ -132,12 +132,10 @@ if (define == undefined) {
 
             /* let's schedule to define this module when the import was defined */
             let moduleNameFuture = sumPath(contextPath, inputs[i])
-            console.log("\t moduleNameFuture => ", moduleNameFuture)
-            // let moduleNameFuture = resolveModuleName()
+            // console.log("\t moduleNameFuture => ", moduleNameFuture)
 
-            let endOfPath = gotoEndOfPath(this[ATOMIC_REACT][ATOMS], PACKAGE_NAME, moduleNameFuture.split("/"))
-
-            console.log("\t\t", moduleName, "[NO]", inputs[i], endOfPath)
+            // let endOfPath = gotoEndOfPath(this[ATOMIC_REACT][ATOMS], PACKAGE_NAME, moduleNameFuture.split("/"))
+            // console.log("\t\t", moduleName, "[NO]", inputs[i], endOfPath)
 
 
             if (this[ATOMIC_REACT][DEFINES][moduleNameFuture] == undefined) {
@@ -158,25 +156,10 @@ if (define == undefined) {
             importFail = true
         }
 
-
         if (importFail) return
-        Object.getOwnPropertyNames(_exports).forEach(_exportKey => {
-
-            if (_exports[_exportKey].__proto__.name && _exports[_exportKey].__proto__.name == "AtomicClass") {
-                const atomKey = _exports[_exportKey].name
-
-                console.log(`Found atom class: ${_exports[_exportKey].name}`)
-                /* const atom = AtomicReact.atoms.find(atom => atom.key === atomKey)
-                if (atom) {
-                    atom.mainClass = _exports[_exportKey]
-                } */
-            }
-
-        })
-
 
         if (this[ATOMIC_REACT][DEFINES][moduleName] != undefined) {
-            console.log(`${moduleName} dependents:`, this[ATOMIC_REACT][DEFINES][moduleName])
+            // console.log(`${moduleName} dependents:`, this[ATOMIC_REACT][DEFINES][moduleName])
             for (let dependent of Object.getOwnPropertyNames(this[ATOMIC_REACT][DEFINES][moduleName])) {
                 this[ATOMIC_REACT][DEFINES][moduleName][dependent]()
             }

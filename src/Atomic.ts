@@ -110,10 +110,6 @@ export class Atomic {
     }
   }
 
-  static exportFunction(funcao: Function) {
-    return encodeURI(funcao.toString().replace(funcao.name, 'function').replace(/this/g, AtomicReact.ClientVariables.Atomic)).replace(/'/g, '%27');
-  }
-
   static getTranspileOptions(moduleName: string): TranspileOptions {
     return {
       moduleName: moduleName,
@@ -211,6 +207,11 @@ export class Atomic {
       const transpiled = TS.transpileModule(readFileSync(filePath).toString(), Atomic.getTranspileOptions(relativePath))
       appendFileSync(logicBundlePath, transpiled.outputText);
     }, [".js", ".ts" , ".tsx"])
+
+
+
+    /* Pos Build */
+    appendFileSync(logicBundlePath, readFileSync(resolve(join(__dirname, "../helper/pos_load.js")), { encoding: "utf-8" }));
 
     // const compilerHost = TS.createCompilerHost(compilerOptions.compilerOptions)
     // compilerHost.readDirectory(this.config.atomicDir, ["tsx"])
