@@ -3,4 +3,8 @@ declare module JSX {
     interface IntrinsicElements {
         [elemName: string]: any;
     }
+
+    interface ElementAttributesProperty {
+        attributes: any;
+    }
 }
