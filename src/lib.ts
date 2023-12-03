@@ -317,7 +317,7 @@ export const JSX = {
                 const posToSplit = (tag.at(tag.length - 2) == "/") ? tag.length - 2 : tag.indexOf(">")
                 source = `${tag.slice(0, posToSplit)} ${attributesAsString}${tag.slice(posToSplit, tag.length)}`
             } else {
-                source = `<${source} ${attributesAsString}> ${(props["children"]).join("")}</${source}>`
+                source = `<${source} ${attributesAsString}> ${((props["children"]).join) ? (props["children"]).join("") : (props["children"])}</${source}>`
             }
 
             /* Sub */
