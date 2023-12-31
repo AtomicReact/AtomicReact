@@ -4,9 +4,10 @@ import { ConsoleFlags } from "./tools/console_flags.js";
 import { HotReload } from "./modules/hot_reload.js"
 import { createDirIfNotExist } from "./tools/file.js";
 import { fileURLToPath } from "url";
-import TS, { TranspileOptions } from "typescript";
+import TS, { TranspileOptions,  } from "typescript";
+const { ModuleKind, JsxEmit, ScriptTarget, ModuleResolutionKind, transpileModule } = TS;
 export * from "./lib.js"
-import { AtomicReact, IAtom, IGlobal, resolveModuleName } from "./lib.js";
+import { IAtom, IGlobal, resolveModuleName } from "./lib.js";
 
 export { HotReload } from "./modules/hot_reload.js"
 
@@ -17,7 +18,7 @@ const __filename = fileURLToPath(import.meta.url)
 export interface IConfig {
   atomicDir: string,
   bundleDir: string,
-  debug: boolean,
+  verbose: boolean,
   packageName: string
 }
 
@@ -30,7 +31,7 @@ export class Atomic {
   static hotReload: HotReload
   atoms: Array<IAtom>;
 
-  constructor(config: IConfig, hotReload) {
+  constructor(config: IConfig, hotReload?: HotReload) {
     this.global = {
       name: JSON.parse(readFileSync(join(__dirname, "package.json")).toString()).name,
       version: JSON.parse(readFileSync(join(__dirname, "package.json")).toString()).version,
@@ -44,14 +45,14 @@ export class Atomic {
     this.config = (config != null) ? JSON.parse(JSON.stringify(config)) : {
       atomicDir: "",
       bundleDir: "",
-      debug: true,
+      verbose: true,
       packageName: "PACKAGE_NAME_NOT_DEFINED"
     };
 
     if (!this.config.atomicDir) { console.log(ConsoleFlags.erro, "You must set an atomicDir where all yours atoms will be"); return; }
     this.config.atomicDir = path.join(process.cwd(), this.config.atomicDir);
     this.config.bundleDir = path.join(process.cwd(), this.config.bundleDir || "");
-    this.config.debug = (this.config.debug == undefined) ? true : this.config.debug;
+    this.config.verbose = (this.config.verbose == undefined) ? true : this.config.verbose;
 
     //Create folder if not exist
     createDirIfNotExist(process.cwd(), this.config.bundleDir);
@@ -74,7 +75,7 @@ export class Atomic {
   }
 
 
-  static readAtomsDir(dirPath: string, callback: (atomKey: string, filePath: string, parsedPath: ParsedPath) => void, extensions = [".html"], atomKey?: string) {
+  static readAtomsDir(dirPath: string, callback: (atomKey: string, filePath: string, parsedPath: ParsedPath) => void, extensions = [/(\.html)/], atomKey?: string) {
     readdirSync(dirPath).forEach(((file) => {
       let filePath = path.join(dirPath, file);
 
@@ -85,7 +86,7 @@ export class Atomic {
         return Atomic.readAtomsDir(filePath, callback, extensions, parsedPath.name)
       }
 
-      if (extensions.includes(parsedPath.ext)) {
+      if (extensions.find((exp) => (exp.test(filePath)))) {
         return callback((atomKey) ? atomKey : parsedPath.name, filePath, parsedPath)
       }
     }));
@@ -95,8 +96,6 @@ export class Atomic {
     this.atoms = [];
 
     this.bundle();
-
-    if (this.config.debug) { this.printAtoms(); }
   }
 
   addAtomo(atom: IAtom) {
@@ -114,7 +113,7 @@ export class Atomic {
     return {
       moduleName: moduleName,
       compilerOptions: {
-        jsx: TS.JsxEmit.ReactJSX,
+        jsx: JsxEmit.ReactJSX,
         jsxFactory: "factory",
         jsxFragmentFactory: "fragment",
         jsxImportSource: "atomicreact/lib/JSX",
@@ -122,9 +121,9 @@ export class Atomic {
         isolatedModules: true,
         allowSyntheticDefaultImports: true,
         preserveValueImports: true,
-        module: TS.ModuleKind.AMD,
-        target: TS.ScriptTarget.ESNext,
-        moduleResolution: TS.ModuleResolutionKind.NodeJs,
+        module: ModuleKind.AMD,
+        target: ScriptTarget.ESNext,
+        moduleResolution: ModuleResolutionKind.NodeJs,
         lib: ["es2016", "dom", "es5"],
         strict: true,
         strictNullChecks: true,
@@ -139,7 +138,7 @@ export class Atomic {
   }
 
   async bundle() {
-    if (this.config.debug) { console.log(ConsoleFlags.info, "===Bundling==="); }
+    // if (this.config.verbose) { console.log(ConsoleFlags.info, "===Bundling==="); }
 
     // Atomic.readAtomsDir(this.config.atomicDir, (atomKey, filePath) => {
     //   this.addAtomo({
@@ -191,23 +190,24 @@ export class Atomic {
 
     const atomicReactModule = "AtomicReact"
     const compilerOptions = Atomic.getTranspileOptions(atomicReactModule.toLowerCase())
-    const transpiledCore = TS.transpileModule(readFileSync(resolve(join(__dirname, `lib.js`))).toString(), compilerOptions)
+    const transpiledCore = transpileModule(readFileSync(resolve(join(__dirname, `lib.js`))).toString(), compilerOptions)
     appendFileSync(coreBundlePath, transpiledCore.outputText);
 
 
     /* Bundle Logic */
     const logicBundlePath = join(this.config.bundleDir, 'atomicreact.bundle.js');
     writeFileSync(logicBundlePath, readFileSync(resolve(join(__dirname, "../helper/switch_bundle.js")), { encoding: "utf-8" }).replaceAll("{{PACKAGE_NAME}}", this.config.packageName))
+    if (this.config.verbose) console.log(`└── Bundling package [${this.config.packageName}]`);
+    let count = 0;
     Atomic.readAtomsDir(this.config.atomicDir, (atomKey, filePath) => {
       // if (atomKey != "atom1" && atomKey != "dashboard") return;
-      if (this.config.debug) console.log(`\t[LOGIC] [${atomKey}] => ${filePath}`);
+      if (this.config.verbose) console.log(`\t├── [${atomKey}] from ${filePath}`);
 
       const relativePath = resolveModuleName(relative(this.config.atomicDir, filePath))
 
-      const transpiled = TS.transpileModule(readFileSync(filePath).toString(), Atomic.getTranspileOptions(relativePath))
-      appendFileSync(logicBundlePath, transpiled.outputText);
-    }, [".js", ".ts" , ".tsx"])
-
+      const transpiled = transpileModule(readFileSync(filePath).toString(), Atomic.getTranspileOptions(relativePath))
+      appendFileSync(logicBundlePath, transpiled.outputText)
+    }, [/\.js$/, /([^(\.d)]\.ts)$/ , /\.tsx$/, /\.jsx$/])
 
 
     /* Pos Build */
@@ -299,9 +299,9 @@ export class Atomic {
     const styleBundlePath = join(this.config.bundleDir, 'atomicreact.bundle.css');
     writeFileSync(styleBundlePath, "")
     Atomic.readAtomsDir(this.config.atomicDir, (atomKey, filePath) => {
-      if (this.config.debug) console.log(`\t[STYLE] [${atomKey}] => ${filePath}`);
+      if (this.config.verbose) console.log(`\t[STYLE] [${atomKey}] => ${filePath}`);
       appendFileSync(styleBundlePath, readFileSync(filePath));
-    }, [".css"])
+    }, [/\.css$/])
 
 
     /*     Atomic.atoms.forEach(((Atomo, index) => {
