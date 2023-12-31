@@ -151,15 +151,17 @@ if (define == undefined) {
 
         try {
             func(...imports)
-            Object.defineProperty(context, path, { value: _exports, configurable: true })
         } catch (e) {
             importFail = true
         }
 
         if (importFail) return
 
+        Object.defineProperty(context, path, { value: _exports, configurable: true })
+
         if (this[ATOMIC_REACT][DEFINES][moduleName] != undefined) {
             // console.log(`${moduleName} dependents:`, this[ATOMIC_REACT][DEFINES][moduleName])
+            //ReDfines atoms is importing this atom
             for (let dependent of Object.getOwnPropertyNames(this[ATOMIC_REACT][DEFINES][moduleName])) {
                 this[ATOMIC_REACT][DEFINES][moduleName][dependent]()
             }
