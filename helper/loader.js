@@ -120,8 +120,6 @@ if (define == undefined) {
 
         let { context, path, contextPath } = gotoEndOfPath(this[ATOMIC_REACT][ATOMS], PACKAGE_NAME, paths)
 
-        // console.log("==>>> ", moduleName, contextPath)
-
         const imports = [require, _exports, ...inputs.slice(2).map(i => require(i, contextPath))]
 
         let importFail = false
@@ -132,16 +130,12 @@ if (define == undefined) {
 
             /* let's schedule to define this module when the import was defined */
             let moduleNameFuture = sumPath(contextPath, inputs[i])
-            // console.log("\t moduleNameFuture => ", moduleNameFuture)
-
-            // let endOfPath = gotoEndOfPath(this[ATOMIC_REACT][ATOMS], PACKAGE_NAME, moduleNameFuture.split("/"))
-            // console.log("\t\t", moduleName, "[NO]", inputs[i], endOfPath)
-
 
             if (this[ATOMIC_REACT][DEFINES][moduleNameFuture] == undefined) {
                 Object.defineProperty(this[ATOMIC_REACT][DEFINES], moduleNameFuture, { value: {}, configurable: true })
             }
 
+            /* Define dependency */
             Object.defineProperty(this[ATOMIC_REACT][DEFINES][moduleNameFuture], moduleName, {
                 value: () => {
                     define(moduleName, inputs, func, true)
@@ -157,14 +151,15 @@ if (define == undefined) {
 
         if (importFail) return
 
+        /* Declare this atom */
         Object.defineProperty(context, path, { value: _exports, configurable: true })
 
         if (this[ATOMIC_REACT][DEFINES][moduleName] != undefined) {
-            // console.log(`${moduleName} dependents:`, this[ATOMIC_REACT][DEFINES][moduleName])
-            //ReDfines atoms is importing this atom
+            /* ReDefines atoms that are importing this atom */
             for (let dependent of Object.getOwnPropertyNames(this[ATOMIC_REACT][DEFINES][moduleName])) {
                 this[ATOMIC_REACT][DEFINES][moduleName][dependent]()
             }
+            /* Remove from defines */
             delete this[ATOMIC_REACT][DEFINES][moduleName]
         }
 
