@@ -1,38 +1,41 @@
-<mxfile host="app.diagrams.net" modified="2024-01-01T00:33:35.347Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/119.0" etag="5pMpu7oHohDPTbTQufor" version="22.1.16" type="github">
+<mxfile host="app.diagrams.net" modified="2024-01-01T00:55:09.093Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/119.0" etag="IWcZ6YTingQvnKreuqB9" version="22.1.16" type="github">
   <diagram name="Página-1" id="zLWKFBo0BfelDE4MzV_v">
-    <mxGraphModel dx="2908" dy="1222" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1989" dy="836" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="tRrPQd9gGLpKsUqzO6ij-82" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;dashed=1;strokeColor=#666666;" parent="1" vertex="1">
-          <mxGeometry x="30" y="2020" width="1590" height="1230" as="geometry" />
+        <mxCell id="AgAPFj6j-VEWw4h1hDbo-88" value="Declaration and Importation of Atoms" style="swimlane;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="10" y="610" width="1630" height="2890" as="geometry" />
         </mxCell>
-        <mxCell id="tRrPQd9gGLpKsUqzO6ij-64" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;dashed=1;strokeColor=#666666;" parent="1" vertex="1">
-          <mxGeometry x="30" y="1630" width="1590" height="370" as="geometry" />
+        <mxCell id="tRrPQd9gGLpKsUqzO6ij-82" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;dashed=1;strokeColor=#666666;" parent="AgAPFj6j-VEWw4h1hDbo-88" vertex="1">
+          <mxGeometry x="30" y="1405" width="1580" height="1230" as="geometry" />
         </mxCell>
-        <mxCell id="tRrPQd9gGLpKsUqzO6ij-52" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;dashed=1;strokeColor=#666666;" parent="1" vertex="1">
-          <mxGeometry x="30" y="1070" width="1600" height="540" as="geometry" />
+        <mxCell id="tRrPQd9gGLpKsUqzO6ij-64" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;dashed=1;strokeColor=#666666;" parent="AgAPFj6j-VEWw4h1hDbo-88" vertex="1">
+          <mxGeometry x="30" y="1015" width="1580" height="370" as="geometry" />
         </mxCell>
-        <mxCell id="tRrPQd9gGLpKsUqzO6ij-51" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;dashed=1;strokeColor=#666666;" parent="1" vertex="1">
-          <mxGeometry x="30" y="750" width="1600" height="290" as="geometry" />
+        <mxCell id="tRrPQd9gGLpKsUqzO6ij-52" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;dashed=1;strokeColor=#666666;" parent="AgAPFj6j-VEWw4h1hDbo-88" vertex="1">
+          <mxGeometry x="30" y="455" width="1580" height="540" as="geometry" />
         </mxCell>
-        <mxCell id="tRrPQd9gGLpKsUqzO6ij-8" value="" style="endArrow=block;dashed=1;html=1;strokeWidth=3;rounded=0;startArrow=none;startFill=0;endFill=1;" parent="1" edge="1">
+        <mxCell id="tRrPQd9gGLpKsUqzO6ij-51" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;dashed=1;strokeColor=#666666;" parent="AgAPFj6j-VEWw4h1hDbo-88" vertex="1">
+          <mxGeometry x="30" y="150" width="1580" height="275" as="geometry" />
+        </mxCell>
+        <mxCell id="tRrPQd9gGLpKsUqzO6ij-8" value="" style="endArrow=block;dashed=1;html=1;strokeWidth=3;rounded=0;startArrow=none;startFill=0;endFill=1;" parent="AgAPFj6j-VEWw4h1hDbo-88" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="20" y="680" as="sourcePoint" />
-            <mxPoint x="19" y="3460" as="targetPoint" />
+            <mxPoint x="20" y="65" as="sourcePoint" />
+            <mxPoint x="19" y="2880" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="tRrPQd9gGLpKsUqzO6ij-9" value="&lt;div&gt;AppAtom&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="40" y="770" width="150" height="60" as="geometry" />
+        <mxCell id="tRrPQd9gGLpKsUqzO6ij-9" value="&lt;div&gt;AppAtom&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="AgAPFj6j-VEWw4h1hDbo-88" vertex="1">
+          <mxGeometry x="40" y="160" width="150" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="tRrPQd9gGLpKsUqzO6ij-10" value="MyAtomInFolderAtom" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="40" y="1090" width="150" height="60" as="geometry" />
+        <mxCell id="tRrPQd9gGLpKsUqzO6ij-10" value="MyAtomInFolderAtom" style="rounded=1;whiteSpace=wrap;html=1;" parent="AgAPFj6j-VEWw4h1hDbo-88" vertex="1">
+          <mxGeometry x="40" y="475" width="150" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="tRrPQd9gGLpKsUqzO6ij-11" value="IndexAtom" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="40" y="1650" width="150" height="60" as="geometry" />
+        <mxCell id="tRrPQd9gGLpKsUqzO6ij-11" value="IndexAtom" style="rounded=1;whiteSpace=wrap;html=1;" parent="AgAPFj6j-VEWw4h1hDbo-88" vertex="1">
+          <mxGeometry x="40" y="1035" width="150" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="tRrPQd9gGLpKsUqzO6ij-12" value="atomicreact.defines" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="523" y="775" width="280" height="90" as="geometry" />
+        <mxCell id="tRrPQd9gGLpKsUqzO6ij-12" value="atomicreact.defines" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="AgAPFj6j-VEWw4h1hDbo-88" vertex="1">
+          <mxGeometry x="523" y="165" width="280" height="90" as="geometry" />
         </mxCell>
         <mxCell id="tRrPQd9gGLpKsUqzO6ij-13" value="atomInFolder/myAtomInFolderAtom: AppAtom" style="text;strokeColor=#82b366;fillColor=#d5e8d4;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="tRrPQd9gGLpKsUqzO6ij-12" vertex="1">
           <mxGeometry y="30" width="280" height="30" as="geometry" />
@@ -40,50 +43,44 @@
         <mxCell id="tRrPQd9gGLpKsUqzO6ij-14" value="myAtoms/myFirstAtom: AppAtom" style="text;strokeColor=#82b366;fillColor=#d5e8d4;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="tRrPQd9gGLpKsUqzO6ij-12" vertex="1">
           <mxGeometry y="60" width="280" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="tRrPQd9gGLpKsUqzO6ij-26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="tRrPQd9gGLpKsUqzO6ij-19" target="tRrPQd9gGLpKsUqzO6ij-21" edge="1">
+        <mxCell id="tRrPQd9gGLpKsUqzO6ij-19" value="ReDefines atoms that are importing this atom" style="shape=step;perimeter=stepPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" parent="AgAPFj6j-VEWw4h1hDbo-88" vertex="1">
+          <mxGeometry x="200" y="665" width="320" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="tRrPQd9gGLpKsUqzO6ij-21" value="&lt;div&gt;AppAtom&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="AgAPFj6j-VEWw4h1hDbo-88" vertex="1">
+          <mxGeometry x="430" y="725" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="tRrPQd9gGLpKsUqzO6ij-26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="AgAPFj6j-VEWw4h1hDbo-88" source="tRrPQd9gGLpKsUqzO6ij-19" target="tRrPQd9gGLpKsUqzO6ij-21" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="tRrPQd9gGLpKsUqzO6ij-19" value="ReDefines atoms that are importing this atom" style="shape=step;perimeter=stepPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" parent="1" vertex="1">
-          <mxGeometry x="200" y="1280" width="320" height="50" as="geometry" />
+        <mxCell id="tRrPQd9gGLpKsUqzO6ij-27" value="atomicreact" style="rounded=1;whiteSpace=wrap;html=1;" parent="AgAPFj6j-VEWw4h1hDbo-88" vertex="1">
+          <mxGeometry x="40" y="65" width="150" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="tRrPQd9gGLpKsUqzO6ij-21" value="&lt;div&gt;AppAtom&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="430" y="1340" width="90" height="30" as="geometry" />
+        <mxCell id="tRrPQd9gGLpKsUqzO6ij-34" value="atomicreact.atoms" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="AgAPFj6j-VEWw4h1hDbo-88" vertex="1">
+          <mxGeometry x="523" y="340" width="277" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="tRrPQd9gGLpKsUqzO6ij-27" value="atomicreact" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="40" y="680" width="150" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="tRrPQd9gGLpKsUqzO6ij-34" value="atomicreact.atoms" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="523" y="955" width="277" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="tRrPQd9gGLpKsUqzO6ij-37" value="atomicreact.atoms" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="523" y="1200" width="277" height="60" as="geometry" />
+        <mxCell id="tRrPQd9gGLpKsUqzO6ij-37" value="atomicreact.atoms" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="AgAPFj6j-VEWw4h1hDbo-88" vertex="1">
+          <mxGeometry x="523" y="585" width="277" height="60" as="geometry" />
         </mxCell>
         <mxCell id="tRrPQd9gGLpKsUqzO6ij-42" value="MyAtomInFolderAtom" style="text;strokeColor=#82b366;fillColor=#d5e8d4;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="tRrPQd9gGLpKsUqzO6ij-37" vertex="1">
           <mxGeometry y="30" width="277" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="tRrPQd9gGLpKsUqzO6ij-76" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="tRrPQd9gGLpKsUqzO6ij-43" target="tRrPQd9gGLpKsUqzO6ij-73" edge="1">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="tRrPQd9gGLpKsUqzO6ij-43" value="Define dependecies" style="shape=step;perimeter=stepPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" parent="AgAPFj6j-VEWw4h1hDbo-88" vertex="1">
+          <mxGeometry x="200" y="165" width="320" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="tRrPQd9gGLpKsUqzO6ij-77" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="tRrPQd9gGLpKsUqzO6ij-43" target="tRrPQd9gGLpKsUqzO6ij-74" edge="1">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="tRrPQd9gGLpKsUqzO6ij-45" value="ReDefines atoms that are importing this atom" style="shape=step;perimeter=stepPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" parent="AgAPFj6j-VEWw4h1hDbo-88" vertex="1">
+          <mxGeometry x="200" y="345" width="320" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="tRrPQd9gGLpKsUqzO6ij-43" value="Define dependecies" style="shape=step;perimeter=stepPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" parent="1" vertex="1">
-          <mxGeometry x="200" y="775" width="320" height="50" as="geometry" />
+        <mxCell id="tRrPQd9gGLpKsUqzO6ij-47" value="atomicreact.atoms" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="AgAPFj6j-VEWw4h1hDbo-88" vertex="1">
+          <mxGeometry x="430" y="65" width="210" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="tRrPQd9gGLpKsUqzO6ij-45" value="ReDefines atoms that are importing this atom" style="shape=step;perimeter=stepPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" parent="1" vertex="1">
-          <mxGeometry x="200" y="960" width="320" height="50" as="geometry" />
+        <mxCell id="tRrPQd9gGLpKsUqzO6ij-48" value="atomicreact.defines" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="AgAPFj6j-VEWw4h1hDbo-88" vertex="1">
+          <mxGeometry x="210" y="65" width="210" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="tRrPQd9gGLpKsUqzO6ij-47" value="atomicreact.atoms" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="430" y="680" width="210" height="60" as="geometry" />
+        <mxCell id="tRrPQd9gGLpKsUqzO6ij-53" value="Define dependecies" style="shape=step;perimeter=stepPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" parent="AgAPFj6j-VEWw4h1hDbo-88" vertex="1">
+          <mxGeometry x="200" y="480" width="320" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="tRrPQd9gGLpKsUqzO6ij-48" value="atomicreact.defines" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="210" y="680" width="210" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="tRrPQd9gGLpKsUqzO6ij-53" value="Define dependecies" style="shape=step;perimeter=stepPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" parent="1" vertex="1">
-          <mxGeometry x="200" y="1095" width="320" height="50" as="geometry" />
-        </mxCell>
-        <mxCell id="tRrPQd9gGLpKsUqzO6ij-57" value="atomicreact.defines" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="520" y="1095" width="280" height="90" as="geometry" />
+        <mxCell id="tRrPQd9gGLpKsUqzO6ij-57" value="atomicreact.defines" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="AgAPFj6j-VEWw4h1hDbo-88" vertex="1">
+          <mxGeometry x="520" y="480" width="280" height="90" as="geometry" />
         </mxCell>
         <mxCell id="tRrPQd9gGLpKsUqzO6ij-58" value="atomInFolder/myAtomInFolderAtom: AppAtom" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="tRrPQd9gGLpKsUqzO6ij-57" vertex="1">
           <mxGeometry y="30" width="280" height="30" as="geometry" />
@@ -91,8 +88,8 @@
         <mxCell id="tRrPQd9gGLpKsUqzO6ij-59" value="myAtoms/myFirstAtom: AppAtom" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="tRrPQd9gGLpKsUqzO6ij-57" vertex="1">
           <mxGeometry y="60" width="280" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="tRrPQd9gGLpKsUqzO6ij-60" value="atomicreact.defines" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="520" y="1500" width="280" height="90" as="geometry" />
+        <mxCell id="tRrPQd9gGLpKsUqzO6ij-60" value="atomicreact.defines" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="AgAPFj6j-VEWw4h1hDbo-88" vertex="1">
+          <mxGeometry x="520" y="885" width="280" height="90" as="geometry" />
         </mxCell>
         <mxCell id="tRrPQd9gGLpKsUqzO6ij-113" value="atomInFolder/myAtomInFolderAtom: AppAtom" style="text;strokeColor=#b85450;fillColor=#f8cecc;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;shadow=0;rounded=0;glass=0;" parent="tRrPQd9gGLpKsUqzO6ij-60" vertex="1">
           <mxGeometry y="30" width="280" height="30" as="geometry" />
@@ -100,14 +97,11 @@
         <mxCell id="tRrPQd9gGLpKsUqzO6ij-62" value="myAtoms/myFirstAtom: AppAtom" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="tRrPQd9gGLpKsUqzO6ij-60" vertex="1">
           <mxGeometry y="60" width="280" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="tRrPQd9gGLpKsUqzO6ij-79" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="tRrPQd9gGLpKsUqzO6ij-65" target="tRrPQd9gGLpKsUqzO6ij-78" edge="1">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="tRrPQd9gGLpKsUqzO6ij-65" value="Define dependecies" style="shape=step;perimeter=stepPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" parent="AgAPFj6j-VEWw4h1hDbo-88" vertex="1">
+          <mxGeometry x="200" y="1040" width="320" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="tRrPQd9gGLpKsUqzO6ij-65" value="Define dependecies" style="shape=step;perimeter=stepPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" parent="1" vertex="1">
-          <mxGeometry x="200" y="1655" width="320" height="50" as="geometry" />
-        </mxCell>
-        <mxCell id="tRrPQd9gGLpKsUqzO6ij-69" value="atomicreact.defines" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="520" y="1655" width="280" height="90" as="geometry" />
+        <mxCell id="tRrPQd9gGLpKsUqzO6ij-69" value="atomicreact.defines" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="AgAPFj6j-VEWw4h1hDbo-88" vertex="1">
+          <mxGeometry x="520" y="1040" width="280" height="90" as="geometry" />
         </mxCell>
         <mxCell id="tRrPQd9gGLpKsUqzO6ij-71" value="myAtoms/myFirstAtom: AppAtom" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="tRrPQd9gGLpKsUqzO6ij-69" vertex="1">
           <mxGeometry y="30" width="280" height="30" as="geometry" />
@@ -115,32 +109,41 @@
         <mxCell id="tRrPQd9gGLpKsUqzO6ij-70" value="app/AppAtom: IndexAtom" style="text;strokeColor=#82b366;fillColor=#d5e8d4;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="tRrPQd9gGLpKsUqzO6ij-69" vertex="1">
           <mxGeometry y="60" width="280" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="tRrPQd9gGLpKsUqzO6ij-72" value="Return. Can&#39;t declare this atom" style="shape=step;perimeter=stepPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" parent="1" vertex="1">
-          <mxGeometry x="200" y="1920" width="320" height="50" as="geometry" />
+        <mxCell id="tRrPQd9gGLpKsUqzO6ij-72" value="Return. Can&#39;t declare this atom" style="shape=step;perimeter=stepPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" parent="AgAPFj6j-VEWw4h1hDbo-88" vertex="1">
+          <mxGeometry x="200" y="1305" width="320" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="tRrPQd9gGLpKsUqzO6ij-73" value="MyAtomInFolderAtom" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="394" y="860" width="126" height="30" as="geometry" />
+        <mxCell id="tRrPQd9gGLpKsUqzO6ij-73" value="MyAtomInFolderAtom" style="rounded=1;whiteSpace=wrap;html=1;" parent="AgAPFj6j-VEWw4h1hDbo-88" vertex="1">
+          <mxGeometry x="394" y="245" width="126" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="tRrPQd9gGLpKsUqzO6ij-74" value="MyFirstAtom" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="394" y="910" width="126" height="30" as="geometry" />
+        <mxCell id="tRrPQd9gGLpKsUqzO6ij-76" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="AgAPFj6j-VEWw4h1hDbo-88" source="tRrPQd9gGLpKsUqzO6ij-43" target="tRrPQd9gGLpKsUqzO6ij-73" edge="1">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="tRrPQd9gGLpKsUqzO6ij-78" value="&lt;div&gt;AppAtom&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="427" y="1770" width="90" height="30" as="geometry" />
+        <mxCell id="tRrPQd9gGLpKsUqzO6ij-74" value="MyFirstAtom" style="rounded=1;whiteSpace=wrap;html=1;" parent="AgAPFj6j-VEWw4h1hDbo-88" vertex="1">
+          <mxGeometry x="394" y="295" width="126" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="tRrPQd9gGLpKsUqzO6ij-80" value="atomicreact.atoms" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="523" y="1830" width="277" height="60" as="geometry" />
+        <mxCell id="tRrPQd9gGLpKsUqzO6ij-77" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="AgAPFj6j-VEWw4h1hDbo-88" source="tRrPQd9gGLpKsUqzO6ij-43" target="tRrPQd9gGLpKsUqzO6ij-74" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="tRrPQd9gGLpKsUqzO6ij-78" value="&lt;div&gt;AppAtom&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="AgAPFj6j-VEWw4h1hDbo-88" vertex="1">
+          <mxGeometry x="427" y="1155" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="tRrPQd9gGLpKsUqzO6ij-79" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="AgAPFj6j-VEWw4h1hDbo-88" source="tRrPQd9gGLpKsUqzO6ij-65" target="tRrPQd9gGLpKsUqzO6ij-78" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="tRrPQd9gGLpKsUqzO6ij-80" value="atomicreact.atoms" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="AgAPFj6j-VEWw4h1hDbo-88" vertex="1">
+          <mxGeometry x="523" y="1215" width="277" height="60" as="geometry" />
         </mxCell>
         <mxCell id="tRrPQd9gGLpKsUqzO6ij-81" value="MyAtomInFolderAtom" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="tRrPQd9gGLpKsUqzO6ij-80" vertex="1">
           <mxGeometry y="30" width="277" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="tRrPQd9gGLpKsUqzO6ij-84" value="MyFirstAtom" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="40" y="2040" width="150" height="60" as="geometry" />
+        <mxCell id="tRrPQd9gGLpKsUqzO6ij-84" value="MyFirstAtom" style="rounded=1;whiteSpace=wrap;html=1;" parent="AgAPFj6j-VEWw4h1hDbo-88" vertex="1">
+          <mxGeometry x="40" y="1425" width="150" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="tRrPQd9gGLpKsUqzO6ij-85" value="Define dependecies" style="shape=step;perimeter=stepPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" parent="1" vertex="1">
-          <mxGeometry x="200" y="2045" width="320" height="50" as="geometry" />
+        <mxCell id="tRrPQd9gGLpKsUqzO6ij-85" value="Define dependecies" style="shape=step;perimeter=stepPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" parent="AgAPFj6j-VEWw4h1hDbo-88" vertex="1">
+          <mxGeometry x="200" y="1430" width="320" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="tRrPQd9gGLpKsUqzO6ij-86" value="atomicreact.defines" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="520" y="2045" width="280" height="90" as="geometry" />
+        <mxCell id="tRrPQd9gGLpKsUqzO6ij-86" value="atomicreact.defines" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="AgAPFj6j-VEWw4h1hDbo-88" vertex="1">
+          <mxGeometry x="520" y="1430" width="280" height="90" as="geometry" />
         </mxCell>
         <mxCell id="tRrPQd9gGLpKsUqzO6ij-87" value="myAtoms/myFirstAtom: AppAtom" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="tRrPQd9gGLpKsUqzO6ij-86" vertex="1">
           <mxGeometry y="30" width="280" height="30" as="geometry" />
@@ -148,14 +151,11 @@
         <mxCell id="tRrPQd9gGLpKsUqzO6ij-88" value="app/AppAtom: IndexAtom" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="tRrPQd9gGLpKsUqzO6ij-86" vertex="1">
           <mxGeometry y="60" width="280" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="tRrPQd9gGLpKsUqzO6ij-95" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="tRrPQd9gGLpKsUqzO6ij-89" target="tRrPQd9gGLpKsUqzO6ij-94" edge="1">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="tRrPQd9gGLpKsUqzO6ij-89" value="ReDefines atoms that are importing this atom" style="shape=step;perimeter=stepPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" parent="AgAPFj6j-VEWw4h1hDbo-88" vertex="1">
+          <mxGeometry x="200" y="1675" width="320" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="tRrPQd9gGLpKsUqzO6ij-89" value="ReDefines atoms that are importing this atom" style="shape=step;perimeter=stepPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" parent="1" vertex="1">
-          <mxGeometry x="200" y="2290" width="320" height="50" as="geometry" />
-        </mxCell>
-        <mxCell id="tRrPQd9gGLpKsUqzO6ij-90" value="atomicreact.atoms" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="520" y="2170" width="280" height="90" as="geometry" />
+        <mxCell id="tRrPQd9gGLpKsUqzO6ij-90" value="atomicreact.atoms" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="AgAPFj6j-VEWw4h1hDbo-88" vertex="1">
+          <mxGeometry x="520" y="1555" width="280" height="90" as="geometry" />
         </mxCell>
         <mxCell id="tRrPQd9gGLpKsUqzO6ij-91" value="MyAtomInFolderAtom" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="tRrPQd9gGLpKsUqzO6ij-90" vertex="1">
           <mxGeometry y="30" width="280" height="30" as="geometry" />
@@ -163,26 +163,29 @@
         <mxCell id="tRrPQd9gGLpKsUqzO6ij-92" value="MyFirstAtom" style="text;strokeColor=#82b366;fillColor=#d5e8d4;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="tRrPQd9gGLpKsUqzO6ij-90" vertex="1">
           <mxGeometry y="60" width="280" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="tRrPQd9gGLpKsUqzO6ij-94" value="&lt;div&gt;AppAtom&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="430" y="2360" width="90" height="30" as="geometry" />
+        <mxCell id="tRrPQd9gGLpKsUqzO6ij-94" value="&lt;div&gt;AppAtom&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="AgAPFj6j-VEWw4h1hDbo-88" vertex="1">
+          <mxGeometry x="430" y="1745" width="90" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="tRrPQd9gGLpKsUqzO6ij-100" value="IndexAtom" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="720" y="2720" width="80" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="tRrPQd9gGLpKsUqzO6ij-103" value="Define dependecies" style="shape=step;perimeter=stepPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" parent="1" vertex="1">
-          <mxGeometry x="520" y="2360" width="280" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="tRrPQd9gGLpKsUqzO6ij-105" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="tRrPQd9gGLpKsUqzO6ij-104" target="tRrPQd9gGLpKsUqzO6ij-100" edge="1">
+        <mxCell id="tRrPQd9gGLpKsUqzO6ij-95" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="AgAPFj6j-VEWw4h1hDbo-88" source="tRrPQd9gGLpKsUqzO6ij-89" target="tRrPQd9gGLpKsUqzO6ij-94" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="tRrPQd9gGLpKsUqzO6ij-104" value="ReDefine atoms importing this one" style="shape=step;perimeter=stepPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" parent="1" vertex="1">
-          <mxGeometry x="521.5" y="2650" width="280" height="30" as="geometry" />
+        <mxCell id="tRrPQd9gGLpKsUqzO6ij-100" value="IndexAtom" style="rounded=1;whiteSpace=wrap;html=1;" parent="AgAPFj6j-VEWw4h1hDbo-88" vertex="1">
+          <mxGeometry x="720" y="2105" width="80" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="tRrPQd9gGLpKsUqzO6ij-106" value="Define dependecies" style="shape=step;perimeter=stepPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" parent="1" vertex="1">
-          <mxGeometry x="801.5" y="2720" width="278.5" height="30" as="geometry" />
+        <mxCell id="tRrPQd9gGLpKsUqzO6ij-103" value="Define dependecies" style="shape=step;perimeter=stepPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" parent="AgAPFj6j-VEWw4h1hDbo-88" vertex="1">
+          <mxGeometry x="520" y="1745" width="280" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="tRrPQd9gGLpKsUqzO6ij-108" value="atomicreact.atoms" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="1080" y="2850" width="280" height="150" as="geometry" />
+        <mxCell id="tRrPQd9gGLpKsUqzO6ij-105" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="AgAPFj6j-VEWw4h1hDbo-88" source="tRrPQd9gGLpKsUqzO6ij-104" target="tRrPQd9gGLpKsUqzO6ij-100" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="tRrPQd9gGLpKsUqzO6ij-104" value="ReDefine atoms importing this one" style="shape=step;perimeter=stepPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" parent="AgAPFj6j-VEWw4h1hDbo-88" vertex="1">
+          <mxGeometry x="521.5" y="2035" width="280" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="tRrPQd9gGLpKsUqzO6ij-106" value="Define dependecies" style="shape=step;perimeter=stepPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" parent="AgAPFj6j-VEWw4h1hDbo-88" vertex="1">
+          <mxGeometry x="801.5" y="2105" width="278.5" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="tRrPQd9gGLpKsUqzO6ij-108" value="atomicreact.atoms" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="AgAPFj6j-VEWw4h1hDbo-88" vertex="1">
+          <mxGeometry x="1080" y="2235" width="280" height="150" as="geometry" />
         </mxCell>
         <mxCell id="tRrPQd9gGLpKsUqzO6ij-109" value="MyAtomInFolderAtom" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="tRrPQd9gGLpKsUqzO6ij-108" vertex="1">
           <mxGeometry y="30" width="280" height="30" as="geometry" />
@@ -196,8 +199,8 @@
         <mxCell id="tRrPQd9gGLpKsUqzO6ij-112" value="IndexAtom" style="text;strokeColor=#82b366;fillColor=#d5e8d4;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="tRrPQd9gGLpKsUqzO6ij-108" vertex="1">
           <mxGeometry y="120" width="280" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="tRrPQd9gGLpKsUqzO6ij-114" value="atomicreact.atoms" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="800" y="2490" width="280" height="120" as="geometry" />
+        <mxCell id="tRrPQd9gGLpKsUqzO6ij-114" value="atomicreact.atoms" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="AgAPFj6j-VEWw4h1hDbo-88" vertex="1">
+          <mxGeometry x="800" y="1875" width="280" height="120" as="geometry" />
         </mxCell>
         <mxCell id="tRrPQd9gGLpKsUqzO6ij-115" value="MyAtomInFolderAtom" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="tRrPQd9gGLpKsUqzO6ij-114" vertex="1">
           <mxGeometry y="30" width="280" height="30" as="geometry" />
@@ -208,8 +211,8 @@
         <mxCell id="tRrPQd9gGLpKsUqzO6ij-117" value="AppAtom" style="text;strokeColor=#82b366;fillColor=#d5e8d4;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="tRrPQd9gGLpKsUqzO6ij-114" vertex="1">
           <mxGeometry y="90" width="280" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="tRrPQd9gGLpKsUqzO6ij-118" value="atomicreact.defines" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="800" y="2360" width="280" height="90" as="geometry" />
+        <mxCell id="tRrPQd9gGLpKsUqzO6ij-118" value="atomicreact.defines" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="AgAPFj6j-VEWw4h1hDbo-88" vertex="1">
+          <mxGeometry x="800" y="1745" width="280" height="90" as="geometry" />
         </mxCell>
         <mxCell id="tRrPQd9gGLpKsUqzO6ij-119" value="myAtoms/myFirstAtom: AppAtom" style="text;strokeColor=#d79b00;fillColor=#ffe6cc;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="tRrPQd9gGLpKsUqzO6ij-118" vertex="1">
           <mxGeometry y="30" width="280" height="30" as="geometry" />
@@ -217,8 +220,8 @@
         <mxCell id="tRrPQd9gGLpKsUqzO6ij-120" value="app/AppAtom: IndexAtom" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="tRrPQd9gGLpKsUqzO6ij-118" vertex="1">
           <mxGeometry y="60" width="280" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="tRrPQd9gGLpKsUqzO6ij-121" value="atomicreact.defines" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="1080" y="2720" width="280" height="90" as="geometry" />
+        <mxCell id="tRrPQd9gGLpKsUqzO6ij-121" value="atomicreact.defines" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="AgAPFj6j-VEWw4h1hDbo-88" vertex="1">
+          <mxGeometry x="1080" y="2105" width="280" height="90" as="geometry" />
         </mxCell>
         <mxCell id="tRrPQd9gGLpKsUqzO6ij-122" value="myAtoms/myFirstAtom: AppAtom" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="tRrPQd9gGLpKsUqzO6ij-121" vertex="1">
           <mxGeometry y="30" width="280" height="30" as="geometry" />
@@ -226,8 +229,8 @@
         <mxCell id="tRrPQd9gGLpKsUqzO6ij-123" value="app/AppAtom: IndexAtom" style="text;strokeColor=#d79b00;fillColor=#ffe6cc;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="tRrPQd9gGLpKsUqzO6ij-121" vertex="1">
           <mxGeometry y="60" width="280" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="tRrPQd9gGLpKsUqzO6ij-125" value="atomicreact.defines" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="798.5" y="3050" width="280" height="90" as="geometry" />
+        <mxCell id="tRrPQd9gGLpKsUqzO6ij-125" value="atomicreact.defines" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="AgAPFj6j-VEWw4h1hDbo-88" vertex="1">
+          <mxGeometry x="798.5" y="2435" width="280" height="90" as="geometry" />
         </mxCell>
         <mxCell id="tRrPQd9gGLpKsUqzO6ij-126" value="myAtoms/myFirstAtom: AppAtom" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="tRrPQd9gGLpKsUqzO6ij-125" vertex="1">
           <mxGeometry y="30" width="280" height="30" as="geometry" />
@@ -235,17 +238,17 @@
         <mxCell id="tRrPQd9gGLpKsUqzO6ij-127" value="app/AppAtom: IndexAtom" style="text;strokeColor=#b85450;fillColor=#f8cecc;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;" parent="tRrPQd9gGLpKsUqzO6ij-125" vertex="1">
           <mxGeometry y="60" width="280" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="tRrPQd9gGLpKsUqzO6ij-128" value="atomicreact.defines" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="520" y="3170" width="280" height="60" as="geometry" />
+        <mxCell id="tRrPQd9gGLpKsUqzO6ij-128" value="atomicreact.defines" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="AgAPFj6j-VEWw4h1hDbo-88" vertex="1">
+          <mxGeometry x="520" y="2555" width="280" height="60" as="geometry" />
         </mxCell>
         <mxCell id="tRrPQd9gGLpKsUqzO6ij-129" value="myAtoms/myFirstAtom: AppAtom" style="text;strokeColor=#b85450;fillColor=#f8cecc;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;" parent="tRrPQd9gGLpKsUqzO6ij-128" vertex="1">
           <mxGeometry y="30" width="280" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="tRrPQd9gGLpKsUqzO6ij-131" value="atomicreact.defines" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="810" y="3270" width="210" height="60" as="geometry" />
+        <mxCell id="tRrPQd9gGLpKsUqzO6ij-131" value="atomicreact.defines" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="AgAPFj6j-VEWw4h1hDbo-88" vertex="1">
+          <mxGeometry x="810" y="2650" width="210" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="tRrPQd9gGLpKsUqzO6ij-134" value="atomicreact.atoms" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="523" y="3270" width="277" height="150" as="geometry" />
+        <mxCell id="tRrPQd9gGLpKsUqzO6ij-134" value="atomicreact.atoms" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="AgAPFj6j-VEWw4h1hDbo-88" vertex="1">
+          <mxGeometry x="526" y="2650" width="277" height="150" as="geometry" />
         </mxCell>
         <mxCell id="tRrPQd9gGLpKsUqzO6ij-135" value="MyAtomInFolderAtom" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="tRrPQd9gGLpKsUqzO6ij-134" vertex="1">
           <mxGeometry y="30" width="277" height="30" as="geometry" />
@@ -259,17 +262,14 @@
         <mxCell id="tRrPQd9gGLpKsUqzO6ij-138" value="IndexAtom" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="tRrPQd9gGLpKsUqzO6ij-134" vertex="1">
           <mxGeometry y="120" width="277" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="AgAPFj6j-VEWw4h1hDbo-1" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;Time&lt;/b&gt;&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-          <mxGeometry y="640" width="60" height="30" as="geometry" />
+        <mxCell id="AgAPFj6j-VEWw4h1hDbo-3" value="Define dependecies" style="shape=step;perimeter=stepPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="AgAPFj6j-VEWw4h1hDbo-88">
+          <mxGeometry x="523" y="725" width="277" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="AgAPFj6j-VEWw4h1hDbo-3" value="Define dependecies" style="shape=step;perimeter=stepPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
-          <mxGeometry x="523" y="1340" width="277" height="30" as="geometry" />
+        <mxCell id="AgAPFj6j-VEWw4h1hDbo-4" value="Return. Can&#39;t declare this atom" style="shape=step;perimeter=stepPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="AgAPFj6j-VEWw4h1hDbo-88">
+          <mxGeometry x="520" y="825" width="280" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="AgAPFj6j-VEWw4h1hDbo-4" value="Return. Can&#39;t declare this atom" style="shape=step;perimeter=stepPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
-          <mxGeometry x="520" y="1440" width="280" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="AgAPFj6j-VEWw4h1hDbo-5" value="atomicreact.defines" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="800" y="1340" width="280" height="90" as="geometry" />
+        <mxCell id="AgAPFj6j-VEWw4h1hDbo-5" value="atomicreact.defines" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="AgAPFj6j-VEWw4h1hDbo-88">
+          <mxGeometry x="800" y="725" width="280" height="90" as="geometry" />
         </mxCell>
         <mxCell id="AgAPFj6j-VEWw4h1hDbo-6" value="atomInFolder/myAtomInFolderAtom: AppAtom" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="AgAPFj6j-VEWw4h1hDbo-5">
           <mxGeometry y="30" width="280" height="30" as="geometry" />
@@ -277,32 +277,59 @@
         <mxCell id="AgAPFj6j-VEWw4h1hDbo-7" value="myAtoms/myFirstAtom: AppAtom" style="text;strokeColor=#d79b00;fillColor=#ffe6cc;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="AgAPFj6j-VEWw4h1hDbo-5">
           <mxGeometry y="60" width="280" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="AgAPFj6j-VEWw4h1hDbo-8" value="Declare this atom" style="shape=step;perimeter=stepPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
-          <mxGeometry x="200" y="1200" width="320" height="50" as="geometry" />
+        <mxCell id="AgAPFj6j-VEWw4h1hDbo-8" value="Declare this atom" style="shape=step;perimeter=stepPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="AgAPFj6j-VEWw4h1hDbo-88">
+          <mxGeometry x="200" y="585" width="320" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="AgAPFj6j-VEWw4h1hDbo-11" value="Remove this atom from defines" style="shape=step;perimeter=stepPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
-          <mxGeometry x="200" y="1500" width="320" height="50" as="geometry" />
+        <mxCell id="AgAPFj6j-VEWw4h1hDbo-11" value="Remove this atom from defines" style="shape=step;perimeter=stepPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="AgAPFj6j-VEWw4h1hDbo-88">
+          <mxGeometry x="200" y="885" width="320" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="AgAPFj6j-VEWw4h1hDbo-14" value="&lt;b&gt;Not &lt;/b&gt;declare this atom.&lt;br&gt;There are atoms imported not declared yet." style="shape=step;perimeter=stepPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
-          <mxGeometry x="203" y="1830" width="320" height="50" as="geometry" />
+        <mxCell id="AgAPFj6j-VEWw4h1hDbo-14" value="&lt;b&gt;Not &lt;/b&gt;declare this atom.&lt;br&gt;There are atoms imported not declared yet." style="shape=step;perimeter=stepPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="AgAPFj6j-VEWw4h1hDbo-88">
+          <mxGeometry x="203" y="1215" width="320" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="AgAPFj6j-VEWw4h1hDbo-16" value="Declare this atom" style="shape=step;perimeter=stepPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
-          <mxGeometry x="200" y="2170" width="320" height="50" as="geometry" />
+        <mxCell id="AgAPFj6j-VEWw4h1hDbo-16" value="Declare this atom" style="shape=step;perimeter=stepPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="AgAPFj6j-VEWw4h1hDbo-88">
+          <mxGeometry x="200" y="1555" width="320" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="AgAPFj6j-VEWw4h1hDbo-17" value="Declare this atom" style="shape=step;perimeter=stepPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
-          <mxGeometry x="521.5" y="2490" width="278.5" height="30" as="geometry" />
+        <mxCell id="AgAPFj6j-VEWw4h1hDbo-17" value="Declare this atom" style="shape=step;perimeter=stepPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="AgAPFj6j-VEWw4h1hDbo-88">
+          <mxGeometry x="521.5" y="1875" width="278.5" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="AgAPFj6j-VEWw4h1hDbo-18" value="Declare this atom" style="shape=step;perimeter=stepPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
-          <mxGeometry x="800.75" y="2850" width="278.5" height="30" as="geometry" />
+        <mxCell id="AgAPFj6j-VEWw4h1hDbo-18" value="Declare this atom" style="shape=step;perimeter=stepPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="AgAPFj6j-VEWw4h1hDbo-88">
+          <mxGeometry x="800.75" y="2235" width="278.5" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="AgAPFj6j-VEWw4h1hDbo-19" value="Remove this atom from defines" style="shape=step;perimeter=stepPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
-          <mxGeometry x="520" y="3050" width="277" height="30" as="geometry" />
+        <mxCell id="AgAPFj6j-VEWw4h1hDbo-19" value="Remove this atom from defines" style="shape=step;perimeter=stepPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="AgAPFj6j-VEWw4h1hDbo-88">
+          <mxGeometry x="520" y="2435" width="277" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="AgAPFj6j-VEWw4h1hDbo-21" value="Remove this atom from defines" style="shape=step;perimeter=stepPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
-          <mxGeometry x="197" y="3170" width="320" height="50" as="geometry" />
+        <mxCell id="AgAPFj6j-VEWw4h1hDbo-21" value="Remove this atom from defines" style="shape=step;perimeter=stepPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="AgAPFj6j-VEWw4h1hDbo-88">
+          <mxGeometry x="197" y="2555" width="320" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="AgAPFj6j-VEWw4h1hDbo-1" value="&lt;b&gt;Time&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="AgAPFj6j-VEWw4h1hDbo-88">
+          <mxGeometry y="25" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="AgAPFj6j-VEWw4h1hDbo-89" value="Insert" style="text;strokeColor=#82b366;fillColor=#d5e8d4;align=center;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="AgAPFj6j-VEWw4h1hDbo-88">
+          <mxGeometry x="1110" y="31.25" width="80" height="38.75" as="geometry" />
+        </mxCell>
+        <mxCell id="AgAPFj6j-VEWw4h1hDbo-90" value="Update" style="text;strokeColor=#d79b00;fillColor=#ffe6cc;align=center;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="AgAPFj6j-VEWw4h1hDbo-88">
+          <mxGeometry x="1230" y="31.25" width="80" height="38.75" as="geometry" />
+        </mxCell>
+        <mxCell id="AgAPFj6j-VEWw4h1hDbo-91" value="Remove" style="text;strokeColor=#b85450;fillColor=#f8cecc;align=center;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;shadow=0;rounded=0;glass=0;" vertex="1" parent="AgAPFj6j-VEWw4h1hDbo-88">
+          <mxGeometry x="1350" y="30" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="AgAPFj6j-VEWw4h1hDbo-92" value="Fire &lt;b&gt;onLoad event (AtomicReact.onLoad)&lt;br&gt;&lt;/b&gt;" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;fillColor=#b0e3e6;strokeColor=#0e8088;" vertex="1" parent="AgAPFj6j-VEWw4h1hDbo-88">
+          <mxGeometry x="523" y="2820" width="507" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="AgAPFj6j-VEWw4h1hDbo-93" value="Event" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;fillColor=#b0e3e6;strokeColor=#0e8088;" vertex="1" parent="AgAPFj6j-VEWw4h1hDbo-88">
+          <mxGeometry x="1470" y="30" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="AgAPFj6j-VEWw4h1hDbo-94" value="atom" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="AgAPFj6j-VEWw4h1hDbo-88">
+          <mxGeometry x="710" y="30" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="AgAPFj6j-VEWw4h1hDbo-95" value="Instruction" style="shape=step;perimeter=stepPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="AgAPFj6j-VEWw4h1hDbo-88">
+          <mxGeometry x="950" y="31.25" width="120" height="38.75" as="geometry" />
+        </mxCell>
+        <mxCell id="AgAPFj6j-VEWw4h1hDbo-96" value="Object" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="AgAPFj6j-VEWw4h1hDbo-88">
+          <mxGeometry x="830" y="31.25" width="80" height="38.75" as="geometry" />
         </mxCell>
         <mxCell id="AgAPFj6j-VEWw4h1hDbo-57" value="&lt;b&gt;Atoms &lt;/b&gt;&lt;b&gt;Directory &lt;/b&gt;&lt;b&gt;&lt;span&gt;Tree &lt;br&gt;&lt;/span&gt;&lt;/b&gt;" style="swimlane;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="40" y="40" width="600" height="520" as="geometry" />
+          <mxGeometry x="10" y="40" width="630" height="520" as="geometry" />
         </mxCell>
         <mxCell id="AgAPFj6j-VEWw4h1hDbo-32" value="index.tsx" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#b1ddf0;strokeColor=#10739e;" vertex="1" parent="AgAPFj6j-VEWw4h1hDbo-57">
           <mxGeometry x="150" y="140" width="120" height="40" as="geometry" />
@@ -349,23 +376,32 @@
         <mxCell id="AgAPFj6j-VEWw4h1hDbo-53" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="AgAPFj6j-VEWw4h1hDbo-57" source="AgAPFj6j-VEWw4h1hDbo-32" target="AgAPFj6j-VEWw4h1hDbo-49">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="AgAPFj6j-VEWw4h1hDbo-50" value="IndexAtom" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="AgAPFj6j-VEWw4h1hDbo-57">
+        <mxCell id="AgAPFj6j-VEWw4h1hDbo-50" value="AppAtom" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="AgAPFj6j-VEWw4h1hDbo-57">
           <mxGeometry x="310" y="200" width="120" height="40" as="geometry" />
         </mxCell>
         <mxCell id="AgAPFj6j-VEWw4h1hDbo-54" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="AgAPFj6j-VEWw4h1hDbo-57" source="AgAPFj6j-VEWw4h1hDbo-38" target="AgAPFj6j-VEWw4h1hDbo-50">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="AgAPFj6j-VEWw4h1hDbo-51" value="IndexAtom" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="AgAPFj6j-VEWw4h1hDbo-57">
+        <mxCell id="AgAPFj6j-VEWw4h1hDbo-51" value="MyAtomInFolderAtom" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="AgAPFj6j-VEWw4h1hDbo-57">
           <mxGeometry x="440.75" y="320" width="120" height="40" as="geometry" />
         </mxCell>
         <mxCell id="AgAPFj6j-VEWw4h1hDbo-55" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="AgAPFj6j-VEWw4h1hDbo-57" source="AgAPFj6j-VEWw4h1hDbo-42" target="AgAPFj6j-VEWw4h1hDbo-51">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="AgAPFj6j-VEWw4h1hDbo-52" value="IndexAtom" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="AgAPFj6j-VEWw4h1hDbo-57">
+        <mxCell id="AgAPFj6j-VEWw4h1hDbo-52" value="MyFirstAtom" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="AgAPFj6j-VEWw4h1hDbo-57">
           <mxGeometry x="440.75" y="430" width="120" height="40" as="geometry" />
         </mxCell>
         <mxCell id="AgAPFj6j-VEWw4h1hDbo-56" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="AgAPFj6j-VEWw4h1hDbo-57" source="AgAPFj6j-VEWw4h1hDbo-44" target="AgAPFj6j-VEWw4h1hDbo-52">
           <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="AgAPFj6j-VEWw4h1hDbo-80" value="directory" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e3c800;strokeColor=#B09500;fontColor=#000000;" vertex="1" parent="AgAPFj6j-VEWw4h1hDbo-57">
+          <mxGeometry x="550" y="110" width="70" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="AgAPFj6j-VEWw4h1hDbo-81" value="File" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#b1ddf0;strokeColor=#10739e;" vertex="1" parent="AgAPFj6j-VEWw4h1hDbo-57">
+          <mxGeometry x="550" y="75" width="70" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="AgAPFj6j-VEWw4h1hDbo-82" value="Atom" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="AgAPFj6j-VEWw4h1hDbo-57">
+          <mxGeometry x="550" y="40" width="70" height="30" as="geometry" />
         </mxCell>
         <mxCell id="AgAPFj6j-VEWw4h1hDbo-58" value="&lt;b&gt;Atoms&amp;nbsp;&lt;/b&gt;&lt;b&gt;Dependency &lt;/b&gt;&lt;b&gt;&lt;span&gt; Tree &lt;br&gt;&lt;/span&gt;&lt;/b&gt;" style="swimlane;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="680" y="40" width="600" height="520" as="geometry" />
@@ -390,6 +426,9 @@
         </mxCell>
         <mxCell id="tRrPQd9gGLpKsUqzO6ij-3" value="IndexAtom" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="AgAPFj6j-VEWw4h1hDbo-58" vertex="1">
           <mxGeometry x="30" y="55" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="AgAPFj6j-VEWw4h1hDbo-83" value="Atom" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="AgAPFj6j-VEWw4h1hDbo-58">
+          <mxGeometry x="520" y="40" width="70" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
