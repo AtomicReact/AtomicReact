@@ -1,9 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 100 100">
   <title>logo</title>
   <g id="Camada_1" data-name="Camada 1">
-    <path  fill="transparent" stroke="#e6ff2b" stroke-width="0.5" stroke-miterlimit="10" d="M50,43.64l5.59,3.23v6.46L50,56.56l-5.59-3.23V46.87L50,43.64m0-.87-6.34,3.67v7.32L50,57.42l6.34-3.67V46.43L50,42.77Z"/>
+    <path  fill="transparent" stroke="#3178c6" stroke-width="0.5" stroke-miterlimit="10" d="M50,43.64l5.59,3.23v6.46L50,56.56l-5.59-3.23V46.87L50,43.64m0-.87-6.34,3.67v7.32L50,57.42l6.34-3.67V46.43L50,42.77Z"/>
     <!-- <g opacity="0.17">
-      <path d="M50,13,82.14,31.51l0,37.13L50,87.22,17.86,68.67l0-37.13L50,13m0-1.15L16.84,31l0,38.28L50,88.37,83.16,69.22l0-38.28L50,11.81Z" fill="#e6ff2b"/>
+      <path d="M50,13,82.14,31.51l0,37.13L50,87.22,17.86,68.67l0-37.13L50,13m0-1.15L16.84,31l0,38.28L50,88.37,83.16,69.22l0-38.28L50,11.81Z" fill="#3178c6"/>
       <animateTransform attributeName="transform"
         attributeType="XML"
         type="rotate"
@@ -14,68 +14,68 @@
         />
     </g> -->
 
-    <line id="l1" x1="50" y1="80.47" x2="50" y2="57.42" fill="none" stroke="#e6ff2b" stroke-miterlimit="10" stroke-width="0.75"/>
+    <line id="l1" x1="50" y1="80.47" x2="50" y2="57.42" fill="none" stroke="#3178c6" stroke-miterlimit="10" stroke-width="0.75"/>
     <animate href="#l1" attributeName="y1" attributeType="XML" from="57.42" to="80.47" begin="0" dur="1.3s" />
 
-    <line id="l2" x1="76.37" y1="34.77" x2="56.25" y2="46.49" fill="none" stroke="#e6ff2b" stroke-miterlimit="10" stroke-width="0.75"/>
+    <line id="l2" x1="76.37" y1="34.77" x2="56.25" y2="46.49" fill="none" stroke="#3178c6" stroke-miterlimit="10" stroke-width="0.75"/>
     <animate href="#l2" attributeName="y1" attributeType="XML" from="46.49" to="34.77" begin="0" dur="1.3s" />
     <animate href="#l2" attributeName="x1" attributeType="XML" from="56.25" to="76.37" begin="0" dur="1.3s"/>
 
-    <line id="l3" x1="43.65" y1="46.39" x2="23.73" y2="34.86" fill="none" stroke="#e6ff2b" stroke-miterlimit="10" stroke-width="0.75"/>
+    <line id="l3" x1="43.65" y1="46.39" x2="23.73" y2="34.86" fill="none" stroke="#3178c6" stroke-miterlimit="10" stroke-width="0.75"/>
     <animate href="#l3" attributeName="y2" attributeType="XML" from="46.39" to="34.86" begin="0" dur="1.3s" />
     <animate href="#l3" attributeName="x2" attributeType="XML" from="43.65" to="23.73" begin="0" dur="1.3s"/>
 
-    <path id="p1" fill="transparent" stroke="#e6ff2b" stroke-width="0.5" stroke-miterlimit="10" d="M50,81.33l5.59,3.23V91L50,94.25,44.41,91V84.57L50,81.33m0-.87-6.34,3.67v7.32L50,95.12l6.34-3.67V84.13L50,80.47Z" />
+    <path id="p1" fill="transparent" stroke="#3178c6" stroke-width="0.5" stroke-miterlimit="10" d="M50,81.33l5.59,3.23V91L50,94.25,44.41,91V84.57L50,81.33m0-.87-6.34,3.67v7.32L50,95.12l6.34-3.67V84.13L50,80.47Z" />
     <set href="#p1" attributeName="stroke-dasharray" attributeType="CSS" to="100"/>
     <set href="#p1" attributeName="stroke-dashoffset" attributeType="CSS" to="100"/>
     <animate href="#p1" fill="freeze" attributeName="stroke-dashoffset" attributeType="CSS" from="100" to="0" begin="1.3" dur="1.3s" />
 
-    <path id="p2" fill="transparent" stroke="#e6ff2b" stroke-width="0.5" stroke-miterlimit="10" d="M82.62,24.69l5.59,3.23v6.46l-5.59,3.23L77,34.38V27.93l5.59-3.23m0-.87-6.34,3.67v7.32l6.34,3.66L89,34.81V27.49l-6.34-3.66Z"/>
+    <path id="p2" fill="transparent" stroke="#3178c6" stroke-width="0.5" stroke-miterlimit="10" d="M82.62,24.69l5.59,3.23v6.46l-5.59,3.23L77,34.38V27.93l5.59-3.23m0-.87-6.34,3.67v7.32l6.34,3.66L89,34.81V27.49l-6.34-3.66Z"/>
     <set href="#p2" attributeName="stroke-dasharray" attributeType="CSS" to="100"/>
     <set href="#p2" attributeName="stroke-dashoffset" attributeType="CSS" to="100"/>
     <animate href="#p2" fill="freeze" attributeName="stroke-dashoffset" attributeType="CSS" from="100" to="0" begin="1.3" dur="1.3s" />
 
-    <path id="p3" fill="transparent" stroke="#e6ff2b" stroke-width="0.5" stroke-miterlimit="10" d="M17.38,24.69,23,27.92v6.46l-5.59,3.23-5.59-3.23V27.93l5.59-3.23m0-.87L11,27.49v7.32l6.34,3.66,6.34-3.67V27.49l-6.34-3.66Z"/>
+    <path id="p3" fill="transparent" stroke="#3178c6" stroke-width="0.5" stroke-miterlimit="10" d="M17.38,24.69,23,27.92v6.46l-5.59,3.23-5.59-3.23V27.93l5.59-3.23m0-.87L11,27.49v7.32l6.34,3.66,6.34-3.67V27.49l-6.34-3.66Z"/>
     <set href="#p3" attributeName="stroke-dasharray" attributeType="CSS" to="100"/>
     <set href="#p3" attributeName="stroke-dashoffset" attributeType="CSS" to="100"/>
     <animate href="#p3" fill="freeze" attributeName="stroke-dashoffset" attributeType="CSS" from="100" to="0" begin="1.3" dur="1.3s" />
 
     <!-- Segunda parte -->
 
-    <line id="p1l1" x1="55.5" y1="84.5" x2="55.5" y2="84.5" fill="none" stroke="#e6ff2b" stroke-miterlimit="10" stroke-width="0.5"/>
+    <line id="p1l1" x1="55.5" y1="84.5" x2="55.5" y2="84.5" fill="none" stroke="#3178c6" stroke-miterlimit="10" stroke-width="0.5"/>
     <animate href="#p1l1" attributeName="x1" attributeType="XML" from="55.5" to="76.5" begin="1.8" dur="1.3s" fill="freeze"/>
     <animate href="#p1l1" attributeName="y1" attributeType="XML" from="84.5" to="72.5" begin="1.8" dur="1.3s" fill="freeze"/>
 
-    <line id="p1l2" x1="44.5" y1="84.5" x2="44.5" y2="84.5" fill="none" stroke="#e6ff2b" stroke-miterlimit="10" stroke-width="0.5"/>
+    <line id="p1l2" x1="44.5" y1="84.5" x2="44.5" y2="84.5" fill="none" stroke="#3178c6" stroke-miterlimit="10" stroke-width="0.5"/>
     <animate href="#p1l2" attributeName="x1" attributeType="XML" from="44.5" to="23.5" begin="1.8" dur="1.3s" fill="freeze"/>
     <animate href="#p1l2" attributeName="y1" attributeType="XML" from="84.5" to="72.5" begin="1.8" dur="1.3s" fill="freeze"/>
 
-    <line id="p2l1" x1="76.5" y1="27.5" x2="76.5" y2="27.5" fill="none" stroke="#e6ff2b" stroke-miterlimit="10" stroke-width="0.5"/>
+    <line id="p2l1" x1="76.5" y1="27.5" x2="76.5" y2="27.5" fill="none" stroke="#3178c6" stroke-miterlimit="10" stroke-width="0.5"/>
     <animate href="#p2l1" attributeName="x1" attributeType="XML" from="76.5" to="55.5" begin="1.8" dur="1.3s" fill="freeze"/>
     <animate href="#p2l1" attributeName="y1" attributeType="XML" from="27.5" to="15.5" begin="1.8" dur="1.3s" fill="freeze"/>
 
-    <line id="p2l2" x1="82.5" y1="37.5" x2="82.5" y2="37.5" fill="none" stroke="#e6ff2b" stroke-miterlimit="10" stroke-width="0.5"/>
+    <line id="p2l2" x1="82.5" y1="37.5" x2="82.5" y2="37.5" fill="none" stroke="#3178c6" stroke-miterlimit="10" stroke-width="0.5"/>
     <animate href="#p2l2" attributeName="y1" attributeType="XML" from="37.5" to="62.5" begin="1.8" dur="1.3s" fill="freeze"/>
 
-    <line id="p3l1" x1="17.5" y1="37.5" x2="17.5" y2="37.5" fill="none" stroke="#e6ff2b" stroke-miterlimit="10" stroke-width="0.5"/>
+    <line id="p3l1" x1="17.5" y1="37.5" x2="17.5" y2="37.5" fill="none" stroke="#3178c6" stroke-miterlimit="10" stroke-width="0.5"/>
     <animate href="#p3l1" attributeName="y1" attributeType="XML" from="37.5" to="62.5" begin="1.8" dur="1.3s" fill="freeze"/>
 
-    <line id="p3l2" x1="23.5" y1="27.5" x2="23.5" y2="27.5" fill="none" stroke="#e6ff2b" stroke-miterlimit="10" stroke-width="0.5"/>
+    <line id="p3l2" x1="23.5" y1="27.5" x2="23.5" y2="27.5" fill="none" stroke="#3178c6" stroke-miterlimit="10" stroke-width="0.5"/>
     <animate href="#p3l2" attributeName="x1" attributeType="XML" from="23.5" to="44.5" begin="1.8" dur="1.3s" fill="freeze"/>
     <animate href="#p3l2" attributeName="y1" attributeType="XML" from="27.5" to="15.5" begin="1.8" dur="1.3s" fill="freeze"/>
 
 
-    <path id="p4" fill="transparent" stroke="#e6ff2b" stroke-width="0.5" stroke-miterlimit="10" d="M17.38,62.87,22.73,66v6.17l-5.34,3.09L12,72.13V66l5.34-3.09m0-1.15L11,65.38v7.32l6.34,3.66,6.34-3.67V65.38l-6.34-3.66Z"/>
+    <path id="p4" fill="transparent" stroke="#3178c6" stroke-width="0.5" stroke-miterlimit="10" d="M17.38,62.87,22.73,66v6.17l-5.34,3.09L12,72.13V66l5.34-3.09m0-1.15L11,65.38v7.32l6.34,3.66,6.34-3.67V65.38l-6.34-3.66Z"/>
     <set href="#p4" attributeName="stroke-dasharray" attributeType="CSS" to="100"/>
     <set href="#p4" attributeName="stroke-dashoffset" attributeType="CSS" to="100"/>
     <animate href="#p4" fill="freeze" attributeName="stroke-dashoffset" attributeType="CSS" from="100" to="0" begin="3.1" dur="1.3s" />
 
-    <path id="p5" fill="transparent" stroke="#e6ff2b" stroke-width="0.5" stroke-miterlimit="10" d="M82.62,62.68,88,65.76v6.17L82.62,75l-5.34-3.08V65.77l5.34-3.09m0-1.15-6.34,3.67v7.32l6.34,3.66L89,72.51V65.18l-6.34-3.66Z"/>
+    <path id="p5" fill="transparent" stroke="#3178c6" stroke-width="0.5" stroke-miterlimit="10" d="M82.62,62.68,88,65.76v6.17L82.62,75l-5.34-3.08V65.77l5.34-3.09m0-1.15-6.34,3.67v7.32l6.34,3.66L89,72.51V65.18l-6.34-3.66Z"/>
     <set href="#p5" attributeName="stroke-dasharray" attributeType="CSS" to="100"/>
     <set href="#p5" attributeName="stroke-dashoffset" attributeType="CSS" to="100"/>
     <animate href="#p5" fill="freeze" attributeName="stroke-dashoffset" attributeType="CSS" from="100" to="0" begin="3.1" dur="1.3s" />
 
-    <path id="p6" fill="transparent" stroke="#e6ff2b" stroke-width="0.5" stroke-miterlimit="10" d="M50,5.75,55.59,9v6.46L50,18.67l-5.59-3.23V9L50,5.75m0-.87L43.66,8.55v7.32L50,19.53l6.34-3.67V8.54L50,4.88Z"/>
+    <path id="p6" fill="transparent" stroke="#3178c6" stroke-width="0.5" stroke-miterlimit="10" d="M50,5.75,55.59,9v6.46L50,18.67l-5.59-3.23V9L50,5.75m0-.87L43.66,8.55v7.32L50,19.53l6.34-3.67V8.54L50,4.88Z"/>
     <set href="#p6" attributeName="stroke-dasharray" attributeType="CSS" to="100"/>
     <set href="#p6" attributeName="stroke-dashoffset" attributeType="CSS" to="100"/>
     <animate href="#p6" fill="freeze" attributeName="stroke-dashoffset" attributeType="CSS" from="100" to="0" begin="3.1" dur="1.3s" />
